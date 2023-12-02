@@ -38,11 +38,9 @@ export default class DsAvatar extends BaseElement {
     `;
 
     const avatarWithoutImage = html`
-      <div part="icon" class="avatar__icon">
-        <slot name="icon">
-          <ion-icon name="person-circle"></ion-icon>
-        </slot>
-      </div>
+      <slot name="icon">
+        <ion-icon name="person-circle"></ion-icon>
+      </slot>
     `;
 
     return html`
