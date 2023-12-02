@@ -8,16 +8,54 @@
     <script src="../node_modules/lit/polyfill-support.js"></script>
 
     <script type="module" src="../dist/components/my-element.js"></script>
+    <script
+      type="module"
+      src="../dist/components/avatar/avatar.component.js"
+    ></script>
     <style>
       p {
         border: solid 1px blue;
         padding: 8px;
       }
+
+      .avatar-image::part(base) {
+        border: 2px solid silver;
+      }
     </style>
   </head>
   <body>
-    <my-element>
-      <p>This is child content</p>
-    </my-element>
+    <ds-avatar shape="square" label="square avatar look"></ds-avatar>
+    <ds-avatar shape="rounded" label="rounded avatar look"></ds-avatar>
+    <ds-avatar label="default avatar look"></ds-avatar>
+
+    <br />
+    <br />
+
+    <ds-avatar
+      class="avatar-image"
+      image="https://media.istockphoto.com/id/1434414228/photo/stern-sad-cat-isolated-on-white-background.webp?b=1&s=170667a&w=0&k=20&c=7AURwT9S7oG_dDkIDHvag4oyy-bAZV7GNZPNBzf-nwE="
+      shape="square"
+      label="square avatar look with image"
+    ></ds-avatar>
+    <ds-avatar
+      class="avatar-image"
+      image="https://media.istockphoto.com/id/1434414228/photo/stern-sad-cat-isolated-on-white-background.webp?b=1&s=170667a&w=0&k=20&c=7AURwT9S7oG_dDkIDHvag4oyy-bAZV7GNZPNBzf-nwE="
+      shape="rounded"
+      label="rounded avatar look with image"
+    ></ds-avatar>
+    <ds-avatar
+      class="avatar-image"
+      image="https://media.istockphoto.com/id/1434414228/photo/stern-sad-cat-isolated-on-white-background.webp?b=1&s=170667a&w=0&k=20&c=7AURwT9S7oG_dDkIDHvag4oyy-bAZV7GNZPNBzf-nwE="
+      label="default avatar look with image"
+    ></ds-avatar>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>
