@@ -54,7 +54,7 @@ export default class DsAvatar extends BaseElement {
 
     let avatarWithoutImage = html`
       <slot name="icon">
-        <ion-icon name="person-circle"></ion-icon>
+        <ion-icon name="person"></ion-icon>
       </slot>
     `;
 
