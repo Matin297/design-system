@@ -41,4 +41,9 @@ export default css`
     height: 100%;
     object-fit: cover;
   }
+
+  .avatar__initials {
+    line-height: 1;
+    text-transform: uppercase;
+  }
 `;
