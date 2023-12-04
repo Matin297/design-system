@@ -10,20 +10,23 @@ export default css`
   .avatar {
     width: var(--size);
     height: var(--size);
+    font-family: var(--ds-font-sans);
     font-size: calc(var(--size) * 0.5);
+    font-weight: var(--ds-font-weight-normal);
+    color: var(--ds-color-neutral-0);
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: silver;
-    overflow: hidden;
+    background-color: var(--ds-color-neutral-400);
   }
 
   .avatar--circle {
-    border-radius: 50%;
+    border-radius: var(--ds-border-radius-circle);
   }
 
   .avatar--rounded {
-    border-radius: 4px;
+    border-radius: var(--ds-border-radius-medium);
   }
 
   .avatar--square {
