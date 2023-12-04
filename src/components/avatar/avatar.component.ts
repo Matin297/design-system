@@ -31,7 +31,7 @@ export default class DsAvatar extends BaseElement {
   loading: 'eager' | 'lazy' = 'eager';
 
   /** The shape of the avatar */
-  @property()
+  @property({reflect: true})
   shape: 'circle' | 'square' | 'rounded' = 'circle';
 
   willUpdate(changedProps: PropertyValues<this>) {
