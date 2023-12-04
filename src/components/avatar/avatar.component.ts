@@ -14,6 +14,10 @@ export default class DsAvatar extends BaseElement {
   @property()
   label = '';
 
+  /** Initials to use as a fallback when no image is available */
+  @property()
+  initials = '';
+
   /** The image source to use for avatar */
   @property()
   image = '';
@@ -37,11 +41,17 @@ export default class DsAvatar extends BaseElement {
       />
     `;
 
-    const avatarWithoutImage = html`
+    let avatarWithoutImage = html`
       <slot name="icon">
         <ion-icon name="person-circle"></ion-icon>
       </slot>
     `;
+
+    if (this.initials) {
+      avatarWithoutImage = html`
+        <div part="initials" class="avatar__initials">${this.initials}</div>
+      `;
+    }
 
     return html`
       <div
