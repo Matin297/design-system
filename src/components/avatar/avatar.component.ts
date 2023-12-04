@@ -1,5 +1,6 @@
 import {html} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import type {PropertyValues} from 'lit';
+import {customElement, property, state} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 import {BaseElement} from '../../internals/base-element';
 import styles from './avatar.styles';
@@ -9,6 +10,9 @@ const ELEMENT_NAME = 'ds-avatar';
 @customElement(ELEMENT_NAME)
 export default class DsAvatar extends BaseElement {
   static styles = [BaseElement.styles, styles];
+
+  @state()
+  private hasError = false;
 
   /** A label to use to describe avatar to assistive devices */
   @property()
@@ -30,6 +34,12 @@ export default class DsAvatar extends BaseElement {
   @property()
   shape: 'circle' | 'square' | 'rounded' = 'circle';
 
+  willUpdate(changedProps: PropertyValues<this>) {
+    if (changedProps.get('image')) {
+      this.hasError = false;
+    }
+  }
+
   render() {
     const avatarWithImage = html`
       <img
@@ -38,6 +48,7 @@ export default class DsAvatar extends BaseElement {
         src=${this.image}
         loading=${this.loading}
         alt=""
+        @error=${this.handleError}
       />
     `;
 
@@ -65,9 +76,13 @@ export default class DsAvatar extends BaseElement {
         role="img"
         aria-label=${this.label}
       >
-        ${this.image ? avatarWithImage : avatarWithoutImage}
+        ${this.image && !this.hasError ? avatarWithImage : avatarWithoutImage}
       </div>
     `;
+  }
+
+  handleError() {
+    this.hasError = true;
   }
 }
 
