@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>&lt;my-element> Demo</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/lit/polyfill-support.js"></script>
+
+    <link rel="stylesheet" href="/src/themes/light.css" />
+
+    <script
+      type="module"
+      src="../dist/components/spinner/spinner.component.js"
+    ></script>
+
+    <style>
+      body {
+        font-family: var(--ds-font-sans);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Spinner</h1>
+
+    <h2>Size</h2>
+    <ds-spinner></ds-spinner>
+    <ds-spinner style="font-size: 2rem"></ds-spinner>
+    <ds-spinner style="font-size: 3rem"></ds-spinner>
+
+    <br />
+    <br />
+
+    <h2>Track Width</h2>
+    <ds-spinner style="font-size: 2rem; --track-width: 5px"></ds-spinner>
+
+    <br />
+    <br />
+
+    <h2>Color</h2>
+    <ds-spinner
+      style="font-size: 2rem; --track-color: pink; --indicator-color: deeppink"
+    ></ds-spinner>
+  </body>
+</html>
