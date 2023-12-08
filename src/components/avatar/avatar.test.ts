@@ -23,4 +23,30 @@ describe('<ds-avatar>', () => {
       expect(base.className).to.include('avatar--circle');
     });
   });
+
+  describe('when provided image and label', () => {
+    const image =
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    const label = 'Small transparent square';
+
+    before(async () => {
+      avatar = await fixture<DsAvatar>(
+        html`<ds-avatar image=${image} label=${label}></ds-avatar>`
+      );
+    });
+
+    it('should be accessible', async () => {
+      await expect(avatar).to.be.accessible();
+    });
+
+    it('should render image part with the given image link as src', () => {
+      const imagePart = avatar.shadowRoot!.querySelector('[part="image"]');
+      expect(imagePart).to.have.attribute('src', image);
+    });
+
+    it('should render the label attribute on the base part', () => {
+      const base = avatar.shadowRoot!.querySelector('[part="base"]');
+      expect(base).to.have.attribute('aria-label', label);
+    });
+  });
 });
