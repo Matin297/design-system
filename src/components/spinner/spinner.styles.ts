@@ -33,7 +33,6 @@ export default css`
   .spinner__indicator {
     stroke: var(--indicator-color);
     stroke-linecap: round;
-    stroke-dasharray: 150% 75%;
     animation: spin var(--speed) linear infinite;
     transform-origin: center;
   }
