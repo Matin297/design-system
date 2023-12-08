@@ -128,4 +128,30 @@ describe('<ds-avatar>', () => {
       });
     });
   });
+
+  describe('when provided content for the icon slot', () => {
+    before(async () => {
+      avatar = await fixture<DsAvatar>(
+        html`
+          <ds-avatar label="icon avatar">
+            <span slot="icon">Random Icon</span>
+          </ds-avatar>
+        `
+      );
+    });
+
+    it('should be accessible', async () => {
+      await expect(avatar).to.be.accessible();
+    });
+
+    it('should render the given icon slotted element correctly', () => {
+      const slot = avatar.shadowRoot!.querySelector(
+        'slot[name=icon]'
+      ) as HTMLSlotElement;
+      const assignedElements = slot.assignedElements();
+
+      expect(assignedElements).to.have.length(1);
+      expect(assignedElements[0]).to.have.text('Random Icon');
+    });
+  });
 });
