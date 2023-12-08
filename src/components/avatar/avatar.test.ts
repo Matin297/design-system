@@ -1,6 +1,6 @@
 import './avatar.component.js';
 
-import {fixture, html, expect} from '@open-wc/testing';
+import {fixture, html, expect, waitUntil} from '@open-wc/testing';
 import type DsAvatar from './avatar.component';
 
 describe('<ds-avatar>', () => {
@@ -152,6 +152,35 @@ describe('<ds-avatar>', () => {
 
       expect(assignedElements).to.have.length(1);
       expect(assignedElements[0]).to.have.text('Random Icon');
+    });
+  });
+
+  describe('when provided an invalid image', () => {
+    before(async () => {
+      avatar = await fixture<DsAvatar>(
+        html`<ds-avatar label="bad avatar" image="bad-image"></ds-avatar>`
+      );
+    });
+
+    it('should not render the image', async () => {
+      await waitUntil(() =>
+        avatar.shadowRoot!.querySelector('slot[name=icon]')
+      );
+
+      expect(avatar.shadowRoot!.querySelector('[part=image]')).not.to.exist;
+    });
+
+    it('should render the image when updated with a valid link', async () => {
+      await waitUntil(() =>
+        avatar.shadowRoot!.querySelector('slot[name=icon]')
+      );
+
+      avatar.image =
+        'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+      await avatar.updateComplete;
+
+      expect(avatar.shadowRoot!.querySelector('[part=image]')).to.exist;
     });
   });
 });
