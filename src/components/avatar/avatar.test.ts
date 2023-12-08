@@ -108,4 +108,24 @@ describe('<ds-avatar>', () => {
       expect(iconSlot).not.to.exist;
     });
   });
+
+  (['circle', 'rounded', 'square'] as const).forEach((shape) => {
+    describe(`when provided a shape attribute of value ${shape}`, () => {
+      before(async () => {
+        avatar = await fixture<DsAvatar>(
+          html`<ds-avatar shape=${shape} label="shaped avatar"></ds-avatar>`
+        );
+      });
+
+      it('should be accessible', async () => {
+        await expect(avatar).to.be.accessible();
+      });
+
+      it('should have the appropriate attribute and className on base', () => {
+        const base = avatar.shadowRoot!.querySelector('[part=base]');
+        expect(avatar).to.have.attribute('shape', shape);
+        expect(base).to.have.class(`avatar--${shape}`);
+      });
+    });
+  });
 });
