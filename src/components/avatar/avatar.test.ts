@@ -49,4 +49,26 @@ describe('<ds-avatar>', () => {
       expect(base).to.have.attribute('aria-label', label);
     });
   });
+
+  describe('when provided initials', () => {
+    const initials = 'SL';
+
+    before(async () => {
+      avatar = await fixture<DsAvatar>(
+        html`
+          <ds-avatar initials=${initials} label="Initials Avatar"></ds-avatar>
+        `
+      );
+    });
+
+    it('should be accessible', async () => {
+      await expect(avatar).to.be.accessible();
+    });
+
+    it('should render initials part with the given initials as text', () => {
+      const initialsPart =
+        avatar.shadowRoot!.querySelector('[part="initials"]');
+      expect(initialsPart).to.have.text(initials);
+    });
+  });
 });
