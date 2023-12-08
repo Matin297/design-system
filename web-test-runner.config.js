@@ -6,6 +6,7 @@
 
 import {legacyPlugin} from '@web/dev-server-legacy';
 import {playwrightLauncher} from '@web/test-runner-playwright';
+import {globbySync} from 'globby';
 
 const mode = process.env.MODE || 'dev';
 if (!['dev', 'prod'].includes(mode)) {
@@ -37,7 +38,7 @@ try {
 // https://modern-web.dev/docs/test-runner/cli-and-configuration/
 export default {
   rootDir: '.',
-  files: ['./dist/**/*.test.js'],
+  files: ['dist/**/*.test.js'],
   nodeResolve: {exportConditions: mode === 'dev' ? ['development'] : []},
   preserveSymlinks: true,
   browsers: commandLineBrowsers ?? Object.values(browsers),
@@ -66,4 +67,14 @@ export default {
       },
     }),
   ],
+  // Create a named group for every test file to enable running single tests.
+  // You can run `npm run test -- --group split-panel` to run only that component's tests.
+  groups: globbySync('dist/**/*.test.js').map((path) => {
+    const groupName = path.match(/^.*\/(?<fileName>.*)\.test\.js/).groups
+      .fileName;
+    return {
+      name: groupName,
+      files: path,
+    };
+  }),
 };
