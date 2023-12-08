@@ -20,7 +20,7 @@ describe('<ds-avatar>', () => {
     it('should default to circle shape', () => {
       const base = avatar.shadowRoot!.querySelector('[part=base]')!;
       expect(avatar).to.have.attribute('shape', 'circle');
-      expect(base.className).to.include('avatar--circle');
+      expect(base).to.have.class('avatar--circle');
     });
   });
 
