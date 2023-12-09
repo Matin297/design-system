@@ -1,6 +1,6 @@
 import './card.component.js';
 
-import {fixture, html, expect} from '@open-wc/testing';
+import {fixture, html, expect, assert} from '@open-wc/testing';
 import type DsCard from './card.component';
 
 describe('<ds-card>', () => {
@@ -24,6 +24,48 @@ describe('<ds-card>', () => {
       ) as HTMLSlotElement;
 
       expect(body.assignedNodes()[0]).to.have.text(content);
+    });
+  });
+
+  describe('when provided header and body', () => {
+    const content =
+      'This card has a header. You can put all sorts of things in it!';
+
+    before(async () => {
+      card = await fixture<DsCard>(html`
+        <ds-card>
+          <div slot="header">Header</div>
+          ${content}
+        </ds-card>
+      `);
+    });
+
+    it('should be accessible', async () => {
+      await expect(card).to.be.accessible();
+    });
+
+    it('should render body content correctly', () => {
+      const body = card.shadowRoot!.querySelector(
+        '[part=body]'
+      ) as HTMLSlotElement;
+
+      assert.include(
+        body.assignedNodes().map((node) => node.textContent),
+        content
+      );
+    });
+
+    it('should render header content correctly', () => {
+      const header = card.shadowRoot!.querySelector(
+        'slot[name=header]'
+      ) as HTMLSlotElement;
+
+      expect(header.assignedElements()).to.have.length(1);
+    });
+
+    it('should attach card--with-header class modifier to base', () => {
+      const base = card.shadowRoot!.querySelector('[part=base]');
+      expect(base).to.have.class('card--with-header');
     });
   });
 });
