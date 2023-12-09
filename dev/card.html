@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>&lt;my-element> Demo</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/lit/polyfill-support.js"></script>
+
+    <link rel="stylesheet" href="/src/themes/light.css" />
+
+    <script
+      type="module"
+      src="../dist/components/card/card.component.js"
+    ></script>
+
+    <style>
+      body {
+        font-family: var(--ds-font-sans);
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      h1 {
+        flex-basis: 100%;
+      }
+
+      h1,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      ds-card {
+        max-width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Card</h1>
+
+    <div>
+      <h2>Basic Card</h2>
+      <ds-card>
+        <p slot="body">
+          This is just a basic card. No image, no header, and no footer. Just
+          your content.
+        </p>
+      </ds-card>
+    </div>
+
+    <div>
+      <h2>Card with Header</h2>
+      <ds-card>
+        <h3 slot="header">Header title</h3>
+        <p slot="body">
+          This card has a header. You can put all sorts of things in it!
+        </p>
+      </ds-card>
+    </div>
+
+    <div>
+      <h2>Card with Footer</h2>
+      <ds-card>
+        <p slot="body">
+          This card has a header. You can put all sorts of things in it!
+        </p>
+        <button slot="footer">Footer Button</button>
+      </ds-card>
+    </div>
+
+    <div>
+      <h2>Card with Image</h2>
+      <ds-card>
+        <img
+          slot="image"
+          src="https://images.unsplash.com/photo-1559209172-0ff8f6d49ff7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
+          alt="A kitten sits patiently between a terracotta pot and decorative grasses."
+        />
+        <p slot="body">
+          This is a kitten, but not just any kitten. This kitten likes walking
+          along pallets.
+        </p>
+      </ds-card>
+    </div>
+  </body>
+</html>
