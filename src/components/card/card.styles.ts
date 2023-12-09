@@ -21,7 +21,6 @@ export default css`
 
   .card:not(.card--with-image) .card__image,
   .card:not(.card--with-header) .card__header,
-  .card:not(.card--with-body) .card__body,
   .card:not(.card--with-footer) .card__footer {
     display: none;
   }

@@ -6,13 +6,11 @@ import styles from './card.styles';
 
 const ELEMENT_NAME = 'ds-card';
 
-const SLOTS = ['image', 'header', 'body', 'footer'] as const;
-
 @customElement(ELEMENT_NAME)
 export default class DsCard extends BaseElement {
   static styles = [BaseElement.styles, styles];
 
-  private _hasSlottedElement(name: (typeof SLOTS)[number]) {
+  private _hasSlottedElement(name: string) {
     return this.querySelector(`:scope > [slot=${name}]`) !== null;
   }
 
@@ -24,20 +22,13 @@ export default class DsCard extends BaseElement {
           card: true,
           'card--with-image': this._hasSlottedElement('image'),
           'card--with-header': this._hasSlottedElement('header'),
-          'card--with-body': this._hasSlottedElement('body'),
           'card--with-footer': this._hasSlottedElement('footer'),
         })}
       >
-        ${SLOTS.map(
-          (slotName) =>
-            html`
-              <slot
-                name=${slotName}
-                part=${slotName}
-                class="card__${slotName}"
-              ></slot>
-            `
-        )}
+        <slot name="image" part="image" class="card__image"></slot>
+        <slot name="header" part="header" class="card__header"></slot>
+        <slot part="body" class="card__body"></slot>
+        <slot name="footer" part="footer" class="card__footer"></slot>
       </div>
     `;
   }
