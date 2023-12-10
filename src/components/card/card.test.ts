@@ -68,4 +68,45 @@ describe('<ds-card>', () => {
       expect(base).to.have.class('card--with-header');
     });
   });
+
+  describe('when provided footer and body', () => {
+    const content =
+      'This card has a footer. You can put all sorts of things in it!';
+
+    before(async () => {
+      card = await fixture<DsCard>(html`
+        <ds-card>
+          ${content}
+          <div slot="footer">Footer Content</div>
+        </ds-card>
+      `);
+    });
+
+    it('should be accessible', async () => {
+      await expect(card).to.be.accessible();
+    });
+
+    it('should render body content correctly', () => {
+      const body = card.shadowRoot!.querySelector(
+        '[part=body]'
+      ) as HTMLSlotElement;
+      assert.include(
+        body.assignedNodes().map((node) => node.textContent),
+        content
+      );
+    });
+
+    it('should render footer content correctly', () => {
+      const footer = card.shadowRoot!.querySelector(
+        '[part=footer]'
+      ) as HTMLSlotElement;
+
+      expect(footer.assignedElements()).to.have.length(1);
+    });
+
+    it('should attach card--with-footer class modifier to base', () => {
+      const base = card.shadowRoot!.querySelector('[part=base]');
+      expect(base).to.have.class('card--with-footer');
+    });
+  });
 });
