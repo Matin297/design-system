@@ -109,4 +109,51 @@ describe('<ds-card>', () => {
       expect(base).to.have.class('card--with-footer');
     });
   });
+
+  describe('when provided image and body', () => {
+    const content =
+      'This is a kitten, but not just any kitten. This kitten likes walking along pallets.';
+
+    before(async () => {
+      card = await fixture<DsCard>(html`
+        <ds-card>
+          <img
+            slot="image"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            alt="A kitten walks towards camera on top of pallet."
+          />
+          ${content}
+        </ds-card>
+      `);
+    });
+
+    it('should be accessible', async () => {
+      await expect(card).to.be.accessible();
+    });
+
+    it('should render body content correctly', () => {
+      const body = card.shadowRoot!.querySelector(
+        '[part=body]'
+      ) as HTMLSlotElement;
+      assert.include(
+        body.assignedNodes().map((node) => node.textContent),
+        content
+      );
+    });
+
+    it('should render image correctly', () => {
+      const image = card.shadowRoot!.querySelector(
+        '[part=image]'
+      ) as HTMLSlotElement;
+
+      expect(image.assignedElements()).to.have.length(1);
+    });
+
+    it('should attach card--with-image class modifier to base', () => {
+      const base = card.shadowRoot!.querySelector(
+        '[part=base]'
+      ) as HTMLSlotElement;
+      expect(base).to.have.class('card--with-image');
+    });
+  });
 });
