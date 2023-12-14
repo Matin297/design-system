@@ -4,6 +4,7 @@ export default css`
   .details {
     border: solid 1px var(--ds-color-neutral-200);
     border-radius: var(--ds-border-radius-medium);
+    user-select: none;
   }
 
   .details__header,
@@ -34,17 +35,21 @@ export default css`
     transition: rotate var(--ds-transition-medium) ease;
   }
 
+  .details__body {
+    overflow: hidden;
+  }
+
   .details__content {
     display: block;
   }
 
   /** Open */
-  .details--open slot[name='expand-icon'],
-  .details:not(.details--open) slot[name='collapse-icon'] {
+  .details[open] slot[name='expand-icon'],
+  .details:not([open]) slot[name='collapse-icon'] {
     display: none;
   }
 
-  .details--open .details__icon {
+  .details[open] .details__icon {
     rotate: 90deg;
   }
 
