@@ -15,6 +15,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "useDefineForClassFields": false,
+    "strictPropertyInitialization": false,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "moduleResolution": "node",
