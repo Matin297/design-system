@@ -2,12 +2,13 @@ import {html} from 'lit';
 import {classMap} from 'lit/directives/class-map.js';
 import {customElement, property} from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
+import styles from './details.styles';
 
 const ELEMENT_NAME = 'ds-details';
 
 @customElement(ELEMENT_NAME)
 export default class DsDetails extends BaseElement {
-  static styles = [BaseElement.styles];
+  static styles = [BaseElement.styles, styles];
 
   /**
    * The summary text to show in header part.
