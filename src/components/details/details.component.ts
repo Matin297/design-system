@@ -63,14 +63,38 @@ export default class DsDetails extends BaseElement {
 
   async hide() {
     if (this.disabled || !this.open) return;
+
+    const dsHideEvent = this.emit('ds-hide', {cancelable: true});
+
+    // Keep it open if event is prevented
+    if (dsHideEvent.defaultPrevented) {
+      this.open = true;
+      return;
+    }
+
     await this.animateBodyContent(DETAILS_HIDE);
+
     this.open = false;
+
+    this.emit('ds-hide-finish');
   }
 
   async show() {
     if (this.disabled || this.open) return;
+
+    const dsShowEvent = this.emit('ds-show', {cancelable: true});
+
+    // Keep it closed if event is prevented
+    if (dsShowEvent.defaultPrevented) {
+      this.open = false;
+      return;
+    }
+
     this.open = true;
+
     await this.animateBodyContent(DETAILS_SHOW);
+
+    this.emit('ds-show-finish');
   }
 
   render() {
