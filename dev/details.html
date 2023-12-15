@@ -22,11 +22,25 @@
       p {
         margin: 0;
       }
+
+      .custom-icon::part(icon) {
+        rotate: none;
+      }
+
+      .details-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
     </style>
   </head>
   <body>
     <h1>Details</h1>
 
+    <br />
+    <br />
+
+    <h2>Basic</h2>
     <ds-details>
       <span slot="summary">Summary</span>
       <p>
@@ -44,6 +58,83 @@
       </p>
     </ds-details>
 
+    <br />
+    <br />
+
+    <h2>Disabled</h2>
+    <ds-details summary="Disabled Summary" disabled>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsa
+        maiores necessitatibus reprehenderit temporibus alias fugiat quo magni
+        laudantium, nesciunt assumenda quos at vitae perferendis aliquam minima
+        corporis asperiores in!
+      </p>
+      <br />
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsa
+        maiores necessitatibus reprehenderit temporibus alias fugiat quo magni
+        laudantium, nesciunt assumenda quos at vitae perferendis aliquam minima
+        corporis asperiores in!
+      </p>
+    </ds-details>
+
+    <br />
+    <br />
+
+    <h2>Customized Icon</h2>
+    <ds-details summary="Custom icon Summary" class="custom-icon">
+      <ion-icon slot="expand-icon" name="chevron-expand-outline"></ion-icon>
+      <ion-icon slot="collapse-icon" name="chevron-collapse-outline"></ion-icon>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsa
+        maiores necessitatibus reprehenderit temporibus alias fugiat quo magni
+        laudantium, nesciunt assumenda quos at vitae perferendis aliquam minima
+        corporis asperiores in!
+      </p>
+      <br />
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsa
+        maiores necessitatibus reprehenderit temporibus alias fugiat quo magni
+        laudantium, nesciunt assumenda quos at vitae perferendis aliquam minima
+        corporis asperiores in!
+      </p>
+    </ds-details>
+
+    <br />
+    <br />
+
+    <h2>Grouped Details</h2>
+    <div class="details-wrapper">
+      <ds-details summary="First" open>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsa
+          maiores necessitatibus reprehenderit temporibus alias fugiat quo magni
+          laudantium, nesciunt assumenda quos at vitae perferendis aliquam
+          minima corporis asperiores in!
+        </p>
+      </ds-details>
+      <ds-details summary="Second">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsa
+          maiores necessitatibus reprehenderit temporibus alias fugiat quo magni
+          laudantium, nesciunt assumenda quos at vitae perferendis aliquam
+          minima corporis asperiores in!
+        </p>
+      </ds-details>
+      <ds-details summary="Third">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsa
+          maiores necessitatibus reprehenderit temporibus alias fugiat quo magni
+          laudantium, nesciunt assumenda quos at vitae perferendis aliquam
+          minima corporis asperiores in!
+        </p>
+      </ds-details>
+    </div>
+
+    <br />
+    <br />
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -52,5 +143,14 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+    <script>
+      const detailsWrapper = document.querySelector('.details-wrapper');
+
+      detailsWrapper.addEventListener('ds-show', (event) => {
+        const currentOpenDetailsElement =
+          detailsWrapper.querySelector('ds-details[open]');
+        if (currentOpenDetailsElement) currentOpenDetailsElement.hide();
+      });
+    </script>
   </body>
 </html>
