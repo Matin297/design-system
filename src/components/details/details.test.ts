@@ -14,6 +14,15 @@ describe('<ds-details>', () => {
       await expect(details).to.be.accessible();
     });
 
+    it('should display the body content', async () => {
+      const details = await fixture<DsDetails>(html`
+        <ds-details open summary="Test">Test Details</ds-details>
+      `);
+
+      const body = details.shadowRoot!.querySelector('.details__body')!;
+      expect(body.clientHeight).to.be.greaterThan(0);
+    });
+
     it('should emit ds-hide and ds-hide-finish when calling hide()', async () => {
       const details = await fixture<DsDetails>(html`
         <ds-details open summary="Test">Test Details</ds-details>
@@ -56,6 +65,15 @@ describe('<ds-details>', () => {
       `);
 
       await expect(details).to.be.accessible();
+    });
+
+    it('should not display the body content', async () => {
+      const details = await fixture<DsDetails>(html`
+        <ds-details summary="Test">Test Details</ds-details>
+      `);
+
+      const body = details.shadowRoot!.querySelector('.details__body')!;
+      expect(body.clientHeight).to.be.equal(0);
     });
 
     it('should emit ds-show and ds-show-finish when calling show()', async () => {
