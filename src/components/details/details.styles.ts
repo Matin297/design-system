@@ -53,6 +53,14 @@ export default css`
     rotate: 90deg;
   }
 
+  .details[open] .details__body {
+    height: auto;
+  }
+
+  .details:not([open]) .details__body {
+    height: 0;
+  }
+
   /** Disabled */
   .details--disabled {
     opacity: 0.5;
