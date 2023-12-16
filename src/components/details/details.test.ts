@@ -5,29 +5,25 @@ import sinon from 'sinon';
 import type DsDetails from './details.component';
 
 describe('<ds-details>', () => {
+  let details: DsDetails;
+
   describe('when details is opened', () => {
-    it('should be accessible', async () => {
-      const details = await fixture<DsDetails>(html`
+    beforeEach(async () => {
+      details = await fixture<DsDetails>(html`
         <ds-details open summary="Test">Test Details</ds-details>
       `);
+    });
 
+    it('should be accessible', async () => {
       await expect(details).to.be.accessible();
     });
 
-    it('should display the body content', async () => {
-      const details = await fixture<DsDetails>(html`
-        <ds-details open summary="Test">Test Details</ds-details>
-      `);
-
+    it('should display the body content', () => {
       const body = details.shadowRoot!.querySelector('.details__body')!;
       expect(body.clientHeight).to.be.greaterThan(0);
     });
 
     it('should emit ds-hide and ds-hide-finish when calling hide()', async () => {
-      const details = await fixture<DsDetails>(html`
-        <ds-details open summary="Test">Test Details</ds-details>
-      `);
-
       const hideHandler = sinon.spy();
       const hideFinishHandler = sinon.spy();
 
@@ -43,10 +39,6 @@ describe('<ds-details>', () => {
     });
 
     it('should not be closed when ds-hide is prevented', async () => {
-      const details = await fixture<DsDetails>(html`
-        <ds-details open summary="Test">Test Details</ds-details>
-      `);
-
       const hideHandler = sinon.spy((event: Event) => event.preventDefault());
 
       details.addEventListener('ds-hide', hideHandler);
@@ -59,28 +51,22 @@ describe('<ds-details>', () => {
   });
 
   describe('when details is closed', () => {
-    it('should be accessible', async () => {
-      const details = await fixture<DsDetails>(html`
+    beforeEach(async () => {
+      details = await fixture<DsDetails>(html`
         <ds-details summary="Test">Test Details</ds-details>
       `);
+    });
 
+    it('should be accessible', async () => {
       await expect(details).to.be.accessible();
     });
 
-    it('should not display the body content', async () => {
-      const details = await fixture<DsDetails>(html`
-        <ds-details summary="Test">Test Details</ds-details>
-      `);
-
+    it('should not display the body content', () => {
       const body = details.shadowRoot!.querySelector('.details__body')!;
       expect(body.clientHeight).to.be.equal(0);
     });
 
     it('should emit ds-show and ds-show-finish when calling show()', async () => {
-      const details = await fixture<DsDetails>(html`
-        <ds-details summary="Test">Test Details</ds-details>
-      `);
-
       const showHandler = sinon.spy();
       const showFinishHandler = sinon.spy();
 
@@ -96,10 +82,6 @@ describe('<ds-details>', () => {
     });
 
     it('should not be opened when ds-show is prevented', async () => {
-      const details = await fixture<DsDetails>(html`
-        <ds-details summary="Test">Test Details</ds-details>
-      `);
-
       const showHandler = sinon.spy((event: Event) => event.preventDefault());
 
       details.addEventListener('ds-show', showHandler);
