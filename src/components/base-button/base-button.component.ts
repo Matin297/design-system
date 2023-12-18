@@ -2,12 +2,13 @@ import {html, literal} from 'lit/static-html.js';
 import {customElement, property} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 import {BaseElement} from '../../internals/base-element';
+import styles from './base-button.styles';
 
 const ELEMENT_NAME = 'ds-base-button';
 
 @customElement(ELEMENT_NAME)
 export default class DsBaseButton extends BaseElement {
-  static styles = [BaseElement.styles];
+  static styles = [BaseElement.styles, styles];
 
   tag = literal`button`;
 
@@ -58,6 +59,7 @@ export default class DsBaseButton extends BaseElement {
           'button--pill': this.pill,
           'button--circle': this.circle,
           'button--outline': this.outline,
+          'button--disabled': this.disabled,
           'button--small': this.size === 'small',
           'button--medium': this.size === 'medium',
           'button--large': this.size === 'large',

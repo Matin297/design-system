@@ -18,12 +18,100 @@
       body {
         font-family: var(--ds-font-sans);
       }
+
+      div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
     </style>
   </head>
   <body>
     <h1>Avatar</h1>
 
-    <ds-base-button title="test">Click base button</ds-base-button>
+    <h2>Filled</h2>
+    <div>
+      <ds-base-button title="test">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button title="test" variant="primary">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button title="test" variant="success">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button title="test" variant="neutral">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button title="test" variant="warning">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button title="test" variant="danger">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button disabled title="test">Click base button</ds-base-button>
+    </div>
+
+    <h2>Outlined</h2>
+    <div>
+      <ds-base-button outline title="test">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button outline title="test" variant="primary">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button outline title="test" variant="success">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button outline title="test" variant="neutral">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button outline title="test" variant="warning">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button outline title="test" variant="danger">
+        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+        Click base button
+        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
+      </ds-base-button>
+
+      <ds-base-button outline disabled title="test"
+        >Click base button</ds-base-button
+      >
+    </div>
 
     <script
       type="module"
