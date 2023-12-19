@@ -270,12 +270,14 @@ export default css`
     border-radius: var(--ds-input-border-radius-small);
   }
 
+  /** Medium */
   .button--medium {
     min-height: var(--ds-input-height-medium);
     font-size: var(--ds-button-font-size-medium);
     border-radius: var(--ds-input-border-radius-medium);
   }
 
+  /** Large */
   .button--large {
     min-height: var(--ds-input-height-large);
     font-size: var(--ds-button-font-size-large);
