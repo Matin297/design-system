@@ -307,6 +307,19 @@ export default css`
     padding: 0 var(--ds-spacing-large);
   }
 
+  /** Prefix */
+  .button--prefixed.button--small,
+  .button--prefixed.button--small .button__label {
+    padding-inline-start: var(--ds-spacing-x-small);
+  }
+
+  .button--prefixed.button--medium,
+  .button--prefixed.button--medium .button__label,
+  .button--prefixed.button--large,
+  .button--prefixed.button--large .button__label {
+    padding-inline-start: var(--ds-spacing-small);
+  }
+
   /** Pill */
   .button--pill.button--small {
     border-radius: var(--ds-input-height-small);
