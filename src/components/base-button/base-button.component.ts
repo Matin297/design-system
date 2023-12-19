@@ -49,6 +49,10 @@ export default class DsBaseButton extends BaseElement {
   @property({type: Boolean, reflect: true})
   disabled = false;
 
+  private _hasSlottedElement(name: string) {
+    return this.querySelector(`:scope > [slot=${name}]`) !== null;
+  }
+
   render() {
     return html`
       <${this.tag}
@@ -69,6 +73,8 @@ export default class DsBaseButton extends BaseElement {
           'button--neutral': this.variant === 'neutral',
           'button--warning': this.variant === 'warning',
           'button--danger': this.variant === 'danger',
+          'button--prefixed': this._hasSlottedElement('prefix'),
+          'button--suffixed': this._hasSlottedElement('suffix'),
         })}
         title=${this.title}
         ?disabled=${this.disabled}
