@@ -20,6 +20,11 @@ export default css`
       background-color var(--ds-transition-x-fast);
   }
 
+  .button:focus-visible {
+    outline: var(--ds-focus-ring);
+    outline-offset: var(--ds-focus-ring-offset);
+  }
+
   /** Default */
   .button--default {
     color: var(--ds-color-neutral-700);
