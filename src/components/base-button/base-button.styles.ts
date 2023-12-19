@@ -320,6 +320,19 @@ export default css`
     padding-inline-start: var(--ds-spacing-small);
   }
 
+  /** Suffix */
+  .button--suffixed.button--small,
+  .button--suffixed.button--small .button__label {
+    padding-inline-end: var(--ds-spacing-x-small);
+  }
+
+  .button--suffixed.button--medium,
+  .button--suffixed.button--medium .button__label,
+  .button--suffixed.button--large,
+  .button--suffixed.button--large .button__label {
+    padding-inline-end: var(--ds-spacing-small);
+  }
+
   /** Pill */
   .button--pill.button--small {
     border-radius: var(--ds-input-height-small);
