@@ -297,6 +297,23 @@ export default css`
     border-radius: var(--ds-input-height-large);
   }
 
+  /** Circle */
+  .button--circle {
+    border-radius: 50%;
+  }
+
+  .button--circle.button--small {
+    width: var(--ds-input-height-small);
+  }
+
+  .button--circle.button--medium {
+    width: var(--ds-input-height-medium);
+  }
+
+  .button--circle.button--large {
+    width: var(--ds-input-height-large);
+  }
+
   /** Disabled */
   .button--disabled * {
     pointer-events: none;
