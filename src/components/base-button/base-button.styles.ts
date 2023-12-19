@@ -263,6 +263,25 @@ export default css`
     color: var(--ds-color-danger-700);
   }
 
+  /** Small */
+  .button--small {
+    min-height: var(--ds-input-height-small);
+    font-size: var(--ds-button-font-size-small);
+    border-radius: var(--ds-input-border-radius-small);
+  }
+
+  .button--medium {
+    min-height: var(--ds-input-height-medium);
+    font-size: var(--ds-button-font-size-medium);
+    border-radius: var(--ds-input-border-radius-medium);
+  }
+
+  .button--large {
+    min-height: var(--ds-input-height-large);
+    font-size: var(--ds-button-font-size-large);
+    border-radius: var(--ds-input-border-radius-large);
+  }
+
   /** Disabled */
   .button--disabled * {
     pointer-events: none;
