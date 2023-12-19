@@ -1,5 +1,13 @@
 import {css} from 'lit';
 
+import defaultStyles from './default.styles';
+import primaryStyles from './primary.styles';
+import successStyles from './success.styles';
+import neutralStyles from './neutral.styles';
+import warningStyles from './warning.styles';
+import dangerStyles from './danger.styles';
+import sizeStyles from './size.styles';
+
 export default css`
   :host {
     display: inline-block;
@@ -32,280 +40,25 @@ export default css`
   }
 
   /** Default */
-  .button--default {
-    color: var(--ds-color-neutral-700);
-    border-color: var(--ds-color-neutral-300);
-    background-color: var(--ds-color-neutral-0);
-  }
-
-  .button--default:not(:disabled):hover {
-    color: var(--ds-color-primary-700);
-    border-color: var(--ds-color-primary-300);
-    background-color: var(--ds-color-primary-50);
-  }
-
-  .button--default.button--outline:not(:disabled):hover {
-    color: var(--ds-color-neutral-0);
-    border-color: var(--ds-color-primary-600);
-    background-color: var(--ds-color-primary-600);
-  }
-
-  .button--default.button--text:not(:disabled):hover {
-    background: none;
-    color: var(--ds-color-primary-500);
-  }
-
-  .button--default:not(:disabled):active {
-    border-color: var(--ds-color-primary-400);
-    background-color: var(--ds-color-primary-100);
-  }
-
-  .button--default.button--outline:not(:disabled):active {
-    border-color: var(--ds-color-primary-700);
-    background-color: var(--ds-color-primary-700);
-  }
-
-  .button--default.button--text:not(:disabled):active {
-    color: var(--ds-color-primary-700);
-  }
+  ${defaultStyles}
 
   /** Primary */
-  .button--primary {
-    color: var(--ds-color-neutral-0);
-    border-color: var(--ds-color-primary-600);
-    background-color: var(--ds-color-primary-600);
-  }
-
-  .button--primary.button--outline,
-  .button--primary.button--text {
-    color: var(--ds-color-primary-600);
-  }
-
-  .button--primary:not(:disabled):hover {
-    border-color: var(--ds-color-primary-500);
-    background-color: var(--ds-color-primary-500);
-  }
-
-  .button--primary.button--outline:not(:disabled):hover {
-    color: var(--ds-color-neutral-0);
-    background-color: var(--ds-color-primary-600);
-  }
-
-  .button--primary.button--text:not(:disabled):hover {
-    background: none;
-    color: var(--ds-color-primary-500);
-  }
-
-  .button--primary:not(:disabled):active {
-    border-color: var(--ds-color-primary-600);
-    background-color: var(--ds-color-primary-600);
-  }
-
-  .button--primary.button--outline:not(:disabled):active {
-    border-color: var(--ds-color-primary-700);
-    background-color: var(--ds-color-primary-700);
-  }
-
-  .button--primary.button--text:not(:disabled):active {
-    color: var(--ds-color-primary-700);
-  }
+  ${primaryStyles}
 
   /** Success */
-  .button--success {
-    color: var(--ds-color-neutral-0);
-    border-color: var(--ds-color-success-600);
-    background-color: var(--ds-color-success-600);
-  }
-
-  .button--success.button--outline,
-  .button--success.button--text {
-    color: var(--ds-color-success-600);
-  }
-
-  .button--success:not(:disabled):hover {
-    border-color: var(--ds-color-success-500);
-    background-color: var(--ds-color-success-500);
-  }
-
-  .button--success.button--outline:not(:disabled):hover {
-    color: var(--ds-color-neutral-0);
-    background-color: var(--ds-color-success-600);
-  }
-
-  .button--success.button--text:not(:disabled):hover {
-    background: none;
-    color: var(--ds-color-success-500);
-  }
-
-  .button--success:not(:disabled):active {
-    border-color: var(--ds-color-success-600);
-    background-color: var(--ds-color-success-600);
-  }
-
-  .button--success.button--outline:not(:disabled):active {
-    border-color: var(--ds-color-success-700);
-    background-color: var(--ds-color-success-700);
-  }
-
-  .button--success.button--text:not(:disabled):active {
-    color: var(--ds-color-success-700);
-  }
+  ${successStyles}
 
   /** Neutral */
-  .button--neutral {
-    color: var(--ds-color-neutral-0);
-    border-color: var(--ds-color-neutral-600);
-    background-color: var(--ds-color-neutral-600);
-  }
-
-  .button--neutral.button--outline,
-  .button--neutral.button--text {
-    color: var(--ds-color-neutral-600);
-  }
-
-  .button--neutral:not(:disabled):hover {
-    border-color: var(--ds-color-neutral-500);
-    background-color: var(--ds-color-neutral-500);
-  }
-
-  .button--neutral.button--outline:not(:disabled):hover {
-    color: var(--ds-color-neutral-0);
-    background-color: var(--ds-color-neutral-600);
-  }
-
-  .button--neutral.button--text:not(:disabled):hover {
-    background: none;
-    color: var(--ds-color-neutral-500);
-  }
-
-  .button--neutral:not(:disabled):active {
-    border-color: var(--ds-color-neutral-600);
-    background-color: var(--ds-color-neutral-600);
-  }
-
-  .button--neutral.button--outline:not(:disabled):active {
-    border-color: var(--ds-color-neutral-700);
-    background-color: var(--ds-color-neutral-700);
-  }
-
-  .button--neutral.button--text:not(:disabled):active {
-    color: var(--ds-color-neutral-700);
-  }
+  ${neutralStyles}
 
   /** Warning */
-  .button--warning {
-    color: var(--ds-color-neutral-0);
-    border-color: var(--ds-color-warning-600);
-    background-color: var(--ds-color-warning-600);
-  }
-
-  .button--warning.button--outline,
-  .button--warning.button--text {
-    color: var(--ds-color-warning-600);
-  }
-
-  .button--warning:not(:disabled):hover {
-    border-color: var(--ds-color-warning-500);
-    background-color: var(--ds-color-warning-500);
-  }
-
-  .button--warning.button--outline:not(:disabled):hover {
-    color: var(--ds-color-neutral-0);
-    background-color: var(--ds-color-warning-600);
-  }
-
-  .button--warning.button--text:not(:disabled):hover {
-    background: none;
-    color: var(--ds-color-warning-500);
-  }
-
-  .button--warning:not(:disabled):active {
-    border-color: var(--ds-color-warning-600);
-    background-color: var(--ds-color-warning-600);
-  }
-
-  .button--warning.button--outline:not(:disabled):active {
-    border-color: var(--ds-color-warning-700);
-    background-color: var(--ds-color-warning-700);
-  }
-
-  .button--warning.button--text:not(:disabled):active {
-    color: var(--ds-color-warning-700);
-  }
+  ${warningStyles}
 
   /** Danger */
-  .button--danger {
-    color: var(--ds-color-neutral-0);
-    border-color: var(--ds-color-danger-600);
-    background-color: var(--ds-color-danger-600);
-  }
+  ${dangerStyles}
 
-  .button--danger.button--outline,
-  .button--danger.button--text {
-    color: var(--ds-color-danger-600);
-  }
-
-  .button--danger:not(:disabled):hover {
-    border-color: var(--ds-color-danger-500);
-    background-color: var(--ds-color-danger-500);
-  }
-
-  .button--danger.button--outline:not(:disabled):hover {
-    color: var(--ds-color-neutral-0);
-    background-color: var(--ds-color-danger-600);
-  }
-
-  .button--danger.button--text:not(:disabled):hover {
-    background: none;
-    color: var(--ds-color-danger-500);
-  }
-
-  .button--danger:not(:disabled):active {
-    border-color: var(--ds-color-danger-600);
-    background-color: var(--ds-color-danger-600);
-  }
-
-  .button--danger.button--outline:not(:disabled):active {
-    border-color: var(--ds-color-danger-700);
-    background-color: var(--ds-color-danger-700);
-  }
-
-  .button--danger.button--text:not(:disabled):active {
-    color: var(--ds-color-danger-700);
-  }
-
-  /** Small */
-  .button--small {
-    min-height: var(--ds-input-height-small);
-    font-size: var(--ds-button-font-size-small);
-    border-radius: var(--ds-input-border-radius-small);
-  }
-
-  .button--small .button__label {
-    padding: 0 var(--ds-spacing-small);
-  }
-
-  /** Medium */
-  .button--medium {
-    min-height: var(--ds-input-height-medium);
-    font-size: var(--ds-button-font-size-medium);
-    border-radius: var(--ds-input-border-radius-medium);
-  }
-
-  .button--medium .button__label {
-    padding: 0 var(--ds-spacing-medium);
-  }
-
-  /** Large */
-  .button--large {
-    min-height: var(--ds-input-height-large);
-    font-size: var(--ds-button-font-size-large);
-    border-radius: var(--ds-input-border-radius-large);
-  }
-
-  .button--large .button__label {
-    padding: 0 var(--ds-spacing-large);
-  }
+  /** Sizes */
+  ${sizeStyles}
 
   /** Prefix */
   .button--prefixed.button--small,
