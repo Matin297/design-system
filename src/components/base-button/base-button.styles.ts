@@ -284,6 +284,19 @@ export default css`
     border-radius: var(--ds-input-border-radius-large);
   }
 
+  /** Pill */
+  .button--pill.button--small {
+    border-radius: var(--ds-input-height-small);
+  }
+
+  .button--pill.button--medium {
+    border-radius: var(--ds-input-height-medium);
+  }
+
+  .button--pill.button--large {
+    border-radius: var(--ds-input-height-large);
+  }
+
   /** Disabled */
   .button--disabled * {
     pointer-events: none;
