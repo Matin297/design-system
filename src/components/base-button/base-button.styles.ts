@@ -15,6 +15,9 @@ export default css`
     border-width: var(--ds-input-border-width);
     font-family: var(--ds-input-font-family);
     font-weight: var(--ds-font-weight-semibold);
+    transition: color var(--ds-transition-x-fast),
+      border-color var(--ds-transition-x-fast),
+      background-color var(--ds-transition-x-fast);
   }
 
   /** Default */
@@ -36,6 +39,11 @@ export default css`
     background-color: var(--ds-color-primary-600);
   }
 
+  .button--default.button--text:not(:disabled):hover {
+    background: none;
+    color: var(--ds-color-primary-500);
+  }
+
   .button--default:not(:disabled):active {
     border-color: var(--ds-color-primary-400);
     background-color: var(--ds-color-primary-100);
@@ -46,6 +54,10 @@ export default css`
     background-color: var(--ds-color-primary-700);
   }
 
+  .button--default.button--text:not(:disabled):active {
+    color: var(--ds-color-primary-700);
+  }
+
   /** Primary */
   .button--primary {
     color: var(--ds-color-neutral-0);
@@ -53,7 +65,8 @@ export default css`
     background-color: var(--ds-color-primary-600);
   }
 
-  .button--primary.button--outline {
+  .button--primary.button--outline,
+  .button--primary.button--text {
     color: var(--ds-color-primary-600);
   }
 
@@ -67,6 +80,11 @@ export default css`
     background-color: var(--ds-color-primary-600);
   }
 
+  .button--primary.button--text:not(:disabled):hover {
+    background: none;
+    color: var(--ds-color-primary-500);
+  }
+
   .button--primary:not(:disabled):active {
     border-color: var(--ds-color-primary-600);
     background-color: var(--ds-color-primary-600);
@@ -77,6 +95,10 @@ export default css`
     background-color: var(--ds-color-primary-700);
   }
 
+  .button--primary.button--text:not(:disabled):active {
+    color: var(--ds-color-primary-700);
+  }
+
   /** Success */
   .button--success {
     color: var(--ds-color-neutral-0);
@@ -84,7 +106,8 @@ export default css`
     background-color: var(--ds-color-success-600);
   }
 
-  .button--success.button--outline {
+  .button--success.button--outline,
+  .button--success.button--text {
     color: var(--ds-color-success-600);
   }
 
@@ -98,6 +121,11 @@ export default css`
     background-color: var(--ds-color-success-600);
   }
 
+  .button--success.button--text:not(:disabled):hover {
+    background: none;
+    color: var(--ds-color-success-500);
+  }
+
   .button--success:not(:disabled):active {
     border-color: var(--ds-color-success-600);
     background-color: var(--ds-color-success-600);
@@ -106,6 +134,10 @@ export default css`
   .button--success.button--outline:not(:disabled):active {
     border-color: var(--ds-color-success-700);
     background-color: var(--ds-color-success-700);
+  }
+
+  .button--success.button--text:not(:disabled):active {
+    color: var(--ds-color-success-700);
   }
 
   /** Neutral */
@@ -214,5 +246,11 @@ export default css`
   /** Outlined */
   .button--outline {
     background: none;
+  }
+
+  /** Text */
+  .button--text {
+    background: none;
+    border: none;
   }
 `;
