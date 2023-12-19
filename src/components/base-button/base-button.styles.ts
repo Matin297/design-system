@@ -147,7 +147,8 @@ export default css`
     background-color: var(--ds-color-neutral-600);
   }
 
-  .button--neutral.button--outline {
+  .button--neutral.button--outline,
+  .button--neutral.button--text {
     color: var(--ds-color-neutral-600);
   }
 
@@ -161,6 +162,11 @@ export default css`
     background-color: var(--ds-color-neutral-600);
   }
 
+  .button--neutral.button--text:not(:disabled):hover {
+    background: none;
+    color: var(--ds-color-neutral-500);
+  }
+
   .button--neutral:not(:disabled):active {
     border-color: var(--ds-color-neutral-600);
     background-color: var(--ds-color-neutral-600);
@@ -169,6 +175,10 @@ export default css`
   .button--neutral.button--outline:not(:disabled):active {
     border-color: var(--ds-color-neutral-700);
     background-color: var(--ds-color-neutral-700);
+  }
+
+  .button--neutral.button--text:not(:disabled):active {
+    color: var(--ds-color-neutral-700);
   }
 
   /** Warning */
