@@ -34,6 +34,8 @@ export default class DsLink extends DsBaseButton {
         target=${this.target}
         rel=${ifDefined(this.rel)}
         download=${ifDefined(this.download)}
+        tabindex=${this.disabled ? -1 : 0}
+        ?aria-disabled=${this.disabled}
       >
         ${this.slots}
       </${this.tag}>
