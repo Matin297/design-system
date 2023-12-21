@@ -7,34 +7,34 @@ export default css`
     background-color: var(--ds-color-neutral-0);
   }
 
-  .button--default:not(:disabled):hover {
+  .button--default:not(.button--disabled):hover {
     color: var(--ds-color-primary-700);
     border-color: var(--ds-color-primary-300);
     background-color: var(--ds-color-primary-50);
   }
 
-  .button--default.button--outline:not(:disabled):hover {
+  .button--default.button--outline:not(.button--disabled):hover {
     color: var(--ds-color-neutral-0);
     border-color: var(--ds-color-primary-600);
     background-color: var(--ds-color-primary-600);
   }
 
-  .button--default.button--text:not(:disabled):hover {
+  .button--default.button--text:not(.button--disabled):hover {
     background: none;
     color: var(--ds-color-primary-500);
   }
 
-  .button--default:not(:disabled):active {
+  .button--default:not(.button--disabled):active {
     border-color: var(--ds-color-primary-400);
     background-color: var(--ds-color-primary-100);
   }
 
-  .button--default.button--outline:not(:disabled):active {
+  .button--default.button--outline:not(.button--disabled):active {
     border-color: var(--ds-color-primary-700);
     background-color: var(--ds-color-primary-700);
   }
 
-  .button--default.button--text:not(:disabled):active {
+  .button--default.button--text:not(.button--disabled):active {
     color: var(--ds-color-primary-700);
   }
 `;

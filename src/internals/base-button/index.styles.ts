@@ -14,10 +14,12 @@ export default css`
   }
 
   .button {
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     white-space: nowrap;
     border-style: solid;
     border-width: var(--ds-input-border-width);
@@ -37,6 +39,16 @@ export default css`
   .button__label,
   .button__suffix {
     display: flex;
+  }
+
+  /** Disabled */
+  :host([disabled]) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  :host([disabled]) * {
+    pointer-events: none;
   }
 
   /** Default */
@@ -114,16 +126,6 @@ export default css`
 
   .button--circle.button--large {
     width: var(--ds-input-height-large);
-  }
-
-  /** Disabled */
-  .button--disabled * {
-    pointer-events: none;
-  }
-
-  .button--disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
   }
 
   /** Outlined */
