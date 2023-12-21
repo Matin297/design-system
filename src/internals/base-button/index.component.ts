@@ -6,32 +6,21 @@ import styles from './index.styles';
 export default class DsBaseButton extends BaseElement {
   static styles = [BaseElement.styles, styles];
 
+  /** Button variant */
+  @property({reflect: true})
+  variant: Variant = 'fill';
+
+  /** Button shape */
+  @property({reflect: true})
+  shape?: Shape;
+
   /** Button theme */
   @property({reflect: true})
-  variant: Variant = 'default';
+  theme: Theme = 'primary';
 
   /** Button size */
   @property({reflect: true})
   size: Size = 'medium';
-
-  /** Renders a bordered button */
-  @property({type: Boolean, reflect: true})
-  outline = false;
-
-  /** Renders a pill-style button */
-  @property({type: Boolean, reflect: true})
-  pill = false;
-
-  /** Renders a button without border or background */
-  @property({type: Boolean, reflect: true})
-  text: false;
-
-  /**
-   * Renders a circular icon button.
-   * When set, component will expect only a single icon in the default slot.
-   */
-  @property({type: Boolean, reflect: true})
-  circle = false;
 
   /** Disables the button */
   @property({type: Boolean, reflect: true})
@@ -44,20 +33,20 @@ export default class DsBaseButton extends BaseElement {
   get classNames() {
     return {
       button: true,
-      'button--text': this.text,
-      'button--pill': this.pill,
-      'button--circle': this.circle,
-      'button--outline': this.outline,
       'button--disabled': this.disabled,
+      'button--fill': this.variant === 'fill',
+      'button--outline': this.variant === 'outline',
+      'button--text': this.variant === 'text',
+      'button--pill': this.shape === 'pill',
+      'button--circle': this.shape === 'circle',
       'button--small': this.size === 'small',
       'button--medium': this.size === 'medium',
       'button--large': this.size === 'large',
-      'button--default': this.variant === 'default',
-      'button--primary': this.variant === 'primary',
-      'button--success': this.variant === 'success',
-      'button--neutral': this.variant === 'neutral',
-      'button--warning': this.variant === 'warning',
-      'button--danger': this.variant === 'danger',
+      'button--primary': this.theme === 'primary',
+      'button--success': this.theme === 'success',
+      'button--neutral': this.theme === 'neutral',
+      'button--warning': this.theme === 'warning',
+      'button--danger': this.theme === 'danger',
       'button--prefixed': this._hasSlottedElement('prefix'),
       'button--suffixed': this._hasSlottedElement('suffix'),
     };
@@ -72,12 +61,10 @@ export default class DsBaseButton extends BaseElement {
   }
 }
 
-type Variant =
-  | 'default'
-  | 'primary'
-  | 'success'
-  | 'neutral'
-  | 'warning'
-  | 'danger';
+type Variant = 'fill' | 'outline' | 'text';
+
+type Shape = 'pill' | 'circle';
 
 type Size = 'small' | 'medium' | 'large';
+
+type Theme = 'primary' | 'success' | 'neutral' | 'warning' | 'danger';
