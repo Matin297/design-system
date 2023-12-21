@@ -1,11 +1,11 @@
 import {css} from 'lit';
 
-import primaryStyles from './primary.styles';
-import successStyles from './success.styles';
-import neutralStyles from './neutral.styles';
-import warningStyles from './warning.styles';
-import dangerStyles from './danger.styles';
-import sizeStyles from './size.styles';
+import primaryStyles from './styles/primary';
+import successStyles from './styles/success';
+import neutralStyles from './styles/neutral';
+import warningStyles from './styles/warning';
+import dangerStyles from './styles/danger';
+import sizeStyles from './styles/size';
 
 export default css`
   :host {
