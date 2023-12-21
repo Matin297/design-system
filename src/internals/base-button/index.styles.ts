@@ -1,6 +1,5 @@
 import {css} from 'lit';
 
-import defaultStyles from './default.styles';
 import primaryStyles from './primary.styles';
 import successStyles from './success.styles';
 import neutralStyles from './neutral.styles';
@@ -50,9 +49,6 @@ export default css`
   :host([disabled]) * {
     pointer-events: none;
   }
-
-  /** Default */
-  ${defaultStyles}
 
   /** Primary */
   ${primaryStyles}

@@ -1,7 +1,7 @@
 import {css} from 'lit';
 
 export default css`
-  .button--neutral {
+  .button--neutral.button--fill {
     color: var(--ds-color-neutral-0);
     border-color: var(--ds-color-neutral-600);
     background-color: var(--ds-color-neutral-600);
@@ -12,7 +12,7 @@ export default css`
     color: var(--ds-color-neutral-600);
   }
 
-  .button--neutral:not(:disabled):hover {
+  .button--neutral.button--fill:not(:disabled):hover {
     border-color: var(--ds-color-neutral-500);
     background-color: var(--ds-color-neutral-500);
   }
@@ -27,7 +27,7 @@ export default css`
     color: var(--ds-color-neutral-500);
   }
 
-  .button--neutral:not(:disabled):active {
+  .button--neutral.button--fill:not(:disabled):active {
     border-color: var(--ds-color-neutral-600);
     background-color: var(--ds-color-neutral-600);
   }
