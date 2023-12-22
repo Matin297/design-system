@@ -3,7 +3,7 @@ import {property} from 'lit/decorators.js';
 import {BaseElement} from '../base-element';
 import styles from './index.styles';
 
-export default class DsBaseButton extends BaseElement {
+export default class BaseButton extends BaseElement {
   static styles = [BaseElement.styles, styles];
 
   /** Button variant */

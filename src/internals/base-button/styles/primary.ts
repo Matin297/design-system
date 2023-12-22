@@ -1,9 +1,12 @@
 import {css} from 'lit';
 
 export default css`
+  .button--primary {
+    border-color: var(--ds-color-primary-600);
+  }
+
   .button--primary.button--fill {
     color: var(--ds-color-neutral-0);
-    border-color: var(--ds-color-primary-600);
     background-color: var(--ds-color-primary-600);
   }
 
