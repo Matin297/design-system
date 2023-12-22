@@ -1,5 +1,10 @@
 {
     "cSpell.words": [
+        "formaction",
+        "formenctype",
+        "formmethod",
+        "formnovalidate",
+        "formtarget",
         "progressbar",
         "slotchange"
     ]
