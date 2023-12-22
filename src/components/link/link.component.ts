@@ -1,5 +1,5 @@
+import {html} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
-import {literal, html} from 'lit/static-html.js';
 import {classMap} from 'lit/directives/class-map.js';
 import {ifDefined} from 'lit/directives/if-defined.js';
 import DsBaseButton from '../../internals/base-button/index.component';
@@ -8,8 +8,6 @@ const ELEMENT_NAME = 'ds-link';
 
 @customElement(ELEMENT_NAME)
 export default class DsLink extends DsBaseButton {
-  tag = literal`a`;
-
   /** The link address to attach to the anchor tag */
   @property()
   href = '';
@@ -27,7 +25,7 @@ export default class DsLink extends DsBaseButton {
 
   render() {
     return html`
-      <${this.tag}
+      <a
         part="base"
         class=${classMap(this.classNames)}
         href=${this.href}
@@ -35,10 +33,10 @@ export default class DsLink extends DsBaseButton {
         rel=${ifDefined(this.rel)}
         download=${ifDefined(this.download)}
         tabindex=${this.disabled ? -1 : 0}
-        ?aria-disabled=${this.disabled}
+        aria-disabled=${this.disabled}
       >
         ${this.slots}
-      </${this.tag}>
+      </a>
     `;
   }
 }
