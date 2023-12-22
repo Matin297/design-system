@@ -11,7 +11,7 @@
 
     <script
       type="module"
-      src="../dist/components/link/link.component.js"
+      src="../dist/components/button/button.component.js"
     ></script>
 
     <style>
@@ -29,273 +29,243 @@
     </style>
   </head>
   <body>
-    <h1>Button Appearance (temporary as links)</h1>
+    <h1>Button</h1>
 
     <h2>Filled</h2>
     <div>
-      <ds-link title="test">
+      <ds-button title="test">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link title="test" theme="success">
+      <ds-button title="test" theme="success">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link title="test" theme="neutral">
+      <ds-button title="test" theme="neutral">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link title="test" theme="warning">
+      <ds-button title="test" theme="warning">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link title="test" theme="danger">
+      <ds-button title="test" theme="danger">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link disabled theme="primary" title="test"> Base Button </ds-link>
+      <ds-button disabled theme="primary" title="test"> Base Button </ds-button>
     </div>
 
     <h2>Outlined</h2>
     <div>
-      <ds-link variant="outline" title="test">
+      <ds-button variant="outline" title="test" theme="primary">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link variant="outline" title="test" theme="primary">
+      <ds-button variant="outline" title="test" theme="success">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link variant="outline" title="test" theme="success">
+      <ds-button variant="outline" title="test" theme="neutral">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link variant="outline" title="test" theme="neutral">
+      <ds-button variant="outline" title="test" theme="warning">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link variant="outline" title="test" theme="warning">
+      <ds-button variant="outline" title="test" theme="danger">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link variant="outline" title="test" theme="danger">
-        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
+      <ds-button variant="outline" disabled title="test">
         Base Button
-        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
-
-      <ds-link variant="outline" disabled title="test"> Base Button </ds-link>
+      </ds-button>
     </div>
 
     <h2>Text</h2>
     <div>
-      <ds-link variant="text" title="test">
+      <ds-button variant="text" title="test" theme="primary">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link variant="text" title="test" theme="primary">
+      <ds-button variant="text" title="test" theme="success">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link variant="text" title="test" theme="success">
+      <ds-button variant="text" title="test" theme="neutral">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link variant="text" title="test" theme="neutral">
+      <ds-button variant="text" title="test" theme="warning">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link variant="text" title="test" theme="warning">
+      <ds-button variant="text" title="test" theme="danger">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link variant="text" title="test" theme="danger">
-        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
-        Base Button
-        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
-
-      <ds-link variant="text" disabled title="test"> Base Button </ds-link>
+      <ds-button variant="text" disabled title="test"> Base Button </ds-button>
     </div>
 
     <h2>Pill</h2>
     <div>
-      <ds-link shape="pill" title="test">
+      <ds-button shape="pill" title="test" theme="primary">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="pill" title="test" theme="primary">
+      <ds-button shape="pill" title="test" theme="success">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="pill" title="test" theme="success">
+      <ds-button shape="pill" title="test" theme="neutral">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="pill" title="test" theme="neutral">
+      <ds-button shape="pill" title="test" theme="warning">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="pill" title="test" theme="warning">
+      <ds-button shape="pill" title="test" theme="danger">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="pill" title="test" theme="danger">
+      <ds-button shape="pill" disabled title="test"> Base Button </ds-button>
+
+      <ds-button shape="pill" variant="outline" title="test" theme="primary">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="pill" disabled title="test"> Base Button </ds-link>
-
-      <ds-link shape="pill" variant="outline" title="test">
+      <ds-button shape="pill" variant="outline" title="test" theme="success">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="pill" variant="outline" title="test" theme="primary">
+      <ds-button shape="pill" variant="outline" title="test" theme="neutral">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="pill" variant="outline" title="test" theme="success">
+      <ds-button shape="pill" variant="outline" title="test" theme="warning">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="pill" variant="outline" title="test" theme="neutral">
+      <ds-button shape="pill" variant="outline" title="test" theme="danger">
         <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
         Base Button
         <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
-
-      <ds-link shape="pill" variant="outline" title="test" theme="warning">
-        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
-        Base Button
-        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
-
-      <ds-link shape="pill" variant="outline" title="test" theme="danger">
-        <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
-        Base Button
-        <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
     </div>
 
     <h2>Circle</h2>
     <div>
-      <ds-link shape="circle" title="test">
+      <ds-button shape="circle" title="test" theme="primary">
         <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="circle" title="test" theme="primary">
+      <ds-button shape="circle" title="test" theme="success">
         <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="circle" title="test" theme="success">
+      <ds-button shape="circle" title="test" theme="neutral">
         <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="circle" title="test" theme="neutral">
+      <ds-button shape="circle" title="test" theme="warning">
         <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="circle" title="test" theme="warning">
+      <ds-button shape="circle" title="test" theme="danger">
         <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="circle" title="test" theme="danger">
+      <ds-button shape="circle" variant="outline" title="test" theme="primary">
         <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="circle" variant="outline" title="test">
+      <ds-button shape="circle" variant="outline" title="test" theme="success">
         <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="circle" variant="outline" title="test" theme="primary">
+      <ds-button shape="circle" variant="outline" title="test" theme="neutral">
         <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="circle" variant="outline" title="test" theme="success">
+      <ds-button shape="circle" variant="outline" title="test" theme="warning">
         <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
 
-      <ds-link shape="circle" variant="outline" title="test" theme="neutral">
+      <ds-button shape="circle" variant="outline" title="test" theme="danger">
         <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
-
-      <ds-link shape="circle" variant="outline" title="test" theme="warning">
-        <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
-
-      <ds-link shape="circle" variant="outline" title="test" theme="danger">
-        <ion-icon name="settings-outline"></ion-icon>
-      </ds-link>
+      </ds-button>
     </div>
 
     <h2>Sizes</h2>
     <section>
       <div>
-        <ds-link shape="circle" size="small" title="test" theme="primary">
+        <ds-button shape="circle" size="small" title="test" theme="primary">
           <ion-icon name="settings-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link shape="circle" size="medium" title="test" theme="primary">
+        <ds-button shape="circle" size="medium" title="test" theme="primary">
           <ion-icon name="settings-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link shape="circle" size="large" title="test" theme="primary">
+        <ds-button shape="circle" size="large" title="test" theme="primary">
           <ion-icon name="settings-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
       </div>
 
       <br />
 
       <div>
-        <ds-link
+        <ds-button
           variant="outline"
           shape="circle"
           size="small"
@@ -303,9 +273,9 @@
           theme="primary"
         >
           <ion-icon name="settings-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link
+        <ds-button
           variant="outline"
           shape="circle"
           size="medium"
@@ -313,9 +283,9 @@
           theme="primary"
         >
           <ion-icon name="settings-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link
+        <ds-button
           variant="outline"
           shape="circle"
           size="large"
@@ -323,101 +293,101 @@
           theme="primary"
         >
           <ion-icon name="settings-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
       </div>
 
       <br />
 
       <div>
-        <ds-link theme="primary" size="small" title="test">
+        <ds-button theme="primary" size="small" title="test">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link theme="primary" size="medium" title="test">
+        <ds-button theme="primary" size="medium" title="test">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link theme="primary" size="large" title="test">
+        <ds-button theme="primary" size="large" title="test">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
       </div>
 
       <br />
 
       <div>
-        <ds-link variant="outline" size="small" title="test">
+        <ds-button variant="outline" size="small" title="test">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link variant="outline" size="medium" title="test">
+        <ds-button variant="outline" size="medium" title="test">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link variant="outline" size="large" title="test">
+        <ds-button variant="outline" size="large" title="test">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
       </div>
 
       <br />
 
       <div>
-        <ds-link variant="text" size="small" title="test">
+        <ds-button variant="text" size="small" title="test">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link variant="text" size="medium" title="test">
+        <ds-button variant="text" size="medium" title="test">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link variant="text" size="large" title="test">
+        <ds-button variant="text" size="large" title="test">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
       </div>
 
       <br />
 
       <div>
-        <ds-link shape="pill" size="small" title="test" theme="primary">
+        <ds-button shape="pill" size="small" title="test" theme="primary">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link shape="pill" size="medium" title="test" theme="primary">
+        <ds-button shape="pill" size="medium" title="test" theme="primary">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link shape="pill" size="large" title="test" theme="primary">
+        <ds-button shape="pill" size="large" title="test" theme="primary">
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
       </div>
 
       <br />
 
       <div>
-        <ds-link
+        <ds-button
           variant="outline"
           shape="pill"
           size="small"
@@ -427,9 +397,9 @@
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link
+        <ds-button
           variant="outline"
           shape="pill"
           size="medium"
@@ -439,9 +409,9 @@
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
 
-        <ds-link
+        <ds-button
           variant="outline"
           shape="pill"
           size="large"
@@ -451,7 +421,7 @@
           <ion-icon slot="prefix" name="alert-circle-outline"></ion-icon>
           Base Button
           <ion-icon slot="suffix" name="bandage-outline"></ion-icon>
-        </ds-link>
+        </ds-button>
       </div>
     </section>
 
