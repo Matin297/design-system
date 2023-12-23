@@ -48,6 +48,14 @@ export default class DsButton extends BaseButton {
   @property({attribute: 'formtarget'})
   formTarget: FormTarget;
 
+  private handleBlur() {
+    this.emit('ds-blur');
+  }
+
+  private handleFocus() {
+    this.emit('ds-focus');
+  }
+
   render() {
     return html`
       <button
@@ -58,6 +66,8 @@ export default class DsButton extends BaseButton {
         name=${ifDefined(this.name)}
         value=${ifDefined(this.value)}
         aria-disabled=${this.disabled}
+        @blur=${this.handleBlur}
+        @focus=${this.handleFocus}
       >
         ${this.slots}
       </button>
