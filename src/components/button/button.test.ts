@@ -24,4 +24,21 @@ describe('<ds-button>', () => {
       expect(button).to.have.attribute('size', 'medium');
     });
   });
+
+  describe('when disabled', () => {
+    before(async () => {
+      button = await fixture<DsButton>(
+        html`<ds-button disabled>Disabled</ds-button>`
+      );
+    });
+
+    it('should be accessible', async () => {
+      expect(button).to.be.accessible();
+    });
+
+    it('should disabled the underlying button element', () => {
+      const base = button.shadowRoot!.querySelector('button[disabled]');
+      expect(base).to.exist;
+    });
+  });
 });
