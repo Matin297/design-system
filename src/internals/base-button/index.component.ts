@@ -1,10 +1,13 @@
 import {html} from 'lit/static-html.js';
-import {property} from 'lit/decorators.js';
+import {property, query} from 'lit/decorators.js';
 import {BaseElement} from '../base-element';
 import styles from './index.styles';
 
 export default class BaseButton extends BaseElement {
   static styles = [BaseElement.styles, styles];
+
+  @query('.button')
+  button: HTMLButtonElement;
 
   /** Button variant */
   @property({reflect: true})
@@ -58,6 +61,21 @@ export default class BaseButton extends BaseElement {
       <slot part="label" class="button__label"></slot>
       <slot name="suffix" part="suffix" class="button__suffix"></slot>
     `;
+  }
+
+  /** Delegates click to underlying the button */
+  click() {
+    this.button.click();
+  }
+
+  /** Delegates focus to underlying the button */
+  focus(options?: FocusOptions) {
+    this.button.focus(options);
+  }
+
+  /** Delegates blur to underlying the button */
+  blur() {
+    this.button.blur();
   }
 }
 
