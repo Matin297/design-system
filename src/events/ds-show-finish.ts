@@ -1,4 +1,4 @@
-export type DsShowFinishEvent = CustomEvent<Record<string, never>>;
+export type DsShowFinishEvent = CustomEvent<Record<PropertyKey, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

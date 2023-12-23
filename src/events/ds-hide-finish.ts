@@ -1,4 +1,4 @@
-export type DsHideFinishEvent = CustomEvent<Record<string, never>>;
+export type DsHideFinishEvent = CustomEvent<Record<PropertyKey, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

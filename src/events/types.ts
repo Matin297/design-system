@@ -1,8 +1,12 @@
 import type {WithRequiredProp} from '../utilities/types';
 
 type DsEventInit<T> = T extends keyof GlobalEventHandlersEventMap
-  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, unknown>>
-    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, never>>
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent<
+      Record<PropertyKey, unknown>
+    >
+    ? GlobalEventHandlersEventMap[T] extends CustomEvent<
+        Record<PropertyKey, never>
+      >
       ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>
       : Partial<
           GlobalEventHandlersEventMap[T]
@@ -22,8 +26,12 @@ type DsCustomEvent<T> = T extends keyof GlobalEventHandlersEventMap
   : CustomEvent<unknown>;
 
 type WithDetailsEvent<T> = T extends keyof GlobalEventHandlersEventMap
-  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, unknown>>
-    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, never>>
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent<
+      Record<PropertyKey, unknown>
+    >
+    ? GlobalEventHandlersEventMap[T] extends CustomEvent<
+        Record<PropertyKey, never>
+      >
       ? never
       : Partial<
           GlobalEventHandlersEventMap[T]
@@ -38,8 +46,12 @@ type WithDetailsEventsMap = {
 };
 
 type WithoutDetailsEvent<T> = T extends keyof GlobalEventHandlersEventMap
-  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, unknown>>
-    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, never>>
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent<
+      Record<PropertyKey, unknown>
+    >
+    ? GlobalEventHandlersEventMap[T] extends CustomEvent<
+        Record<PropertyKey, never>
+      >
       ? T
       : Partial<
           GlobalEventHandlersEventMap[T]
