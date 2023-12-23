@@ -1,4 +1,4 @@
-import {html} from 'lit';
+import {html, PropertyValues} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 import {ifDefined} from 'lit/directives/if-defined.js';
@@ -8,6 +8,15 @@ const ELEMENT_NAME = 'ds-button';
 
 @customElement(ELEMENT_NAME)
 export default class DsButton extends BaseButton {
+  static formAssociated = true;
+
+  private _internals: ElementInternals;
+
+  constructor() {
+    super();
+    this._internals = this.attachInternals();
+  }
+
   /**
    * The type of button. The default value is "button" which is the opposite of how
    * the native button element behaves.
@@ -24,36 +33,31 @@ export default class DsButton extends BaseButton {
   @property()
   value: string;
 
-  /** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#form */
-  @property()
-  form: string;
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#formaction */
-  @property({attribute: 'formaction'})
-  formAction: string;
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#formenctype */
-  @property({attribute: 'formenctype'})
-  formEnctype: FormEnctype;
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#formmethod */
-  @property({attribute: 'formmethod'})
-  formMethod: FormMethod;
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#formnovalidate */
-  @property({attribute: 'formnovalidate', type: Boolean})
-  formNoValidate: boolean;
-
-  /** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#formtarget */
-  @property({attribute: 'formtarget'})
-  formTarget: FormTarget;
-
-  private handleBlur() {
-    this.emit('ds-blur');
+  firstUpdated() {
+    this._internals.setFormValue(this.value);
   }
 
-  private handleFocus() {
-    this.emit('ds-focus');
+  willUpdate(changedProps: PropertyValues<this>) {
+    if (changedProps.get('value')) {
+      this._internals.setFormValue(this.value);
+    }
+  }
+
+  private handleClick() {
+    if (
+      (this.type === 'reset' || this.type === 'submit') &&
+      this._internals.form
+    ) {
+      const button = document.createElement('button');
+
+      button.style.display = 'none';
+      button.type = this.type;
+
+      this._internals.form.append(button);
+
+      button.click();
+      button.remove();
+    }
   }
 
   render() {
@@ -66,8 +70,7 @@ export default class DsButton extends BaseButton {
         name=${ifDefined(this.name)}
         value=${ifDefined(this.value)}
         aria-disabled=${this.disabled}
-        @blur=${this.handleBlur}
-        @focus=${this.handleFocus}
+        @click=${this.handleClick}
       >
         ${this.slots}
       </button>
@@ -82,12 +85,3 @@ declare global {
 }
 
 type Type = 'button' | 'submit' | 'reset';
-
-type FormEnctype =
-  | 'application/x-www-form-urlencoded'
-  | 'multipart/form-data'
-  | 'text/plain';
-
-type FormMethod = 'post' | 'get' | 'dialog';
-
-type FormTarget = '_self' | '_blank' | '_parent' | '_top';
