@@ -13,6 +13,7 @@ export default css`
   }
 
   .button {
+    width: 100%;
     cursor: pointer;
     user-select: none;
     text-decoration: none;
