@@ -33,6 +33,26 @@ export default class DsButton extends BaseButton {
   @property()
   value: string;
 
+  /** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#formaction */
+  @property({attribute: 'formaction'})
+  formAction: string;
+
+  /** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#formenctype */
+  @property({attribute: 'formenctype'})
+  formEnctype: FormEnctype;
+
+  /** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#formmethod */
+  @property({attribute: 'formmethod'})
+  formMethod: FormMethod;
+
+  /** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#formnovalidate */
+  @property({attribute: 'formnovalidate', type: Boolean})
+  formNoValidate: boolean;
+
+  /** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#formtarget */
+  @property({attribute: 'formtarget'})
+  formTarget: FormTarget;
+
   firstUpdated() {
     this._internals.setFormValue(this.value);
   }
@@ -48,10 +68,11 @@ export default class DsButton extends BaseButton {
       (this.type === 'reset' || this.type === 'submit') &&
       this._internals.form
     ) {
-      const button = document.createElement('button');
+      const button = this.shadowRoot!.querySelector(
+        'button'
+      )!.cloneNode() as HTMLButtonElement;
 
       button.style.display = 'none';
-      button.type = this.type;
 
       this._internals.form.append(button);
 
@@ -69,6 +90,11 @@ export default class DsButton extends BaseButton {
         type=${this.type}
         name=${ifDefined(this.name)}
         value=${ifDefined(this.value)}
+        formaction=${ifDefined(this.formAction)}
+        formmethod=${ifDefined(this.formMethod)}
+        formtarget=${ifDefined(this.formTarget)}
+        formenctype=${ifDefined(this.formEnctype)}
+        ?formnovalidate=${this.formNoValidate}
         aria-disabled=${this.disabled}
         @click=${this.handleClick}
       >
@@ -85,3 +111,12 @@ declare global {
 }
 
 type Type = 'button' | 'submit' | 'reset';
+
+type FormEnctype =
+  | 'application/x-www-form-urlencoded'
+  | 'multipart/form-data'
+  | 'text/plain';
+
+type FormMethod = 'post' | 'get';
+
+type FormTarget = '_self' | '_blank' | '_parent' | '_top';
