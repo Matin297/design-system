@@ -13,6 +13,10 @@
       type="module"
       src="../dist/components/button/button.component.js"
     ></script>
+    <script
+      type="module"
+      src="../dist/components/spinner/spinner.component.js"
+    ></script>
 
     <style>
       body {
@@ -424,6 +428,59 @@
         </ds-button>
       </div>
     </section>
+
+    <h2>Loading</h2>
+    <div>
+      <ds-button title="test">
+        <ds-spinner style="--indicator-color: currentcolor"></ds-spinner>
+      </ds-button>
+
+      <ds-button title="test" theme="success">
+        <ds-spinner style="--indicator-color: currentcolor"></ds-spinner>
+      </ds-button>
+
+      <ds-button title="test" theme="neutral">
+        <ds-spinner style="--indicator-color: currentcolor"></ds-spinner>
+      </ds-button>
+
+      <ds-button title="test" theme="warning">
+        <ds-spinner style="--indicator-color: currentcolor"></ds-spinner>
+      </ds-button>
+
+      <ds-button title="test" theme="danger">
+        <ds-spinner style="--indicator-color: currentcolor"></ds-spinner>
+      </ds-button>
+    </div>
+
+    <h2>Custom Width</h2>
+    <div>
+      <ds-button
+        style="width: 100%"
+        variant="outline"
+        title="test"
+        size="small"
+      >
+        Base Button
+      </ds-button>
+
+      <ds-button
+        style="width: 100%"
+        variant="outline"
+        title="test"
+        size="medium"
+      >
+        Base Button
+      </ds-button>
+
+      <ds-button
+        style="width: 100%"
+        variant="outline"
+        title="test"
+        size="large"
+      >
+        Base Button
+      </ds-button>
+    </div>
 
     <script
       type="module"
