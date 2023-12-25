@@ -1,6 +1,7 @@
 import './checkbox.component.js';
 
 import {fixture, html, expect} from '@open-wc/testing';
+import {sendKeys} from '@web/test-runner-commands';
 import type DsCheckbox from './checkbox.component';
 
 describe('<ds-checkbox>', () => {
@@ -29,7 +30,37 @@ describe('<ds-checkbox>', () => {
       expect(checkbox).to.have.attribute('size', 'medium');
     });
 
+    it('should be a valid input by default', () => {
+      expect(checkbox.isValid).to.be.true;
+    });
+
+    it('should get checked when clicked', async () => {
+      checkbox = await fixture<DsCheckbox>(
+        html`<ds-checkbox>Test</ds-checkbox>`
+      );
+
+      checkbox.click();
+      await checkbox.updateComplete;
+      expect(checkbox.checked).to.be.true;
+    });
+
+    it('should get checked when space bar is pressed', async () => {
+      checkbox = await fixture<DsCheckbox>(
+        html`<ds-checkbox>Test</ds-checkbox>`
+      );
+
+      checkbox.focus();
+
+      await sendKeys({press: ' '});
+
+      expect(checkbox.checked).to.be.true;
+    });
+
     it('should be disabled when disabled property is set', async () => {
+      checkbox = await fixture<DsCheckbox>(
+        html`<ds-checkbox>Test</ds-checkbox>`
+      );
+
       checkbox.disabled = true;
       await checkbox.updateComplete;
       expect(checkbox.shadowRoot!.querySelector('input')).to.have.attribute(
