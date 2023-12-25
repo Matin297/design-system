@@ -13,6 +13,10 @@
       type="module"
       src="../dist/components/checkbox/checkbox.component.js"
     ></script>
+    <script
+      type="module"
+      src="../dist/components/button/button.component.js"
+    ></script>
 
     <style>
       body {
@@ -64,6 +68,24 @@
       <ds-checkbox indeterminate required size="large">Large</ds-checkbox>
     </div>
 
+    <form>
+      <h2>Form</h2>
+      <p>
+        <ds-checkbox name="job" value="programmer"> Job </ds-checkbox>
+      </p>
+      <p>
+        <ds-checkbox required name="other" value="yes"> Other </ds-checkbox>
+      </p>
+      <p>
+        <ds-checkbox id="custom" required name="terms&conditions" value="agree">
+          Terms and Conditions
+        </ds-checkbox>
+      </p>
+      <p>
+        <ds-button type="submit">Submit</ds-button>
+      </p>
+    </form>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -72,5 +94,13 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+
+    <script>
+      const customCheckbox = document.getElementById('custom');
+
+      customElements.whenDefined('ds-checkbox').then(async () => {
+        customCheckbox.setCustomValidationMessage('Invalid checkbox!');
+      });
+    </script>
   </body>
 </html>
