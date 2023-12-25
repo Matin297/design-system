@@ -1,6 +1,7 @@
 import {html, PropertyValues} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
+import {ifDefined} from 'lit/directives/if-defined.js';
 import {BaseElement} from '../../internals/base-element';
 import styles from './checkbox.styles';
 
@@ -108,8 +109,9 @@ export default class DsCheckbox extends BaseElement {
         <input
           type="checkbox"
           class="checkbox__input"
-          name=${this.name}
-          value=${this.value}
+          aria-checked=${this.checked}
+          name=${ifDefined(this.name)}
+          value=${ifDefined(this.value)}
           ?checked=${this.checked}
           ?disabled=${this.disabled}
           ?required=${this.required}
