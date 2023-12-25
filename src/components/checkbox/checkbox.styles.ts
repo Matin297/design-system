@@ -51,7 +51,7 @@ export default css`
   }
 
   /** Disabled */
-  :host([disabled]) {
+  :host([disabled]) .checkbox {
     opacity: 0.5;
     cursor: not-allowed;
   }
