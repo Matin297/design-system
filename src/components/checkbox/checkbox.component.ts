@@ -90,6 +90,15 @@ export default class DsCheckbox extends BaseElement {
     this.input.click();
   }
 
+  /** Delegates the focus event to the underlying input */
+  focus(options?: FocusOptions) {
+    this.input.focus(options);
+  }
+
+  get isValid() {
+    return this._internals.checkValidity();
+  }
+
   /** Sets the validation message used when checkbox is invalid */
   setCustomValidationMessage(message: string) {
     if (message) this.validationMessage = message;
