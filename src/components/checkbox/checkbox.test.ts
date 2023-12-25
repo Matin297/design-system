@@ -28,5 +28,33 @@ describe('<ds-checkbox>', () => {
 
       expect(checkbox).to.have.attribute('size', 'medium');
     });
+
+    it('should be disabled when disabled property is set', async () => {
+      checkbox.disabled = true;
+      await checkbox.updateComplete;
+      expect(checkbox.shadowRoot!.querySelector('input')).to.have.attribute(
+        'disabled'
+      );
+    });
+  });
+
+  describe('when disabled', () => {
+    before(async () => {
+      checkbox = await fixture<DsCheckbox>(
+        html`<ds-checkbox disabled>Test</ds-checkbox>`
+      );
+    });
+
+    it('should be accessible', async () => {
+      await expect(checkbox).to.be.accessible();
+    });
+
+    it('should disable the underlying checkbox input', () => {
+      const checkboxInput = checkbox.shadowRoot!.querySelector(
+        'input[type=checkbox]'
+      );
+
+      expect(checkboxInput).to.have.attribute('disabled');
+    });
   });
 });
