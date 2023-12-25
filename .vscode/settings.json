@@ -6,6 +6,7 @@
         "formmethod",
         "formnovalidate",
         "formtarget",
+        "labelledby",
         "progressbar",
         "slotchange"
     ]
