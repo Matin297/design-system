@@ -1,5 +1,5 @@
-import {html} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import {html, PropertyValues} from 'lit';
+import {customElement, property, query, state} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 import {BaseElement} from '../../internals/base-element';
 import styles from './checkbox.styles';
@@ -9,6 +9,20 @@ const ELEMENT_NAME = 'ds-checkbox';
 @customElement(ELEMENT_NAME)
 export default class DsCheckbox extends BaseElement {
   static styles = [BaseElement.styles, styles];
+
+  static formAssociated = true;
+  private _internals: ElementInternals;
+
+  constructor() {
+    super();
+    this._internals = this.attachInternals();
+  }
+
+  @query('.checkbox__input')
+  input: HTMLInputElement;
+
+  @state()
+  validationMessage = 'Please, check this box if you wish to proceed';
 
   /** Checkbox size */
   @property({reflect: true})
@@ -38,6 +52,48 @@ export default class DsCheckbox extends BaseElement {
   @property({type: Boolean, reflect: true})
   indeterminate = false;
 
+  firstUpdated() {
+    this._handleCheckboxStates();
+  }
+
+  willUpdate(changedProps: PropertyValues<this>) {
+    if (changedProps.get('checked') !== undefined) {
+      this._handleCheckboxStates();
+    }
+  }
+
+  private _clickHandler() {
+    this.checked = !this.checked;
+    this.indeterminate = false;
+  }
+
+  private _handleCheckboxStates() {
+    if (this.checked) {
+      this._internals.setFormValue(this.value);
+      this._internals.setValidity({});
+    } else {
+      this._internals.setFormValue(null);
+
+      if (this.required) {
+        this._internals.setValidity(
+          {valueMissing: true},
+          this.validationMessage,
+          this.input
+        );
+      }
+    }
+  }
+
+  /** Delegates the click event to the underlying input */
+  click() {
+    this.input.click();
+  }
+
+  /** Sets the validation message used when checkbox is invalid */
+  setCustomValidationMessage(message: string) {
+    if (message) this.validationMessage = message;
+  }
+
   render() {
     return html`
       <label
@@ -57,6 +113,7 @@ export default class DsCheckbox extends BaseElement {
           ?checked=${this.checked}
           ?disabled=${this.disabled}
           ?required=${this.required}
+          @click=${this._clickHandler}
         />
         <span part="control" class="checkbox__control">
           ${this.checked
@@ -65,7 +122,7 @@ export default class DsCheckbox extends BaseElement {
                 name="checkmark-outline"
               ></ion-icon>`
             : ''}
-          ${this.indeterminate
+          ${this.indeterminate && !this.checked
             ? html`<ion-icon
                 class="checkbox__remove"
                 name="remove-outline"
