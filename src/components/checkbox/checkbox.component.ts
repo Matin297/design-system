@@ -35,7 +35,7 @@ export default class DsCheckbox extends BaseElement {
 
   /** Checkbox value, submitted as a name/value pair with form data */
   @property()
-  value: string;
+  value = 'on';
 
   /** Whether of not the checkbox is checked */
   @property({type: Boolean, reflect: true})
