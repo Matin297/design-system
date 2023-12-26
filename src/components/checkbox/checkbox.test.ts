@@ -127,4 +127,22 @@ describe('<ds-checkbox>', () => {
       expect(formData.get('testName')).to.equal('on');
     });
   });
+
+  describe('when required', () => {
+    it('should be invalid when unchecked', async () => {
+      const checkbox = await fixture<DsCheckbox>(
+        html`<ds-checkbox required>Test</ds-checkbox>`
+      );
+
+      expect(checkbox.isValid).to.be.false;
+    });
+
+    it('should be valid when checked', async () => {
+      const checkbox = await fixture<DsCheckbox>(
+        html`<ds-checkbox checked required>Test</ds-checkbox>`
+      );
+
+      expect(checkbox.isValid).to.be.true;
+    });
+  });
 });
