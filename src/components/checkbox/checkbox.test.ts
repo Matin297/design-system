@@ -2,6 +2,7 @@ import './checkbox.component.js';
 
 import {fixture, html, expect} from '@open-wc/testing';
 import {sendKeys} from '@web/test-runner-commands';
+import sinon from 'sinon';
 import type DsCheckbox from './checkbox.component';
 
 describe('<ds-checkbox>', () => {
@@ -50,9 +51,7 @@ describe('<ds-checkbox>', () => {
       );
 
       checkbox.focus();
-
       await sendKeys({press: ' '});
-
       expect(checkbox.checked).to.be.true;
     });
 
@@ -86,6 +85,28 @@ describe('<ds-checkbox>', () => {
       );
 
       expect(checkboxInput).to.have.attribute('disabled');
+    });
+  });
+
+  describe('when submitting a form', () => {
+    it('should include its name/value in the form data', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <ds-checkbox name="testName" value="testValue" checked>
+            Test
+          </ds-checkbox>
+          <button>Submit</button>
+        </form>
+      `);
+
+      const submitHandler = sinon.spy((e: SubmitEvent) => e.preventDefault());
+      form.addEventListener('submit', submitHandler);
+      form.querySelector('button')!.click();
+
+      expect(submitHandler).to.have.been.calledOnce;
+
+      const formData = new FormData(form);
+      expect(formData.get('testName')).to.equal('testValue');
     });
   });
 });
