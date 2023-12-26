@@ -1,6 +1,6 @@
 import './checkbox.component.js';
 
-import {fixture, html, expect, oneEvent} from '@open-wc/testing';
+import {fixture, html, expect} from '@open-wc/testing';
 import {sendKeys} from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type DsCheckbox from './checkbox.component';
@@ -176,7 +176,7 @@ describe('<ds-checkbox>', () => {
 
   describe('when required', () => {
     it('should be invalid when unchecked', async () => {
-      const checkbox = await fixture<DsCheckbox>(
+      checkbox = await fixture<DsCheckbox>(
         html`<ds-checkbox required>Test</ds-checkbox>`
       );
 
@@ -184,11 +184,27 @@ describe('<ds-checkbox>', () => {
     });
 
     it('should be valid when checked', async () => {
-      const checkbox = await fixture<DsCheckbox>(
+      checkbox = await fixture<DsCheckbox>(
         html`<ds-checkbox checked required>Test</ds-checkbox>`
       );
 
       expect(checkbox.isValid).to.be.true;
+    });
+  });
+
+  describe('when indeterminate', () => {
+    it('should show the indeterminate icon until checked', async () => {
+      checkbox = await fixture<DsCheckbox>(html`
+        <ds-checkbox indeterminate>Test</ds-checkbox>
+      `);
+
+      expect(checkbox.shadowRoot!.querySelector('.checkbox__remove')).to.exist;
+
+      checkbox.click();
+      await checkbox.updateComplete;
+
+      expect(checkbox.shadowRoot!.querySelector('.checkbox__remove')).not.to
+        .exist;
     });
   });
 });
