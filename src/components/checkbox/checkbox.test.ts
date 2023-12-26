@@ -108,5 +108,23 @@ describe('<ds-checkbox>', () => {
       const formData = new FormData(form);
       expect(formData.get('testName')).to.equal('testValue');
     });
+
+    it('should send the text "on" to the form data when no value is provided', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <ds-checkbox name="testName" checked>Test</ds-checkbox>
+          <button>Submit</button>
+        </form>
+      `);
+
+      const submitHandler = sinon.spy((e: SubmitEvent) => e.preventDefault());
+      form.addEventListener('submit', submitHandler);
+      form.querySelector('button')!.click();
+
+      expect(submitHandler).to.have.been.calledOnce;
+
+      const formData = new FormData(form);
+      expect(formData.get('testName')).to.equal('on');
+    });
   });
 });
