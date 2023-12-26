@@ -126,6 +126,30 @@ describe('<ds-checkbox>', () => {
       const formData = new FormData(form);
       expect(formData.get('testName')).to.equal('on');
     });
+
+    it('should include its name/value in form data when placed outside the target form', async () => {
+      const container = await fixture<HTMLDivElement>(html`
+        <div>
+          <form id="testID">
+            <button>submit</button>
+          </form>
+          <ds-checkbox form="testID" name="testName" value="testValue" checked>
+            Test
+          </ds-checkbox>
+        </div>
+      `);
+
+      const submitHandler = sinon.spy((e: SubmitEvent) => e.preventDefault());
+      const form = container.querySelector<HTMLFormElement>('form')!;
+
+      form.addEventListener('submit', submitHandler);
+      container.querySelector('button')!.click();
+
+      expect(submitHandler).to.have.been.calledOnce;
+
+      const formData = new FormData(form);
+      expect(formData.get('testName')).to.equal('testValue');
+    });
   });
 
   describe('when required', () => {
