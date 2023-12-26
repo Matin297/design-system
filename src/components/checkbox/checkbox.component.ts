@@ -10,9 +10,10 @@ const ELEMENT_NAME = 'ds-checkbox';
 @customElement(ELEMENT_NAME)
 export default class DsCheckbox extends BaseElement {
   static styles = [BaseElement.styles, styles];
-
   static formAssociated = true;
+
   private _internals: ElementInternals;
+  private _defaultChecked: boolean;
 
   constructor() {
     super();
@@ -54,6 +55,7 @@ export default class DsCheckbox extends BaseElement {
   indeterminate = false;
 
   firstUpdated() {
+    this._defaultChecked = this.checked;
     this._handleCheckboxStates();
   }
 
@@ -61,6 +63,10 @@ export default class DsCheckbox extends BaseElement {
     if (changedProps.get('checked') !== undefined) {
       this._handleCheckboxStates();
     }
+  }
+
+  formResetCallback() {
+    this.checked = this._defaultChecked;
   }
 
   private _clickHandler() {
