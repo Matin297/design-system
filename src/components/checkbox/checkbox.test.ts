@@ -1,6 +1,6 @@
 import './checkbox.component.js';
 
-import {fixture, html, expect} from '@open-wc/testing';
+import {fixture, html, expect, oneEvent} from '@open-wc/testing';
 import {sendKeys} from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type DsCheckbox from './checkbox.component';
@@ -149,6 +149,28 @@ describe('<ds-checkbox>', () => {
 
       const formData = new FormData(form);
       expect(formData.get('testName')).to.equal('testValue');
+    });
+  });
+
+  describe('when resetting a form', () => {
+    it('should roll back to its initial checked state', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <ds-checkbox checked>Test</ds-checkbox>
+          <button type="reset">Reset</button>
+        </form>
+      `);
+
+      const button = form.querySelector<HTMLButtonElement>('button')!;
+      const checkbox = form.querySelector<DsCheckbox>('ds-checkbox')!;
+
+      checkbox.checked = false;
+      await checkbox.updateComplete;
+      expect(checkbox.checked).to.be.false;
+
+      button.click();
+      await checkbox.updateComplete;
+      expect(checkbox.checked).to.be.true;
     });
   });
 
