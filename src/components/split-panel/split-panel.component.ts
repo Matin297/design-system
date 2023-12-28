@@ -5,8 +5,8 @@ import {clamp, toPercent} from '../../utilities/math';
 import styles from './split-panel.styles';
 
 const ELEMENT_NAME = 'ds-split-panel';
-const DIVIDER_COLUM = 'var(--divider-width)';
-const END_COLUM = 'auto';
+const DIVIDER_SPACE = 'var(--divider-width)';
+const END_PANEL_SPACE = 'auto';
 
 @customElement(ELEMENT_NAME)
 export default class DsSplitPanel extends BaseElement {
@@ -20,13 +20,17 @@ export default class DsSplitPanel extends BaseElement {
   @property({type: Boolean, reflect: true})
   disabled = false;
 
+  /** Renders split panel in a vertical orientation with start and end panels stacked */
+  @property({type: Boolean, reflect: true})
+  vertical = false;
+
   willUpdate(changedProps: PropertyValues<this>) {
     // Whenever position changes update the template columns on host
     if (changedProps.has('position')) {
-      this.style.gridTemplateColumns = `
-        ${this._calcStartColumn()} 
-        ${DIVIDER_COLUM} 
-        ${END_COLUM}
+      this.style[this._gridTemplateProp] = `
+        ${this._calcStartPanelSpace()} 
+        ${DIVIDER_SPACE} 
+        ${END_PANEL_SPACE}
       `;
     }
   }
@@ -54,13 +58,13 @@ export default class DsSplitPanel extends BaseElement {
     // Read document-relative coordinates for host
     const hostCoords = this.getCoords();
 
-    // Updates position with pointer's x coordinate
+    // Updates position with pointer's coordinates based on orientation
     const pointerMoveHandler = (event: PointerEvent) => {
-      this.position = clamp(
-        0,
-        toPercent(event.pageX - hostCoords.left, this.offsetWidth),
-        100
-      );
+      const newPositionInPx = this.vertical
+        ? event.pageY - hostCoords.top
+        : event.pageX - hostCoords.left;
+
+      this.position = clamp(0, toPercent(newPositionInPx, this._hostSize), 100);
     };
 
     const pointerUpHandler = () => {
@@ -73,14 +77,22 @@ export default class DsSplitPanel extends BaseElement {
     document.addEventListener('pointerup', pointerUpHandler, {once: true});
   }
 
-  private _calcStartColumn() {
+  private _calcStartPanelSpace() {
     return `
       clamp(
         0%, 
-        calc(${this.position}% - ${DIVIDER_COLUM} / 2), 
-        calc(100% - ${DIVIDER_COLUM})
+        calc(${this.position}% - ${DIVIDER_SPACE} / 2), 
+        calc(100% - ${DIVIDER_SPACE})
       )
     `;
+  }
+
+  private get _gridTemplateProp() {
+    return this.vertical ? 'gridTemplateRows' : 'gridTemplateColumns';
+  }
+
+  private get _hostSize() {
+    return this.vertical ? this.offsetHeight : this.offsetWidth;
   }
 }
 
