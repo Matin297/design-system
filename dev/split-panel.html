@@ -17,10 +17,11 @@
     <style>
       body {
         font-family: var(--ds-font-sans);
+        padding: 2rem;
       }
 
       div {
-        height: 200px;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -31,14 +32,24 @@
   <body>
     <h1>Split Panel</h1>
 
-    <ds-split-panel>
+    <h2>Horizontal</h2>
+    <ds-split-panel style="height: 200px">
       <div slot="start-panel">Start</div>
       <div slot="end-panel">End</div>
     </ds-split-panel>
 
     <br />
 
-    <ds-split-panel disabled>
+    <h2>Vertical</h2>
+    <ds-split-panel style="height: 400px" vertical>
+      <div class="vertical" slot="start-panel">Start</div>
+      <div class="vertical" slot="end-panel">End</div>
+    </ds-split-panel>
+
+    <br />
+
+    <h2>Disabled</h2>
+    <ds-split-panel disabled style="height: 200px">
       <div slot="start-panel">Start</div>
       <div slot="end-panel">End</div>
     </ds-split-panel>
