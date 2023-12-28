@@ -67,7 +67,9 @@ export default class DsSplitPanel extends BaseElement {
       document.removeEventListener('pointermove', pointerMoveHandler);
     };
 
-    document.addEventListener('pointermove', pointerMoveHandler);
+    document.addEventListener('pointermove', pointerMoveHandler, {
+      passive: true,
+    });
     document.addEventListener('pointerup', pointerUpHandler, {once: true});
   }
 
