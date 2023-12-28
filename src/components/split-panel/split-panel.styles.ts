@@ -25,4 +25,9 @@ export default css`
   :host([disabled]) .divider {
     cursor: not-allowed;
   }
+
+  /** Vertical */
+  :host([vertical]) .divider {
+    cursor: row-resize;
+  }
 `;
