@@ -48,4 +48,17 @@ export class BaseElement extends LitElement {
 
     return customEvent as DsCustomEvent<T>;
   }
+
+  /** Calculates coordinates relative to the document */
+  getCoords() {
+    const coords = this.getBoundingClientRect();
+
+    return {
+      ...coords,
+      top: coords.top + window.scrollY,
+      bottom: coords.bottom + window.scrollY,
+      left: coords.left + window.scrollX,
+      right: coords.right + window.scrollX,
+    };
+  }
 }
