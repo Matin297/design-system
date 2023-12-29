@@ -48,6 +48,19 @@
 
     <br />
 
+    <h2>Nested Split Panels</h2>
+    <ds-split-panel style="height: 400px">
+      <div slot="start-panel">Start</div>
+      <div slot="end-panel">
+        <ds-split-panel style="height: 100%; width: 100%" vertical>
+          <div class="vertical" slot="start-panel">Start</div>
+          <div class="vertical" slot="end-panel">End</div>
+        </ds-split-panel>
+      </div>
+    </ds-split-panel>
+
+    <br />
+
     <h2>Min & Max</h2>
     <ds-split-panel
       style="height: 200px; --min: 150px; --max: calc(100% - 150px)"
