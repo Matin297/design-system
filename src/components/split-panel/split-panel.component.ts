@@ -6,6 +6,11 @@ import styles from './split-panel.styles';
 
 const ELEMENT_NAME = 'ds-split-panel';
 
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values#navigation_keys
+ */
+const NAVIGATION_KEYS = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+
 const MIN_SPACE = 'var(--min)';
 const MAX_SPACE = 'var(--max)';
 
@@ -48,12 +53,36 @@ export default class DsSplitPanel extends BaseElement {
         role="separator"
         aria-valuenow=${this.position}
         tabindex=${this.disabled ? -1 : 0}
+        @keydown=${this._keyDownHandler}
         @pointerdown=${this._pointerDownHandler}
       >
         <slot name="divider"></slot>
       </div>
       <slot name="end-panel" part="end-panel" class="end-panel"></slot>
     `;
+  }
+
+  private _keyDownHandler(event: KeyboardEvent) {
+    if (this.disabled) {
+      return;
+    }
+
+    if (NAVIGATION_KEYS.includes(event.key)) {
+      event.preventDefault();
+
+      let newPosition = this.position;
+      const step = event.shiftKey ? 10 : 1;
+
+      if (this.vertical) {
+        if (event.key === 'ArrowUp') newPosition -= step;
+        if (event.key === 'ArrowDown') newPosition += step;
+      } else {
+        if (event.key === 'ArrowLeft') newPosition -= step;
+        if (event.key === 'ArrowRight') newPosition += step;
+      }
+
+      this.position = clamp(0, newPosition, 100);
+    }
   }
 
   private _pointerDownHandler() {
