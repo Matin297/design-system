@@ -5,6 +5,10 @@ import {clamp, toPercent} from '../../utilities/math';
 import styles from './split-panel.styles';
 
 const ELEMENT_NAME = 'ds-split-panel';
+
+const MIN_SPACE = 'var(--min)';
+const MAX_SPACE = 'var(--max)';
+
 const DIVIDER_SPACE = 'var(--divider-width)';
 const END_PANEL_SPACE = 'auto';
 
@@ -80,9 +84,9 @@ export default class DsSplitPanel extends BaseElement {
   private _calcStartPanelSpace() {
     return `
       clamp(
-        0%, 
+        ${MIN_SPACE}, 
         calc(${this.position}% - ${DIVIDER_SPACE} / 2), 
-        calc(100% - ${DIVIDER_SPACE})
+        ${MAX_SPACE}
       )
     `;
   }

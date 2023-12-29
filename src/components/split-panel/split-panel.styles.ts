@@ -2,7 +2,9 @@ import {css} from 'lit';
 
 export default css`
   :host {
+    --min: 0%;
     --divider-width: 10px;
+    --max: calc(100% - var(--divider-width));
 
     display: grid;
     overflow: hidden;
