@@ -39,4 +39,22 @@ describe('<ds-split-panel>', () => {
       expect(start.offsetWidth).to.equal(end.offsetWidth);
     });
   });
+
+  describe('when position is provided', () => {
+    it('should render the panels with correct proportion based on position', async () => {
+      const panel = await fixture<DsSplitPanel>(html`
+        <ds-split-panel position="25">
+          <div slot="start-panel">start</div>
+          <div slot="end-panel">end</div>
+        </ds-split-panel>
+      `);
+
+      const start = panel.querySelector<HTMLDivElement>(
+        '[slot="start-panel"]'
+      )!;
+      const end = panel.querySelector<HTMLDivElement>('[slot="end-panel"]')!;
+
+      expect(start.offsetWidth).to.be.lessThan(end.offsetWidth);
+    });
+  });
 });
