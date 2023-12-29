@@ -32,7 +32,7 @@ export default class DsSplitPanel extends BaseElement {
     // Whenever position changes update the template columns on host
     if (changedProps.has('position')) {
       this.style[this._gridTemplateProp] = `
-        ${this._calcStartPanelSpace()} 
+        ${this._startPanelSpace} 
         ${DIVIDER_SPACE} 
         ${END_PANEL_SPACE}
       `;
@@ -49,7 +49,9 @@ export default class DsSplitPanel extends BaseElement {
         aria-valuenow=${this.position}
         tabindex=${this.disabled ? -1 : 0}
         @pointerdown=${this._pointerDownHandler}
-      ></div>
+      >
+        <slot name="divider"></slot>
+      </div>
       <slot name="end-panel" part="end-panel" class="end-panel"></slot>
     `;
   }
@@ -81,7 +83,7 @@ export default class DsSplitPanel extends BaseElement {
     document.addEventListener('pointerup', pointerUpHandler, {once: true});
   }
 
-  private _calcStartPanelSpace() {
+  private get _startPanelSpace() {
     return `
       clamp(
         ${MIN_SPACE}, 

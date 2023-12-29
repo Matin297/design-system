@@ -11,7 +11,11 @@ export default css`
   }
 
   .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: col-resize;
+    color: var(--ds-color-neutral-900);
     background-color: var(--ds-color-neutral-200);
   }
 
