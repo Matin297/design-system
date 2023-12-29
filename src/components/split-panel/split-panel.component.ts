@@ -51,6 +51,7 @@ export default class DsSplitPanel extends BaseElement {
         part="divider"
         class="divider"
         role="separator"
+        aria-label="resize"
         aria-valuenow=${this.position}
         tabindex=${this.disabled ? -1 : 0}
         @keydown=${this._keyDownHandler}
