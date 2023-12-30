@@ -109,6 +109,22 @@ describe('<ds-split-panel>', () => {
 
       expect(start.offsetWidth).to.be.lessThan(end.offsetWidth);
     });
+
+    it('should render the panels with correct proportion based on position, vertically', async () => {
+      const panel = await fixture<DsSplitPanel>(html`
+        <ds-split-panel style="height: 400px" position="25" vertical>
+          <div slot="start-panel">start</div>
+          <div slot="end-panel">end</div>
+        </ds-split-panel>
+      `);
+
+      const start = panel.querySelector<HTMLDivElement>(
+        '[slot="start-panel"]'
+      )!;
+      const end = panel.querySelector<HTMLDivElement>('[slot="end-panel"]')!;
+
+      expect(start.offsetHeight).to.be.lessThan(end.offsetHeight);
+    });
   });
 
   describe('when disabled', () => {
