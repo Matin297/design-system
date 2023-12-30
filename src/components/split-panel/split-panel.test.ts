@@ -1,7 +1,7 @@
 import './split-panel.component.js';
 
 import {fixture, html, expect} from '@open-wc/testing';
-import {sendMouse} from '@web/test-runner-commands';
+import {sendMouse, resetMouse} from '@web/test-runner-commands';
 import type DsSplitPanel from './split-panel.component';
 
 // WARNING: When you move the mouse or hold down a mouse button,
@@ -13,6 +13,10 @@ import type DsSplitPanel from './split-panel.component';
 
 describe('<ds-split-panel>', () => {
   describe('when no parameters are provided', () => {
+    afterEach(async () => {
+      await resetMouse();
+    });
+
     it('should be accessible', async () => {
       const panel = await fixture<DsSplitPanel>(html`
         <ds-split-panel>
@@ -111,6 +115,19 @@ describe('<ds-split-panel>', () => {
       const end = panel.querySelector<HTMLDivElement>('[slot="end-panel"]')!;
 
       expect(start.offsetWidth).to.be.lessThan(end.offsetWidth);
+    });
+  });
+
+  describe('when disabled', () => {
+    it('should be accessible', async () => {
+      const panel = await fixture<DsSplitPanel>(html`
+        <ds-split-panel disabled>
+          <div slot="start-panel">start</div>
+          <div slot="end-panel">end</div>
+        </ds-split-panel>
+      `);
+
+      await expect(panel).to.be.accessible();
     });
   });
 });
