@@ -162,4 +162,22 @@ describe('<ds-split-panel>', () => {
       expect(start.offsetWidth).to.equal(end.offsetWidth);
     });
   });
+
+  describe('when vertical', () => {
+    it('should render both start and end panels the same size', async () => {
+      const panel = await fixture<DsSplitPanel>(html`
+        <ds-split-panel style="height: 400px" vertical>
+          <div slot="start-panel">Start</div>
+          <div slot="end-panel">End</div>
+        </ds-split-panel>
+      `);
+
+      const start = panel.querySelector<HTMLDivElement>(
+        '[slot="start-panel"]'
+      )!;
+      const end = panel.querySelector<HTMLDivElement>('[slot="end-panel"]')!;
+
+      expect(start.offsetHeight).to.equal(end.offsetHeight);
+    });
+  });
 });
