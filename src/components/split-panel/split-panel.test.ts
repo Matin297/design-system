@@ -179,5 +179,25 @@ describe('<ds-split-panel>', () => {
 
       expect(start.offsetHeight).to.equal(end.offsetHeight);
     });
+
+    it('should update panels proportion when position updates programmatically', async () => {
+      const panel = await fixture<DsSplitPanel>(html`
+        <ds-split-panel style="height: 400px" vertical>
+          <div slot="start-panel">Start</div>
+          <div slot="end-panel">End</div>
+        </ds-split-panel>
+      `);
+
+      panel.position = 75;
+
+      await panel.updateComplete;
+
+      const start = panel.querySelector<HTMLDivElement>(
+        '[slot="start-panel"]'
+      )!;
+      const end = panel.querySelector<HTMLDivElement>('[slot="end-panel"]')!;
+
+      expect(start.offsetHeight).to.be.greaterThan(end.offsetHeight);
+    });
   });
 });
