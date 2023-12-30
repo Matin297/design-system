@@ -1,6 +1,7 @@
 import './split-panel.component.js';
 
 import {fixture, html, expect} from '@open-wc/testing';
+import {sendMouse} from '@web/test-runner-commands';
 import type DsSplitPanel from './split-panel.component';
 
 // WARNING: When you move the mouse or hold down a mouse button,
@@ -39,7 +40,7 @@ describe('<ds-split-panel>', () => {
       expect(start.offsetWidth).to.equal(end.offsetWidth);
     });
 
-    it('should update panels proportion when provided position changes', async () => {
+    it('should update panels proportion when position updates programmatically', async () => {
       const panel = await fixture<DsSplitPanel>(html`
         <ds-split-panel>
           <div slot="start-panel">start</div>
@@ -57,6 +58,41 @@ describe('<ds-split-panel>', () => {
       const end = panel.querySelector<HTMLDivElement>('[slot="end-panel"]')!;
 
       expect(start.offsetWidth).to.be.greaterThan(end.offsetWidth);
+    });
+
+    it('should resize panels when moving divider using mouse', async () => {
+      const panel = await fixture<DsSplitPanel>(html`
+        <ds-split-panel>
+          <div slot="start-panel">start</div>
+          <div slot="end-panel">end</div>
+        </ds-split-panel>
+      `);
+
+      const start = panel.querySelector<HTMLDivElement>(
+        '[slot="start-panel"]'
+      )!;
+      const divider =
+        panel.shadowRoot!.querySelector<HTMLDivElement>('[part=divider]')!;
+      const end = panel.querySelector<HTMLDivElement>('[slot="end-panel"]')!;
+
+      expect(start.offsetWidth).to.equal(end.offsetWidth);
+
+      const step = 10;
+      const {top, left, width, height} = divider.getBoundingClientRect();
+      const mouseY = top + window.scrollY + height / 2;
+      const mouseX = left + window.scrollX + width / 2;
+
+      // move the mouse to the center of the divider
+      await sendMouse({type: 'move', position: [mouseX, mouseY]});
+      // perform a mouse down on the divider
+      await sendMouse({type: 'down'});
+
+      // move the mouse to the left by "step" px
+      await sendMouse({type: 'move', position: [mouseX - step, mouseY]});
+      // perform a mouse up on the divider
+      await sendMouse({type: 'up'});
+
+      expect(start.offsetWidth + step).to.equal(end.offsetWidth - step);
     });
   });
 
