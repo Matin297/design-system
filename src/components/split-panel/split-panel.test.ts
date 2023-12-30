@@ -5,11 +5,11 @@ import {sendMouse, resetMouse} from '@web/test-runner-commands';
 import type DsSplitPanel from './split-panel.component';
 
 describe('<ds-split-panel>', () => {
-  describe('when no parameters are provided', () => {
-    afterEach(async () => {
-      await resetMouse();
-    });
+  afterEach(async () => {
+    await resetMouse();
+  });
 
+  describe('when no parameters are provided', () => {
     it('should be accessible', async () => {
       const panel = await fixture<DsSplitPanel>(html`
         <ds-split-panel>
@@ -128,10 +128,6 @@ describe('<ds-split-panel>', () => {
   });
 
   describe('when disabled', () => {
-    afterEach(async () => {
-      await resetMouse();
-    });
-
     it('should be accessible', async () => {
       const panel = await fixture<DsSplitPanel>(html`
         <ds-split-panel disabled>
