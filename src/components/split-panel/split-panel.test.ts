@@ -215,5 +215,40 @@ describe('<ds-split-panel>', () => {
 
       expect(start.offsetHeight).to.be.greaterThan(end.offsetHeight);
     });
+
+    it('should resize panels when moving divider using mouse', async () => {
+      const panel = await fixture<DsSplitPanel>(html`
+        <ds-split-panel style="height: 400px" vertical>
+          <div slot="start-panel">Start</div>
+          <div slot="end-panel">End</div>
+        </ds-split-panel>
+      `);
+
+      const start = panel.querySelector<HTMLDivElement>(
+        '[slot="start-panel"]'
+      )!;
+      const divider =
+        panel.shadowRoot!.querySelector<HTMLDivElement>('[part=divider]')!;
+      const end = panel.querySelector<HTMLDivElement>('[slot="end-panel"]')!;
+
+      expect(start.offsetHeight).to.equal(end.offsetHeight);
+
+      const step = 10;
+      const {top, left, width, height} = divider.getBoundingClientRect();
+      const mouseY = top + window.scrollY + height / 2;
+      const mouseX = left + window.scrollX + width / 2;
+
+      // move the mouse to the center of the divider
+      await sendMouse({type: 'move', position: [mouseX, mouseY]});
+      // perform a mouse down on the divider
+      await sendMouse({type: 'down'});
+
+      // move the mouse upward by "step" px
+      await sendMouse({type: 'move', position: [mouseX, mouseY - step]});
+      // perform a mouse up on the divider
+      await sendMouse({type: 'up'});
+
+      expect(start.offsetHeight + step).to.equal(end.offsetHeight - step);
+    });
   });
 });
