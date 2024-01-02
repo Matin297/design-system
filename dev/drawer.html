@@ -11,39 +11,25 @@
 
     <script
       type="module"
-      src="../dist/components/spinner/spinner.component.js"
-    ></script>
-    <script
-      type="module"
-      src="../dist/components/avatar/avatar.component.js"
+      src="../dist/components/drawer/drawer.component.js"
     ></script>
 
     <style>
       body {
         font-family: var(--ds-font-sans);
       }
-
-      nav {
-        display: flex;
-        gap: 1rem;
-      }
     </style>
   </head>
   <body>
-    <header>
-      <h1>Components</h1>
-      <nav>
-        <a href="./avatar.html">Avatar</a>
-        <a href="./spinner.html">Spinner</a>
-        <a href="./card.html">Card</a>
-        <a href="./details.html">Details</a>
-        <a href="./button.html">Button</a>
-        <a href="./link.html">Link</a>
-        <a href="./checkbox.html">Checkbox</a>
-        <a href="./split-panel.html">Split Panel</a>
-        <a href="./drawer.html">Drawer</a>
-      </nav>
-    </header>
+    <h1>Drawer</h1>
+
+    <ds-drawer id="drawer">
+      <h2 slot="header">Header</h2>
+      <div>Here goes the content for body</div>
+      <button id="close" slot="footer">Close Drawer</button>
+    </ds-drawer>
+
+    <button id="open">Open Drawer</button>
 
     <script
       type="module"
@@ -53,5 +39,17 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+
+    <script>
+      const drawer = document.getElementById('drawer');
+
+      document.getElementById('open').addEventListener('click', () => {
+        drawer.show();
+      });
+
+      document.getElementById('close').addEventListener('click', () => {
+        drawer.close();
+      });
+    </script>
   </body>
 </html>
