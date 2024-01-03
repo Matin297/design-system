@@ -21,14 +21,10 @@ export default css`
   }
 
   .drawer::backdrop {
-    --overlay-transition: 250ms;
-    --overlay-color: hsl(240 3.8% 46.1% / 33%);
-
     opacity: 0;
-    background-color: var(--overlay-color);
-    transition: opacity var(--overlay-transition) ease,
-      display var(--overlay-transition) ease allow-discrete,
-      overlay var(--overlay-transition) ease allow-discrete;
+    background-color: hsl(240 3.8% 46.1% / 33%);
+    transition: opacity 250ms ease, display 250ms ease allow-discrete,
+      overlay 250ms ease allow-discrete;
   }
 
   .drawer[open],
