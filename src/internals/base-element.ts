@@ -36,6 +36,11 @@ export class BaseElement extends LitElement {
       right: coords.right + window.scrollX,
     };
   }
+
+  /** Check to see if there are elements in lightDOM assigned to a slot in shadowDOM */
+  hasSlottedElement(name: string) {
+    return this.querySelector(`:scope > [slot=${name}]`) !== null;
+  }
 }
 
 const EVENTS = {

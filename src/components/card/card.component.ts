@@ -10,19 +10,15 @@ const ELEMENT_NAME = 'ds-card';
 export default class DsCard extends BaseElement {
   static styles = [BaseElement.styles, styles];
 
-  private _hasSlottedElement(name: string) {
-    return this.querySelector(`:scope > [slot=${name}]`) !== null;
-  }
-
   render() {
     return html`
       <div
         part="base"
         class=${classMap({
           card: true,
-          'card--with-image': this._hasSlottedElement('image'),
-          'card--with-header': this._hasSlottedElement('header'),
-          'card--with-footer': this._hasSlottedElement('footer'),
+          'card--with-image': this.hasSlottedElement('image'),
+          'card--with-header': this.hasSlottedElement('header'),
+          'card--with-footer': this.hasSlottedElement('footer'),
         })}
       >
         <slot name="image" part="image" class="card__image"></slot>

@@ -29,10 +29,6 @@ export default class BaseButton extends BaseElement {
   @property({type: Boolean, reflect: true})
   disabled = false;
 
-  private _hasSlottedElement(name: string) {
-    return this.querySelector(`:scope > [slot=${name}]`) !== null;
-  }
-
   get classNames() {
     return {
       button: true,
@@ -50,8 +46,8 @@ export default class BaseButton extends BaseElement {
       'button--neutral': this.theme === 'neutral',
       'button--warning': this.theme === 'warning',
       'button--danger': this.theme === 'danger',
-      'button--prefixed': this._hasSlottedElement('prefix'),
-      'button--suffixed': this._hasSlottedElement('suffix'),
+      'button--prefixed': this.hasSlottedElement('prefix'),
+      'button--suffixed': this.hasSlottedElement('suffix'),
     };
   }
 

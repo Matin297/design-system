@@ -41,13 +41,13 @@ export default class DsDrawer extends BaseElement {
   }
 
   render() {
-    const header = this._hasSlottedElement('header')
+    const header = this.hasSlottedElement('header')
       ? html`<header part="header" class="drawer__header">
           <slot name="header"></slot>
         </header>`
       : '';
 
-    const footer = this._hasSlottedElement('footer')
+    const footer = this.hasSlottedElement('footer')
       ? html`<footer part="footer" class="drawer__footer">
           <slot name="footer"></slot>
         </footer>`
@@ -75,10 +75,6 @@ export default class DsDrawer extends BaseElement {
         </section>
       </dialog>
     `;
-  }
-
-  private _hasSlottedElement(name: string) {
-    return this.querySelector(`:scope > [slot=${name}]`) !== null;
   }
 }
 
