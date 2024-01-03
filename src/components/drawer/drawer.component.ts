@@ -3,12 +3,13 @@ import {customElement, property, query} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 import {ifDefined} from 'lit/directives/if-defined.js';
 import {BaseElement} from '../../internals/base-element';
+import styles from './drawer.styles';
 
 const ELEMENT_NAME = 'ds-drawer';
 
 @customElement(ELEMENT_NAME)
 export default class DsDrawer extends BaseElement {
-  static styles = [BaseElement.styles];
+  static styles = [BaseElement.styles, styles];
 
   @query('.drawer')
   drawer: HTMLDialogElement;
