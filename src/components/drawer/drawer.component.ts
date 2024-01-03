@@ -41,6 +41,18 @@ export default class DsDrawer extends BaseElement {
   }
 
   render() {
+    const header = this._hasSlottedElement('header')
+      ? html`<header part="header" class="drawer__header">
+          <slot name="header"></slot>
+        </header>`
+      : '';
+
+    const footer = this._hasSlottedElement('footer')
+      ? html`<footer part="footer" class="drawer__footer">
+          <slot name="footer"></slot>
+        </footer>`
+      : '';
+
     return html`
       <dialog
         part="base"
@@ -54,19 +66,19 @@ export default class DsDrawer extends BaseElement {
         aria-label=${ifDefined(this.label)}
         aria-labelledby=${ifDefined(this.labelledBy)}
       >
-        <header part="header" class="drawer__header">
-          <slot name="header"></slot>
-        </header>
-
-        <main part="body" class="drawer__body">
-          <slot></slot>
-        </main>
-
-        <footer part="footer" class="drawer__footer">
-          <slot name="footer"></slot>
-        </footer>
+        <section part="body" class="drawer__body">
+          ${header}
+          <main part="content" class="drawer__content">
+            <slot></slot>
+          </main>
+          ${footer}
+        </section>
       </dialog>
     `;
+  }
+
+  private _hasSlottedElement(name: string) {
+    return this.querySelector(`:scope > [slot=${name}]`) !== null;
   }
 }
 
