@@ -64,7 +64,8 @@ export default class DsDetails extends BaseElement {
   async hide() {
     if (this.disabled || !this.open) return;
 
-    const dsHideEvent = this.emit('ds-hide', {cancelable: true});
+    const dsHideEvent = this.generateEvent('ds-hide', {cancelable: true});
+    this.dispatchEvent(dsHideEvent);
 
     // Keep it open if event is prevented
     if (dsHideEvent.defaultPrevented) {
@@ -76,13 +77,15 @@ export default class DsDetails extends BaseElement {
 
     this.open = false;
 
-    this.emit('ds-hide-finish');
+    const dsHideFinishEvent = this.generateEvent('ds-hide-finish');
+    this.dispatchEvent(dsHideFinishEvent);
   }
 
   async show() {
     if (this.disabled || this.open) return;
 
-    const dsShowEvent = this.emit('ds-show', {cancelable: true});
+    const dsShowEvent = this.generateEvent('ds-show', {cancelable: true});
+    this.dispatchEvent(dsShowEvent);
 
     // Keep it closed if event is prevented
     if (dsShowEvent.defaultPrevented) {
@@ -94,7 +97,8 @@ export default class DsDetails extends BaseElement {
 
     await this.animateBodyContent(DETAILS_SHOW);
 
-    this.emit('ds-show-finish');
+    const dsShowFinishEvent = this.generateEvent('ds-show-finish');
+    this.dispatchEvent(dsShowFinishEvent);
   }
 
   render() {

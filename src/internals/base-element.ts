@@ -1,16 +1,6 @@
 import type {CSSResultGroup} from 'lit';
 import {LitElement, css} from 'lit';
 
-import type {
-  DsEventMap,
-  DsEventInit,
-  DsCustomEvent,
-  WithDetailsEvent,
-  WithDetailsEventsMap,
-  WithoutDetailsEvent,
-  WithoutDetailsEventsMap,
-} from '../events/types';
-
 export class BaseElement extends LitElement {
   static styles: CSSResultGroup = css`
     :host {
@@ -24,29 +14,14 @@ export class BaseElement extends LitElement {
     }
   `;
 
-  emit<T extends keyof WithDetailsEventsMap>(
-    name: WithDetailsEvent<T>,
-    options: DsEventInit<T>
-  ): DsCustomEvent<T>;
-  emit<T extends keyof WithoutDetailsEventsMap>(
-    name: WithoutDetailsEvent<T>,
-    options?: DsEventInit<T>
-  ): DsCustomEvent<T>;
-  emit<T extends keyof DsEventMap>(
-    name: T,
-    options?: DsEventInit<T>
-  ): DsCustomEvent<T> {
-    const customEvent = new CustomEvent(name, {
+  generateEvent(name: DsEventName, options?: CustomEventInit) {
+    return new CustomEvent(name, {
       bubbles: true,
       composed: true,
       cancelable: false,
       detail: {},
       ...options,
     });
-
-    this.dispatchEvent(customEvent);
-
-    return customEvent as DsCustomEvent<T>;
   }
 
   /** Calculates coordinates relative to the document */
@@ -62,3 +37,12 @@ export class BaseElement extends LitElement {
     };
   }
 }
+
+const EVENTS = {
+  HIDE: 'ds-hide',
+  HIDE_FINISH: 'ds-hide-finish',
+  SHOW: 'ds-show',
+  SHOW_FINISH: 'ds-show-finish',
+} as const;
+
+type DsEventName = (typeof EVENTS)[keyof typeof EVENTS];
