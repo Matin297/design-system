@@ -23,13 +23,33 @@
   <body>
     <h1>Drawer</h1>
 
-    <ds-drawer id="drawer">
+    <button onclick="ie.show()">Inline End</button>
+    <ds-drawer id="ie">
       <h2 slot="header">Header</h2>
       <div>Here goes the content for body</div>
-      <button id="close" slot="footer">Close Drawer</button>
+      <button slot="footer" onclick="ie.hide()">Close Drawer</button>
     </ds-drawer>
 
-    <button id="open">Open Drawer</button>
+    <button onclick="is.show()">Inline Start</button>
+    <ds-drawer id="is" placement="start">
+      <h2 slot="header">Header</h2>
+      <div>Here goes the content for body</div>
+      <button slot="footer" onclick="is.hide()">Close Drawer</button>
+    </ds-drawer>
+
+    <button onclick="bs.show()">Block Start</button>
+    <ds-drawer id="bs" direction="block" placement="start">
+      <h2 slot="header">Header</h2>
+      <div>Here goes the content for body</div>
+      <button slot="footer" onclick="bs.hide()">Close Drawer</button>
+    </ds-drawer>
+
+    <button onclick="be.show()">Block End</button>
+    <ds-drawer id="be" direction="block">
+      <h2 slot="header">Header</h2>
+      <div>Here goes the content for body</div>
+      <button slot="footer" onclick="be.hide()">Close Drawer</button>
+    </ds-drawer>
 
     <script
       type="module"
@@ -39,17 +59,5 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
-
-    <script>
-      const drawer = document.getElementById('drawer');
-
-      document.getElementById('open').addEventListener('click', () => {
-        drawer.show();
-      });
-
-      document.getElementById('close').addEventListener('click', () => {
-        drawer.close();
-      });
-    </script>
   </body>
 </html>
