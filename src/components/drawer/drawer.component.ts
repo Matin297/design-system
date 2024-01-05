@@ -22,6 +22,10 @@ export default class DsDrawer extends BaseElement {
   @property({attribute: 'labelledby'})
   labelledBy?: string;
 
+  /** Whether dialog is modal or not */
+  @property({type: Boolean, reflect: true})
+  contained = false;
+
   /** Where to place the drawer based on direction */
   @property()
   placement: Placement = 'end';
@@ -32,7 +36,11 @@ export default class DsDrawer extends BaseElement {
 
   /** Delegates opening the drawer to the underlying dialog */
   show() {
-    this.drawer.showModal();
+    if (this.contained) {
+      this.drawer.show();
+    } else {
+      this.drawer.showModal();
+    }
   }
 
   /** Delegates closing the drawer to the underlying dialog */
