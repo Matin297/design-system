@@ -1,5 +1,3 @@
-/** @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#animating_dialogs */
-
 import {css} from 'lit';
 
 export default css`
@@ -16,27 +14,6 @@ export default css`
     border: none;
     max-height: 100%;
     max-width: 100%;
-    overflow: hidden;
-    opacity: 0;
-
-    transition: opacity var(--ds-transition-medium) ease-in-out,
-      translate var(--ds-transition-medium) ease-in-out,
-      display var(--ds-transition-medium) ease-in-out allow-discrete,
-      overlay var(--ds-transition-medium) ease-in-out allow-discrete;
-  }
-
-  .drawer::backdrop {
-    opacity: 0;
-    background-color: hsl(240 3.8% 46.1% / 33%);
-
-    transition: opacity 250ms ease-in-out,
-      display 250ms ease-in-out allow-discrete,
-      overlay 250ms ease-in-out allow-discrete;
-  }
-
-  .drawer[open],
-  .drawer[open]::backdrop {
-    opacity: 1;
   }
 
   /** Body */
@@ -69,13 +46,11 @@ export default css`
   }
 
   .drawer--inline.drawer--end {
-    translate: 100%;
     inset-inline-end: 0;
     inset-inline-start: initial;
   }
 
   .drawer--inline.drawer--start {
-    translate: -100%;
     inset-inline-start: 0;
     inset-inline-end: initial;
   }
@@ -88,46 +63,12 @@ export default css`
   }
 
   .drawer--block.drawer--end {
-    translate: 0 100%;
     inset-block-end: 0;
     inset-block-start: initial;
   }
 
   .drawer--block.drawer--start {
-    translate: 0 -100%;
     inset-block-start: 0;
     inset-block-end: initial;
-  }
-
-  .drawer--inline.drawer--end[open],
-  .drawer--inline.drawer--start[open],
-  .drawer--block.drawer--start[open],
-  .drawer--block.drawer--end[open] {
-    translate: 0;
-  }
-
-  @starting-style {
-    .drawer[open],
-    .drawer[open]::backdrop {
-      opacity: 0;
-    }
-
-    /** Inline */
-    .drawer--inline.drawer--end[open] {
-      translate: 100%;
-    }
-
-    .drawer--inline.drawer--start[open] {
-      translate: -100%;
-    }
-
-    /** Block */
-    .drawer--block.drawer--end[open] {
-      translate: 0 100%;
-    }
-
-    .drawer--block.drawer--start[open] {
-      translate: 0 -100%;
-    }
   }
 `;
