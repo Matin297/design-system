@@ -22,7 +22,10 @@ export default class DsDrawer extends BaseElement {
   @property({attribute: 'labelledby'})
   labelledBy?: string;
 
-  /** Whether dialog is modal or not */
+  /**
+   * Whether dialog is modal or not.
+   * For this to work, set position to relative and overflow to hidden on the container.
+   */
   @property({type: Boolean, reflect: true})
   contained = false;
 
@@ -34,7 +37,10 @@ export default class DsDrawer extends BaseElement {
   @property()
   direction: Direction = 'inline';
 
-  /** Delegates opening the drawer to the underlying dialog */
+  /**
+   * Delegates opening the drawer to the underlying dialog.
+   * If contained is set then will open a non-modal drawer.
+   */
   show() {
     if (this.contained) {
       this.drawer.show();
