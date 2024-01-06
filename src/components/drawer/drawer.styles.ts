@@ -1,4 +1,6 @@
 import {css} from 'lit';
+import inlineStyles from './inline.styles';
+import blockStyles from './block.styles';
 
 export default css`
   :host {
@@ -39,36 +41,8 @@ export default css`
   }
 
   /** Inline */
-  .drawer--inline {
-    height: 100%;
-    width: var(--size);
-    inset-block: 0;
-  }
-
-  .drawer--inline.drawer--end {
-    inset-inline-end: 0;
-    inset-inline-start: initial;
-  }
-
-  .drawer--inline.drawer--start {
-    inset-inline-start: 0;
-    inset-inline-end: initial;
-  }
+  ${inlineStyles}
 
   /** Block */
-  .drawer--block {
-    width: 100%;
-    height: var(--size);
-    inset-inline: 0;
-  }
-
-  .drawer--block.drawer--end {
-    inset-block-end: 0;
-    inset-block-start: initial;
-  }
-
-  .drawer--block.drawer--start {
-    inset-block-start: 0;
-    inset-block-end: initial;
-  }
+  ${blockStyles}
 `;
