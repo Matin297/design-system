@@ -35,6 +35,13 @@ export function performAnimation(
   });
 }
 
+/** Waits for all animations on an element to finish */
+export function waitForAnimationsToFinish(element: HTMLElement) {
+  return Promise.allSettled(
+    element.getAnimations().map((animation) => animation.finished)
+  );
+}
+
 export function shimKeyframesAutoHeight(
   keyframes: Keyframe[],
   calculatedValue: number
