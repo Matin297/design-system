@@ -3,6 +3,11 @@ import {customElement, property, query} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 import {ifDefined} from 'lit/directives/if-defined.js';
 import {BaseElement} from '../../internals/base-element';
+import {waitForAnimationsToFinish} from '../../internals/animation';
+import {
+  findAutoFocusElement,
+  queryFocusableElements,
+} from '../../internals/tabbable';
 import styles from './drawer.styles';
 
 const ELEMENT_NAME = 'ds-drawer';
@@ -11,8 +16,19 @@ const ELEMENT_NAME = 'ds-drawer';
 export default class DsDrawer extends BaseElement {
   static styles = [BaseElement.styles, styles];
 
+  private _mutationObserver = new MutationObserver((mutationList) =>
+    this._observerCallback(mutationList)
+  );
+
   @query('.drawer')
   drawer: HTMLDialogElement;
+
+  firstUpdated() {
+    this._mutationObserver.observe(this.drawer, {
+      attributes: true,
+      attributeFilter: ['open'],
+    });
+  }
 
   /** Specified value for aria-label */
   @property()
@@ -89,6 +105,30 @@ export default class DsDrawer extends BaseElement {
         </section>
       </dialog>
     `;
+  }
+
+  private async _observerCallback(mutationList: MutationRecord[]) {
+    for (const mutation of mutationList) {
+      const target = mutation.target as HTMLDialogElement;
+
+      if (target.open) {
+        await waitForAnimationsToFinish(target);
+
+        const focusableElements = queryFocusableElements(this);
+        const autoFocusableElement = findAutoFocusElement(focusableElements);
+
+        // Either move focus to an element with autofocus attribute
+        // or to the first focusable element.
+        if (
+          autoFocusableElement &&
+          typeof autoFocusableElement.focus === 'function'
+        ) {
+          autoFocusableElement.focus();
+        } else if (typeof focusableElements[0].focus === 'function') {
+          focusableElements[0]?.focus();
+        }
+      }
+    }
   }
 }
 
