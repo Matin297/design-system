@@ -16,6 +16,7 @@ export default css`
     border: none;
     max-height: 100%;
     max-width: 100%;
+    box-shadow: var(--ds-shadow-large);
   }
 
   /** Body */
