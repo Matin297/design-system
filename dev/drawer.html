@@ -41,36 +41,73 @@
   <body>
     <h1>Drawer</h1>
 
-    <ds-button variant="outline" onclick="ie.show()">Open Drawer</ds-button>
+    <ds-drawer id="fie">
+      <h3 slot="header">Header</h3>
+      <div>
+        <p>Here goes the content for body</p>
+        <input placeholder="initial focus" autofocus />
+      </div>
+      <ds-button slot="footer" onclick="fie.close()">Close Drawer</ds-button>
+    </ds-drawer>
+
     <ds-drawer id="ie">
       <h3 slot="header">Header</h3>
       <div>Here goes the content for body</div>
       <ds-button slot="footer" onclick="ie.close()">Close Drawer</ds-button>
     </ds-drawer>
 
-    <h2>Slide from start</h2>
-    <ds-button variant="outline" onclick="is.show()">Open Drawer</ds-button>
     <ds-drawer id="is" placement="start">
       <h3 slot="header">Header</h3>
       <div>Here goes the content for body</div>
       <ds-button slot="footer" onclick="is.close()">Close Drawer</ds-button>
     </ds-drawer>
 
-    <h2>Slide From top</h2>
-    <ds-button variant="outline" onclick="bs.show()">Open Drawer</ds-button>
     <ds-drawer id="bs" direction="block" placement="start">
       <h3 slot="header">Header</h3>
       <div>Here goes the content for body</div>
       <ds-button slot="footer" onclick="bs.close()">Close Drawer</ds-button>
     </ds-drawer>
 
-    <h2>Slide from bottom</h2>
-    <ds-button variant="outline" onclick="be.show()">Open Drawer</ds-button>
     <ds-drawer id="be" direction="block">
       <h3 slot="header">Header</h3>
       <div>Here goes the content for body</div>
       <ds-button slot="footer" onclick="be.close()">Close Drawer</ds-button>
     </ds-drawer>
+
+    <ds-drawer id="cie" style="--size: 50vw">
+      <h3 slot="header">Header</h3>
+      <div>Here goes the content for body</div>
+      <ds-button slot="footer" onclick="cie.close()">Close Drawer</ds-button>
+    </ds-drawer>
+
+    <ds-drawer id="sie">
+      <h3 slot="header">Header</h3>
+      <div style="height: 900px; border: 2px solid rebeccapurple">
+        Here goes the content for body
+      </div>
+      <ds-button slot="footer" onclick="sie.close()">Close Drawer</ds-button>
+    </ds-drawer>
+
+    <h2>Default slide</h2>
+    <ds-button variant="outline" onclick="ie.show()">Open Drawer</ds-button>
+
+    <h2>Slide from start</h2>
+    <ds-button variant="outline" onclick="is.show()">Open Drawer</ds-button>
+
+    <h2>Slide From top</h2>
+    <ds-button variant="outline" onclick="bs.show()">Open Drawer</ds-button>
+
+    <h2>Slide from bottom</h2>
+    <ds-button variant="outline" onclick="be.show()">Open Drawer</ds-button>
+
+    <h2>Custom size</h2>
+    <ds-button variant="outline" onclick="cie.show()">Open Drawer</ds-button>
+
+    <h2>Scrolling</h2>
+    <ds-button variant="outline" onclick="sie.show()">Open Drawer</ds-button>
+
+    <h2>Custom initial focus</h2>
+    <ds-button variant="outline" onclick="fie.show()">Open Drawer</ds-button>
 
     <div class="wrapper">
       <h2>Contained drawer</h2>
@@ -102,35 +139,6 @@
         <ds-button slot="footer" onclick="bec.close()">Close Drawer</ds-button>
       </ds-drawer>
     </div>
-
-    <h2>Custom size</h2>
-    <ds-button variant="outline" onclick="cie.show()">Open Drawer</ds-button>
-    <ds-drawer id="cie" style="--size: 50vw">
-      <h3 slot="header">Header</h3>
-      <div>Here goes the content for body</div>
-      <ds-button slot="footer" onclick="cie.close()">Close Drawer</ds-button>
-    </ds-drawer>
-
-    <h2>Scrolling</h2>
-    <ds-button variant="outline" onclick="sie.show()">Open Drawer</ds-button>
-    <ds-drawer id="sie">
-      <h3 slot="header">Header</h3>
-      <div style="height: 900px; border: 2px solid rebeccapurple">
-        Here goes the content for body
-      </div>
-      <ds-button slot="footer" onclick="sie.close()">Close Drawer</ds-button>
-    </ds-drawer>
-
-    <h2>Custom initial focus</h2>
-    <ds-button variant="outline" onclick="fie.show()">Open Drawer</ds-button>
-    <ds-drawer id="fie">
-      <h3 slot="header">Header</h3>
-      <div>
-        <p>Here goes the content for body</p>
-        <input placeholder="initial focus" autofocus />
-      </div>
-      <ds-button slot="footer" onclick="fie.close()">Close Drawer</ds-button>
-    </ds-drawer>
 
     <script
       type="module"
