@@ -122,6 +122,9 @@ export default class DsDrawer extends BaseElement {
         const focusableElements = queryFocusableElements(this);
         const autoFocusableElement = findAutoFocusElement(focusableElements);
 
+        /** Initial focus indicator event */
+        const initialFocusEvent = this.generateEvent('ds-initial-focus');
+
         // Either move focus to an element with autofocus attribute
         // or to the first focusable element.
         if (
@@ -129,11 +132,13 @@ export default class DsDrawer extends BaseElement {
           typeof autoFocusableElement.focus === 'function'
         ) {
           autoFocusableElement.focus();
+          this.dispatchEvent(initialFocusEvent);
         } else if (
           focusableElements.length > 0 &&
           typeof focusableElements[0].focus === 'function'
         ) {
           focusableElements[0].focus();
+          this.dispatchEvent(initialFocusEvent);
         }
       } else {
         await waitForAnimationsToFinish(target);
