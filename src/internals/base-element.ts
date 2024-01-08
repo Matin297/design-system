@@ -48,6 +48,7 @@ const EVENTS = {
   HIDE_FINISH: 'ds-hide-finish',
   SHOW: 'ds-show',
   SHOW_FINISH: 'ds-show-finish',
+  INITIAL_FOCUS: 'ds-initial-focus',
 } as const;
 
 type DsEventName = (typeof EVENTS)[keyof typeof EVENTS];
