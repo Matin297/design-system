@@ -16,5 +16,20 @@ describe('<ds-drawer>', () => {
 
       expect(display).to.be.equal('none');
     });
+
+    it('should display dialog when show method is called', async () => {
+      const drawer = await fixture<DsDrawer>(
+        html`<ds-drawer>Here goes the content</ds-drawer>`
+      );
+
+      drawer.show();
+
+      await drawer.updateComplete;
+
+      const dialog =
+        drawer.shadowRoot!.querySelector<HTMLDialogElement>('dialog');
+
+      expect(dialog).to.be.displayed;
+    });
   });
 });
