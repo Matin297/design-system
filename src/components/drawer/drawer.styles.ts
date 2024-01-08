@@ -16,6 +16,7 @@ export default css`
     border: none;
     max-height: 100%;
     max-width: 100%;
+    z-index: var(--ds-z-index-drawer);
     box-shadow: var(--ds-shadow-large);
   }
 
