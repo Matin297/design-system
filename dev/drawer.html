@@ -121,6 +121,17 @@
       <ds-button slot="footer" onclick="sie.close()">Close Drawer</ds-button>
     </ds-drawer>
 
+    <h2>Custom initial focus</h2>
+    <ds-button variant="outline" onclick="fie.show()">Open Drawer</ds-button>
+    <ds-drawer id="fie">
+      <h3 slot="header">Header</h3>
+      <div>
+        <p>Here goes the content for body</p>
+        <input placeholder="initial focus" autofocus />
+      </div>
+      <ds-button slot="footer" onclick="fie.close()">Close Drawer</ds-button>
+    </ds-drawer>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
