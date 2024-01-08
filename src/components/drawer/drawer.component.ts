@@ -129,8 +129,11 @@ export default class DsDrawer extends BaseElement {
           typeof autoFocusableElement.focus === 'function'
         ) {
           autoFocusableElement.focus();
-        } else if (typeof focusableElements[0].focus === 'function') {
-          focusableElements[0]?.focus();
+        } else if (
+          focusableElements.length > 0 &&
+          typeof focusableElements[0].focus === 'function'
+        ) {
+          focusableElements[0].focus();
         }
       } else {
         await waitForAnimationsToFinish(target);
