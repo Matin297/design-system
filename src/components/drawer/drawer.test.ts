@@ -1,6 +1,7 @@
 import './drawer.component.js';
 
 import {fixture, html, expect, oneEvent} from '@open-wc/testing';
+import {sendKeys} from '@web/test-runner-commands';
 import type DsDrawer from './drawer.component';
 
 describe('<ds-drawer>', () => {
@@ -64,6 +65,24 @@ describe('<ds-drawer>', () => {
       await oneEvent(drawer, 'ds-initial-focus');
 
       expect(document.activeElement).to.be.equal(drawer.querySelector('input'));
+    });
+
+    it('should be closed whe Esc key is pressed', async () => {
+      const drawer = await fixture<DsDrawer>(
+        html`<ds-drawer>Here goes the content</ds-drawer>`
+      );
+
+      drawer.show();
+
+      await drawer.updateComplete;
+
+      await sendKeys({press: 'Escape'});
+
+      const dialog =
+        drawer.shadowRoot?.querySelector<HTMLDialogElement>('dialog');
+      const display = getComputedStyle(dialog!).display;
+
+      expect(display).to.be.equal('none');
     });
   });
 });
