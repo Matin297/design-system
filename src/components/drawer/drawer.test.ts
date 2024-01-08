@@ -28,8 +28,27 @@ describe('<ds-drawer>', () => {
 
       const dialog =
         drawer.shadowRoot!.querySelector<HTMLDialogElement>('dialog');
+      const display = getComputedStyle(dialog!).display;
 
-      expect(dialog).to.be.displayed;
+      expect(display).to.be.equal('block');
+    });
+
+    it('should hide dialog when close method is called', async () => {
+      const drawer = await fixture<DsDrawer>(
+        html`<ds-drawer>Here goes the content</ds-drawer>`
+      );
+
+      drawer.show();
+      await drawer.updateComplete;
+
+      drawer.close();
+      await drawer.updateComplete;
+
+      const dialog =
+        drawer.shadowRoot!.querySelector<HTMLDialogElement>('dialog');
+      const display = getComputedStyle(dialog!).display;
+
+      expect(display).to.be.equal('none');
     });
   });
 });
