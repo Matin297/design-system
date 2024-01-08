@@ -13,14 +13,14 @@
       type="module"
       src="../dist/components/drawer/drawer.component.js"
     ></script>
+    <script
+      type="module"
+      src="../dist/components/button/button.component.js"
+    ></script>
 
     <style>
       body {
         font-family: var(--ds-font-sans);
-      }
-
-      ds-drawer::part(base) {
-        background-color: tan;
       }
 
       .wrapper {
@@ -28,7 +28,7 @@
         height: 300px;
         padding: 1rem;
         margin: 2rem auto;
-        border: 3px solid brown;
+        background-color: var(--ds-color-neutral-100);
         position: relative;
         overflow: hidden;
       }
@@ -37,62 +37,65 @@
   <body>
     <h1>Drawer</h1>
 
-    <button onclick="ie.show()">Inline End</button>
+    <ds-button variant="outline" onclick="ie.show()">Inline End</ds-button>
     <ds-drawer id="ie">
       <h2 slot="header">Header</h2>
       <div>Here goes the content for body</div>
       <input placeholder="auto focused input" autofocus />
-      <button slot="footer" onclick="ie.close()">Close Drawer</button>
+      <ds-button slot="footer" onclick="ie.close()">Close Drawer</ds-button>
     </ds-drawer>
 
-    <button onclick="is.show()">Inline Start</button>
+    <h2>Slide from start</h2>
+    <ds-button variant="outline" onclick="is.show()">Inline Start</ds-button>
     <ds-drawer id="is" placement="start">
       <h2 slot="header">Header</h2>
       <div>Here goes the content for body</div>
-      <button slot="footer" onclick="is.close()">Close Drawer</button>
+      <ds-button slot="footer" onclick="is.close()">Close Drawer</ds-button>
     </ds-drawer>
 
-    <button onclick="bs.show()">Block Start</button>
+    <h2>Slide From top</h2>
+    <ds-button variant="outline" onclick="bs.show()">Block Start</ds-button>
     <ds-drawer id="bs" direction="block" placement="start">
       <h2 slot="header">Header</h2>
       <div>Here goes the content for body</div>
-      <button slot="footer" onclick="bs.close()">Close Drawer</button>
+      <ds-button slot="footer" onclick="bs.close()">Close Drawer</ds-button>
     </ds-drawer>
 
-    <button onclick="be.show()">Block End</button>
+    <h2>Slide from bottom</h2>
+    <ds-button variant="outline" onclick="be.show()">Block End</ds-button>
     <ds-drawer id="be" direction="block">
       <h2 slot="header">Header</h2>
       <div>Here goes the content for body</div>
-      <button slot="footer" onclick="be.close()">Close Drawer</button>
+      <ds-button slot="footer" onclick="be.close()">Close Drawer</ds-button>
     </ds-drawer>
 
     <div class="wrapper">
-      <button onclick="iec.show()">Inline End</button>
+      <ds-button variant="outline" onclick="iec.show()">Inline End</ds-button>
       <ds-drawer contained id="iec">
         <h2 slot="header">Header</h2>
         <div>Here goes the content for body</div>
-        <button slot="footer" onclick="iec.close()">Close Drawer</button>
+        <ds-button slot="footer" onclick="iec.close()">Close Drawer</ds-button>
       </ds-drawer>
 
-      <button onclick="isc.show()">Inline Start</button>
+      <ds-button variant="outline" onclick="isc.show()">Inline Start</ds-button>
       <ds-drawer contained id="isc" placement="start">
         <h2 slot="header">Header</h2>
         <div>Here goes the content for body</div>
-        <button slot="footer" onclick="isc.close()">Close Drawer</button>
+        <ds-button slot="footer" onclick="isc.close()">Close Drawer</ds-button>
       </ds-drawer>
 
-      <button onclick="bsc.show()">Block Start</button>
+      <ds-button variant="outline" onclick="bsc.show()">Block Start</ds-button>
       <ds-drawer contained id="bsc" direction="block" placement="start">
         <h2 slot="header">Header</h2>
         <div>Here goes the content for body</div>
-        <button slot="footer" onclick="bsc.close()">Close Drawer</button>
+        <ds-button slot="footer" onclick="bsc.close()">Close Drawer</ds-button>
       </ds-drawer>
 
-      <button onclick="bec.show()">Block End</button>
+      <ds-button variant="outline" onclick="bec.show()">Block End</ds-button>
       <ds-drawer id="bec" direction="block" contained>
         <h2 slot="header">Header</h2>
         <div>Here goes the content for body</div>
-        <button slot="footer" onclick="bec.close()">Close Drawer</button>
+        <ds-button slot="footer" onclick="bec.close()">Close Drawer</ds-button>
       </ds-drawer>
     </div>
 
