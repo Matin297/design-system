@@ -8,6 +8,7 @@ import {
   findAutoFocusElement,
   queryFocusableElements,
 } from '../../internals/tabbable';
+import {lockBodyScroll, unlockBodyScroll} from '../../internals/scroll';
 import styles from './drawer.styles';
 
 const ELEMENT_NAME = 'ds-drawer';
@@ -112,6 +113,10 @@ export default class DsDrawer extends BaseElement {
       const target = mutation.target as HTMLDialogElement;
 
       if (target.open) {
+        if (!this.contained) {
+          lockBodyScroll(this);
+        }
+
         await waitForAnimationsToFinish(target);
 
         const focusableElements = queryFocusableElements(this);
@@ -126,6 +131,12 @@ export default class DsDrawer extends BaseElement {
           autoFocusableElement.focus();
         } else if (typeof focusableElements[0].focus === 'function') {
           focusableElements[0]?.focus();
+        }
+      } else {
+        await waitForAnimationsToFinish(target);
+
+        if (!this.contained) {
+          unlockBodyScroll(this);
         }
       }
     }
