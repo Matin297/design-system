@@ -119,27 +119,7 @@ export default class DsDrawer extends BaseElement {
 
         await waitForAnimationsToFinish(target);
 
-        const focusableElements = queryFocusableElements(this);
-        const autoFocusableElement = findAutoFocusElement(focusableElements);
-
-        /** Initial focus indicator event */
-        const initialFocusEvent = this.generateEvent('ds-initial-focus');
-
-        // Either move focus to an element with autofocus attribute
-        // or to the first focusable element.
-        if (
-          autoFocusableElement &&
-          typeof autoFocusableElement.focus === 'function'
-        ) {
-          autoFocusableElement.focus();
-          this.dispatchEvent(initialFocusEvent);
-        } else if (
-          focusableElements.length > 0 &&
-          typeof focusableElements[0].focus === 'function'
-        ) {
-          focusableElements[0].focus();
-          this.dispatchEvent(initialFocusEvent);
-        }
+        this._moveFocus();
       } else {
         await waitForAnimationsToFinish(target);
 
@@ -147,6 +127,22 @@ export default class DsDrawer extends BaseElement {
           unlockBodyScroll(this);
         }
       }
+    }
+  }
+
+  private async _moveFocus() {
+    const focusableElements = queryFocusableElements(this);
+    const autofocusElement = findAutoFocusElement(focusableElements);
+
+    // selected element which is either an element with autofocus attribute
+    // or the first focusable element found.
+    const elementToFocus = autofocusElement ?? focusableElements[0];
+
+    // perform the focus and dispatch an event to indicate
+    // the shift of focus to the selected element
+    if (elementToFocus && typeof elementToFocus.focus === 'function') {
+      elementToFocus.focus();
+      this.dispatchEvent(this.generateEvent('ds-initial-focus'));
     }
   }
 }
