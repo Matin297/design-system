@@ -534,3 +534,8 @@
   --ds-z-index-toast: 950;
   --ds-z-index-tooltip: 1000;
 }
+
+.ds-scroll-lock {
+  overflow: hidden;
+  padding-inline-end: var(--ds-scrollbar-width);
+}
