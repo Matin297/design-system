@@ -1,6 +1,6 @@
 import {css} from 'lit';
-import inlineStyles from './inline.styles';
-import blockStyles from './block.styles';
+import inlineStyles from './styles/inline';
+import blockStyles from './styles/block';
 
 export default css`
   :host {
