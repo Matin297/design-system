@@ -111,6 +111,16 @@
       <ds-button slot="footer" onclick="cie.close()">Close Drawer</ds-button>
     </ds-drawer>
 
+    <h2>Scrolling</h2>
+    <ds-button variant="outline" onclick="sie.show()">Open Drawer</ds-button>
+    <ds-drawer id="sie">
+      <h3 slot="header">Header</h3>
+      <div style="height: 900px; border: 2px solid rebeccapurple">
+        Here goes the content for body
+      </div>
+      <ds-button slot="footer" onclick="sie.close()">Close Drawer</ds-button>
+    </ds-drawer>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
