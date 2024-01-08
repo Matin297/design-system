@@ -1,6 +1,6 @@
 import './drawer.component.js';
 
-import {fixture, html, expect} from '@open-wc/testing';
+import {fixture, html, expect, oneEvent} from '@open-wc/testing';
 import type DsDrawer from './drawer.component';
 
 describe('<ds-drawer>', () => {
@@ -49,6 +49,21 @@ describe('<ds-drawer>', () => {
       const display = getComputedStyle(dialog!).display;
 
       expect(display).to.be.equal('none');
+    });
+
+    it('should focus on an autofocus element if any is provided', async () => {
+      const drawer = await fixture<DsDrawer>(
+        html`<ds-drawer>
+          <p>Here goes the content</p>
+          <input autofocus />
+        </ds-drawer>`
+      );
+
+      drawer.show();
+
+      await oneEvent(drawer, 'ds-initial-focus');
+
+      expect(document.activeElement).to.be.equal(drawer.querySelector('input'));
     });
   });
 });
