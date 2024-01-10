@@ -10,22 +10,23 @@ export default class DsRange extends BaseElement {
 
   render() {
     return html`
-      <div class="range">
-        <label for="range" class="range__label">
+      <div class="range" part="base">
+        <label for="range" class="range__label" part="label">
           <slot name="label"></slot>
         </label>
 
-        <div class="range__control">
+        <div class="range__control" part="control">
           <input
+            part="input"
             class="range__input"
             type="range"
             id="range"
             aria-describedby="helper-text"
           />
-          <output for="range" class="range__tooltip"></output>
+          <output part="tooltip" for="range" class="range__tooltip"></output>
         </div>
 
-        <div class="range__helper-text" id="helper-text">
+        <div part="helper-text" class="range__helper-text" id="helper-text">
           <slot name="helper-text"></slot>
         </div>
       </div>
