@@ -6,7 +6,15 @@ const ELEMENT_NAME = 'ds-range';
 
 @customElement(ELEMENT_NAME)
 export default class DsRange extends BaseElement {
+  static formAssociated = true;
   static styles = [BaseElement.styles];
+
+  private _internals: ElementInternals;
+
+  constructor() {
+    super();
+    this._internals = this.attachInternals();
+  }
 
   /** Range name, submitted as a name/value pair with form data */
   @property()
@@ -35,6 +43,10 @@ export default class DsRange extends BaseElement {
   /** Whether to show the tooltip and if so where to display it */
   @property()
   tooltip: Tooltip = 'top';
+
+  firstUpdated() {
+    this._internals.setFormValue(this.value.toString());
+  }
 
   render() {
     return html`
