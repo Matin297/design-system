@@ -2,13 +2,14 @@ import {html, PropertyValues} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
 import {clamp} from '../../utilities/math';
+import styles from './range.styles';
 
 const ELEMENT_NAME = 'ds-range';
 
 @customElement(ELEMENT_NAME)
 export default class DsRange extends BaseElement {
   static formAssociated = true;
-  static styles = [BaseElement.styles];
+  static styles = [BaseElement.styles, styles];
 
   private _internals: ElementInternals;
 
@@ -55,6 +56,9 @@ export default class DsRange extends BaseElement {
       }
 
       this._internals.setFormValue(value.toString());
+
+      const percent = (this.value - this.min) / (this.max - this.min);
+      this.style.setProperty('--percent', `${percent * 100}%`);
     }
   }
 
@@ -80,7 +84,9 @@ export default class DsRange extends BaseElement {
             aria-describedby="helper-text"
             @input=${this._inputHandler}
           />
-          <output part="tooltip" for="range" class="range__tooltip"></output>
+          <output part="tooltip" for="range" class="range__tooltip">
+            ${this.value}
+          </output>
         </div>
 
         <div part="helper-text" class="range__helper-text" id="helper-text">
