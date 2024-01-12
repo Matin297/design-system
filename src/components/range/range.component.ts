@@ -1,6 +1,7 @@
-import {html} from 'lit';
+import {html, PropertyValues} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
+import {clamp} from '../../utilities/math';
 
 const ELEMENT_NAME = 'ds-range';
 
@@ -44,8 +45,17 @@ export default class DsRange extends BaseElement {
   @property()
   tooltip: Tooltip = 'top';
 
-  firstUpdated() {
-    this._internals.setFormValue(this.value.toString());
+  willUpdate(changedProps: PropertyValues<this>) {
+    if (changedProps.has('value')) {
+      let value = clamp(this.min, this.value, this.max);
+
+      if (Object.is(value, NaN)) {
+        value = 0;
+        this.value = 0;
+      }
+
+      this._internals.setFormValue(value.toString());
+    }
   }
 
   render() {
