@@ -61,8 +61,14 @@ export default class DsRange extends BaseElement {
             type="range"
             part="input"
             class="range__input"
+            max=${this.max}
+            min=${this.min}
+            step=${this.step}
+            name=${this.name}
             value=${this.value}
+            ?disabled=${this.disabled}
             aria-describedby="helper-text"
+            @input=${this._inputHandler}
           />
           <output part="tooltip" for="range" class="range__tooltip"></output>
         </div>
@@ -72,6 +78,11 @@ export default class DsRange extends BaseElement {
         </div>
       </div>
     `;
+  }
+
+  private _inputHandler(event: InputEvent) {
+    const target = event.target as EventTarget & {value: string};
+    this.value = parseFloat(target.value);
   }
 }
 
