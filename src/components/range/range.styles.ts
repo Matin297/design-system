@@ -4,9 +4,15 @@ export default css`
   :host {
     --percent: 0;
     --proportion: 0;
-    --thumb-size: 20px;
-    --track-height: 6px;
+
     --tooltip-offset: 3px;
+
+    --thumb-size: 20px;
+    --thumb-color: var(--ds-color-primary-600);
+    --thumb-hover-color: var(--ds-color-primary-700);
+    --thumb-active-color: var(--ds-color-primary-500);
+
+    --track-height: 6px;
     --track-color: var(--ds-color-neutral-200);
     --track-fill-color: var(--ds-color-primary-600);
 
@@ -124,12 +130,12 @@ export default css`
   .range__input::-webkit-slider-thumb {
     -webkit-appearance: none;
 
-    cursor: pointer;
+    cursor: grab;
     border-radius: 50%;
     position: relative;
     width: var(--thumb-size);
     height: var(--thumb-size);
-    background-color: var(--ds-color-primary-600);
+    background-color: var(--thumb-color);
     margin-top: calc(var(--thumb-size) / -2 + var(--track-height) / 2);
     z-index: 1;
   }
@@ -140,12 +146,12 @@ export default css`
   }
 
   .range__input:enabled::-webkit-slider-thumb:hover {
-    background-color: var(--ds-color-primary-700);
+    background-color: var(--thumb-hover-color);
   }
 
   .range__input:enabled::-webkit-slider-thumb:active {
     cursor: grabbing;
-    background-color: var(--ds-color-primary-500);
+    background-color: var(--thumb-active-color);
   }
 
   .range__input:disabled::-webkit-slider-thumb {
