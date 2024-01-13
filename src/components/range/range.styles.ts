@@ -51,8 +51,7 @@ export default css`
     opacity: 0.5;
   }
 
-  .range__input:enabled:active + .range__tooltip,
-  .range__input:enabled:focus + .range__tooltip {
+  .range__input:enabled:active + .range__tooltip {
     opacity: 1;
   }
 
