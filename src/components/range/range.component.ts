@@ -1,4 +1,5 @@
 import {html, PropertyValues} from 'lit';
+import {classMap} from 'lit/directives/class-map.js';
 import {customElement, property} from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
 import {clamp} from '../../utilities/math';
@@ -57,12 +58,30 @@ export default class DsRange extends BaseElement {
 
       this._internals.setFormValue(value.toString());
 
-      const percent = (this.value - this.min) / (this.max - this.min);
-      this.style.setProperty('--percent', `${percent * 100}%`);
+      const proportion = (this.value - this.min) / (this.max - this.min);
+
+      this.style.setProperty('--proportion', `${proportion}`);
+      this.style.setProperty('--percent', `${proportion * 100}%`);
     }
   }
 
   render() {
+    let tooltip = html`
+      <output
+        part="tooltip"
+        for="range"
+        class=${classMap({
+          range__tooltip: true,
+          'range__tooltip--top': this.tooltip === 'top',
+          'range__tooltip--bottom': this.tooltip === 'bottom',
+        })}
+      >
+        ${this.value}
+      </output>
+    `;
+
+    if (this.tooltip === 'none') tooltip = html``;
+
     return html`
       <div class="range" part="base">
         <label for="range" class="range__label" part="label">
@@ -84,9 +103,7 @@ export default class DsRange extends BaseElement {
             aria-describedby="helper-text"
             @input=${this._inputHandler}
           />
-          <output part="tooltip" for="range" class="range__tooltip">
-            ${this.value}
-          </output>
+          ${tooltip}
         </div>
 
         <div part="helper-text" class="range__helper-text" id="helper-text">
