@@ -47,6 +47,9 @@ export default class DsRange extends BaseElement {
   @property()
   tooltip: Tooltip = 'top';
 
+  @property({attribute: false})
+  formatter?: (value: number) => string;
+
   willUpdate(changedProps: PropertyValues<this>) {
     if (changedProps.has('value')) {
       let value = clamp(this.min, this.value, this.max);
@@ -76,7 +79,9 @@ export default class DsRange extends BaseElement {
           'range__tooltip--bottom': this.tooltip === 'bottom',
         })}
       >
-        ${this.value}
+        ${typeof this.formatter === 'function'
+          ? this.formatter(this.value)
+          : this.value}
       </output>
     `;
 
