@@ -13,6 +13,16 @@ export default css`
     display: block;
   }
 
+  .range__label {
+    color: var(--ds-input-label-color);
+    font-size: var(--ds-input-label-font-size-medium);
+  }
+
+  .range__helper-text {
+    color: var(--ds-input-help-text-color);
+    font-size: var(--ds-input-help-text-font-size-medium);
+  }
+
   .range__control {
     display: flex;
     position: relative;
