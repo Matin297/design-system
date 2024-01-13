@@ -23,12 +23,71 @@
   <body>
     <h1>Range</h1>
 
+    <h2>Labels</h2>
+    <ds-range>
+      <span slot="label">Volume</span>
+    </ds-range>
+
+    <br />
+    <br />
+
+    <h2>Helper Text</h2>
     <ds-range>
       <span slot="label">Range label</span>
-      <span slot="helper-text">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-      </span>
+      <span slot="helper-text"> Controls the volume of the current song. </span>
     </ds-range>
+
+    <br />
+    <br />
+
+    <h2>Min, Max, Step</h2>
+    <ds-range min="1" max="6" step="1"></ds-range>
+
+    <br />
+    <br />
+
+    <h2>Disabled</h2>
+    <ds-range disabled></ds-range>
+
+    <br />
+    <br />
+
+    <h2>Tooltip Placement</h2>
+    <ds-range tooltip="bottom"></ds-range>
+
+    <br />
+    <br />
+
+    <h2>Disabled Tooltip</h2>
+    <ds-range tooltip="none"></ds-range>
+
+    <br />
+    <br />
+
+    <h2>Custom Colors</h2>
+    <ds-range
+      style="
+        --track-color: var(--ds-color-fuchsia-200);
+        --track-fill-color: var(--ds-color-fuchsia-600);
+        --thumb-color: var(--ds-color-fuchsia-600);
+        --thumb-hover-color: var(--ds-color-fuchsia-700);
+        --thumb-active-color: var(--ds-color-fuchsia-500);
+      "
+    ></ds-range>
+
+    <br />
+    <br />
+
+    <form>
+      <h2>Default value</h2>
+      <ds-range name="range">
+        <span slot="label">Range label</span>
+        <span slot="helper-text">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        </span>
+      </ds-range>
+      <p><button type="submit">submit</button></p>
+    </form>
 
     <script
       type="module"
