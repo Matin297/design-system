@@ -3,8 +3,10 @@ import {css} from 'lit';
 export default css`
   :host {
     --percent: 0;
+    --proportion: 0;
     --thumb-size: 20px;
     --track-height: 6px;
+    --tooltip-offset: 3px;
     --track-color: var(--ds-color-neutral-200);
     --track-fill-color: var(--ds-color-primary-600);
 
@@ -12,7 +14,9 @@ export default css`
   }
 
   .range__control {
+    display: flex;
     position: relative;
+    margin: calc(var(--thumb-size) / 2 + var(--ds-spacing-3x-small)) 0;
   }
 
   .range__input {
@@ -29,6 +33,64 @@ export default css`
 
   .range__input:disabled {
     opacity: 0.5;
+  }
+
+  .range__input:enabled:active + .range__tooltip,
+  .range__input:enabled:focus + .range__tooltip {
+    opacity: 1;
+  }
+
+  /** Tooltip */
+  .range__tooltip {
+    position: absolute;
+
+    color: var(--ds-tooltip-color);
+    z-index: var(--ds-z-index-tooltip);
+    padding: var(--ds-tooltip-padding);
+    font-size: var(--ds-tooltip-font-size);
+    font-family: var(--ds-tooltip-font-family);
+    font-weight: var(--ds-tooltip-font-weight);
+    border-radius: var(--ds-tooltip-border-radius);
+    background-color: var(--ds-tooltip-background-color);
+
+    translate: calc(-50% + var(--thumb-size) / 2);
+    inset-inline-start: calc(
+      var(--percent) - var(--proportion) * var(--thumb-size)
+    );
+
+    opacity: 0;
+    transition: opacity var(--ds-transition-medium) ease-in-out;
+  }
+
+  .range__tooltip::after {
+    content: '';
+    position: absolute;
+    inset-inline-start: 50%;
+    translate: calc(var(--ds-tooltip-arrow-size) * -1);
+    border: var(--ds-tooltip-arrow-size) solid
+      var(--ds-tooltip-background-color);
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
+
+  /** Top Placement */
+  .range__tooltip--top {
+    bottom: calc(var(--thumb-size) + var(--tooltip-offset));
+  }
+
+  .range__tooltip--top::after {
+    inset-block-start: 100%;
+    border-bottom-color: transparent;
+  }
+
+  /** Bottom PLacement */
+  .range__tooltip--bottom {
+    top: calc(var(--thumb-size) + var(--tooltip-offset));
+  }
+
+  .range__tooltip--bottom::after {
+    inset-block-end: 100%;
+    border-top-color: transparent;
   }
 
   /** Fill */
