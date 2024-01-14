@@ -126,4 +126,25 @@ describe('<ds-range>', () => {
       expect(formData.get('a')).to.equal('10');
     });
   });
+
+  describe('when resetting a form', () => {
+    it('should reset range value', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <ds-range name="ranger" value="0"></ds-range>
+          <button type="reset">reset</button>
+        </form>
+      `);
+
+      const ranger = form.querySelector('ds-range')!;
+
+      ranger.value = 50;
+      await ranger.updateComplete;
+
+      form.querySelector('button')!.click();
+      await ranger.updateComplete;
+
+      expect(ranger.value).to.equal(0);
+    });
+  });
 });
