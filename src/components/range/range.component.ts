@@ -72,8 +72,13 @@ export default class DsRange extends BaseElement {
   }
 
   /** Delegates focus to the underlying input element */
-  focus() {
-    this.input.focus();
+  focus(options?: FocusOptions) {
+    this.input.focus(options);
+  }
+
+  /** Delegates blur to the underlying input element */
+  blur() {
+    this.input.blur();
   }
 
   render() {
