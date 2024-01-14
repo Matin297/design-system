@@ -103,5 +103,27 @@ describe('<ds-range>', () => {
       expect(submitHandler).to.have.been.calledOnce;
       expect(formData.get('a')).to.equal('10');
     });
+
+    it('should include name/vale for the range when place outside a form', async () => {
+      const container = await fixture<HTMLDivElement>(html`
+        <div>
+          <ds-range form="ranger" name="a" value="10"></ds-range>
+          <form id="ranger">
+            <button>submit</button>
+          </form>
+        </div>
+      `);
+
+      const form = container.querySelector<HTMLFormElement>('form')!;
+      const submitHandler = sinon.spy((e: Event) => e.preventDefault());
+
+      form.addEventListener('submit', submitHandler);
+      form.querySelector('button')!.click();
+
+      const formData = new FormData(form);
+
+      expect(submitHandler).to.have.been.calledOnce;
+      expect(formData.get('a')).to.equal('10');
+    });
   });
 });
