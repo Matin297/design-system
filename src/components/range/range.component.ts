@@ -13,6 +13,7 @@ export default class DsRange extends BaseElement {
   static styles = [BaseElement.styles, styles];
 
   private _internals: ElementInternals;
+  private _defaultValue = 0;
 
   constructor() {
     super();
@@ -53,6 +54,10 @@ export default class DsRange extends BaseElement {
   @property({attribute: false})
   formatter?: (value: number) => string;
 
+  firstUpdated() {
+    this._defaultValue = this.value;
+  }
+
   willUpdate(changedProps: PropertyValues<this>) {
     if (changedProps.has('value')) {
       let value = clamp(this.min, this.value, this.max);
@@ -69,6 +74,13 @@ export default class DsRange extends BaseElement {
       this.style.setProperty('--proportion', `${proportion}`);
       this.style.setProperty('--percent', `${proportion * 100}%`);
     }
+  }
+
+  formResetCallback() {
+    this.value = this._defaultValue;
+    // if we do not reset the input value directly, it won't
+    // change the position of the thumb!
+    this.input.value = this.value.toString();
   }
 
   /** Delegates focus to the underlying input element */
