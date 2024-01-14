@@ -2,6 +2,7 @@ import './range.component.js';
 
 import {fixture, html, expect} from '@open-wc/testing';
 import {sendMouse, sendKeys} from '@web/test-runner-commands';
+import sinon from 'sinon';
 import type DsRange from './range.component';
 
 describe('<ds-range>', () => {
@@ -82,6 +83,25 @@ describe('<ds-range>', () => {
       await ranger.updateComplete;
 
       expect(ranger.value).to.be.equal(51);
+    });
+  });
+
+  describe('when submitting a form', () => {
+    it('should include name/vale for the range', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <ds-range name="a" value="10"></ds-range>
+          <button>submit</button>
+        </form>
+      `);
+
+      const submitHandler = sinon.spy((e: Event) => e.preventDefault());
+      form.addEventListener('submit', submitHandler);
+      form.querySelector('button')?.click();
+      const formData = new FormData(form);
+
+      expect(submitHandler).to.have.been.calledOnce;
+      expect(formData.get('a')).to.equal('10');
     });
   });
 });
