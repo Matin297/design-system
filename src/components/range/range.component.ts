@@ -93,6 +93,16 @@ export default class DsRange extends BaseElement {
     this.input.blur();
   }
 
+  /** Delegates step up to the underlying input element */
+  stepUp() {
+    this.input.stepUp();
+  }
+
+  /** Delegates step down to the underlying input element */
+  stepDown() {
+    this.input.stepDown();
+  }
+
   render() {
     let tooltip = html`
       <output
