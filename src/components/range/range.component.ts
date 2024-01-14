@@ -1,6 +1,6 @@
 import {html, PropertyValues} from 'lit';
 import {classMap} from 'lit/directives/class-map.js';
-import {customElement, property} from 'lit/decorators.js';
+import {customElement, property, query} from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
 import {clamp} from '../../utilities/math';
 import styles from './range.styles';
@@ -18,6 +18,9 @@ export default class DsRange extends BaseElement {
     super();
     this._internals = this.attachInternals();
   }
+
+  @query('#range')
+  input: HTMLInputElement;
 
   /** Range name, submitted as a name/value pair with form data */
   @property()
@@ -66,6 +69,11 @@ export default class DsRange extends BaseElement {
       this.style.setProperty('--proportion', `${proportion}`);
       this.style.setProperty('--percent', `${proportion * 100}%`);
     }
+  }
+
+  /** Delegates focus to the underlying input element */
+  focus() {
+    this.input.focus();
   }
 
   render() {
