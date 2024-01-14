@@ -1,4 +1,5 @@
 import {css} from 'lit';
+import backdropStyles from './styles/backdrop';
 import inlineStyles from './styles/inline';
 import blockStyles from './styles/block';
 
@@ -41,6 +42,9 @@ export default css`
   .drawer__footer {
     padding: var(--footer-spacing);
   }
+
+  /** Backdrop */
+  ${backdropStyles}
 
   /** Inline */
   ${inlineStyles}
