@@ -69,5 +69,19 @@ describe('<ds-range>', () => {
 
       expect(ranger.value).to.be.equal(49);
     });
+
+    it('should increase value when right arrow is pressed on focus', async () => {
+      const ranger = await fixture<DsRange>(
+        html` <ds-range value="50"></ds-range> `
+      );
+
+      ranger.focus();
+
+      await sendKeys({press: 'ArrowRight'});
+
+      await ranger.updateComplete;
+
+      expect(ranger.value).to.be.equal(51);
+    });
   });
 });
