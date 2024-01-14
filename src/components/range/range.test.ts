@@ -1,6 +1,7 @@
 import './range.component.js';
 
 import {fixture, html, expect} from '@open-wc/testing';
+import {sendMouse} from '@web/test-runner-commands';
 import type DsRange from './range.component';
 
 describe('<ds-range>', () => {
@@ -36,6 +37,23 @@ describe('<ds-range>', () => {
       const input =
         ranger.shadowRoot!.querySelector<HTMLInputElement>('input')!;
       expect(input.disabled).to.be.true;
+    });
+  });
+
+  describe('when value changes', () => {
+    it('should change the value to 100 when click far right of the track', async () => {
+      const ranger = await fixture<DsRange>(html` <ds-range></ds-range> `);
+
+      const {right, bottom} = ranger.getBoundingClientRect();
+
+      await sendMouse({
+        type: 'click',
+        position: [Math.round(right) - 1, Math.round(bottom) - 1],
+      });
+
+      await ranger.updateComplete;
+
+      expect(ranger.value).to.be.equal(100);
     });
   });
 });
