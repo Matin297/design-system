@@ -60,19 +60,7 @@ export default class DsRange extends BaseElement {
 
   willUpdate(changedProps: PropertyValues<this>) {
     if (changedProps.has('value')) {
-      let value = clamp(this.min, this.value, this.max);
-
-      if (Object.is(value, NaN)) {
-        value = 0;
-        this.value = 0;
-      }
-
-      this._internals.setFormValue(value.toString());
-
-      const proportion = (this.value - this.min) / (this.max - this.min);
-
-      this.style.setProperty('--proportion', `${proportion}`);
-      this.style.setProperty('--percent', `${proportion * 100}%`);
+      this._handleValueUpdate();
     }
   }
 
@@ -153,9 +141,29 @@ export default class DsRange extends BaseElement {
     `;
   }
 
+  private get _proportion() {
+    return (this.value - this.min) / (this.max - this.min);
+  }
+
   private _inputHandler(event: InputEvent) {
     const target = event.target as EventTarget & {value: string};
     this.value = parseFloat(target.value);
+  }
+
+  private _handleValueUpdate() {
+    let value = clamp(this.min, this.value, this.max);
+
+    if (Object.is(value, NaN)) {
+      value = 0;
+      this.value = 0;
+    }
+
+    // update form
+    this._internals.setFormValue(value.toString());
+
+    // update styles
+    this.style.setProperty('--proportion', `${this._proportion}`);
+    this.style.setProperty('--percent', `${this._proportion * 100}%`);
   }
 }
 
