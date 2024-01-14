@@ -1,5 +1,10 @@
 import {css} from 'lit';
 
+/**
+ * Note: that it wasn't possible to animate the backdrop fade out.
+ * The backdrop is immediately removed from the DOM when the <dialog>
+ * is closed, so there is nothing to animate.
+ */
 export default css`
   .drawer[open]::backdrop {
     animation: backdrop-fade-in 250ms;
