@@ -26,4 +26,16 @@ describe('<ds-range>', () => {
       expect(ranger.tooltip).to.be.equal('top');
     });
   });
+
+  describe('when disabled', () => {
+    it('should disable the underlying input', async () => {
+      const ranger = await fixture<DsRange>(html`
+        <ds-range disabled><p slot="label">Label</p></ds-range>
+      `);
+
+      const input =
+        ranger.shadowRoot!.querySelector<HTMLInputElement>('input')!;
+      expect(input.disabled).to.be.true;
+    });
+  });
 });
