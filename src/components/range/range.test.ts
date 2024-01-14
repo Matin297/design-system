@@ -1,7 +1,7 @@
 import './range.component.js';
 
 import {fixture, html, expect} from '@open-wc/testing';
-import {sendMouse} from '@web/test-runner-commands';
+import {sendMouse, sendKeys} from '@web/test-runner-commands';
 import type DsRange from './range.component';
 
 describe('<ds-range>', () => {
@@ -54,6 +54,20 @@ describe('<ds-range>', () => {
       await ranger.updateComplete;
 
       expect(ranger.value).to.be.equal(100);
+    });
+
+    it('should decrease value when left arrow is pressed on focus', async () => {
+      const ranger = await fixture<DsRange>(
+        html` <ds-range value="50"></ds-range> `
+      );
+
+      ranger.focus();
+
+      await sendKeys({press: 'ArrowLeft'});
+
+      await ranger.updateComplete;
+
+      expect(ranger.value).to.be.equal(49);
     });
   });
 });
