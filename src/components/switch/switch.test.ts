@@ -31,6 +31,17 @@ describe('<ds-switch>', () => {
       );
       expect(switcher.checkValidity()).to.be.true;
     });
+
+    it('should be checked when clicked', async () => {
+      const switcher = await fixture<DsSwitch>(
+        html`<ds-switch>Label</ds-switch>`
+      );
+
+      switcher.click();
+      await switcher.updateComplete;
+
+      expect(switcher.checked).to.be.true;
+    });
   });
 
   describe('when disabled', () => {
