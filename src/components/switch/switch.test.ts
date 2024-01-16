@@ -24,6 +24,13 @@ describe('<ds-switch>', () => {
       expect(switcher.value).to.be.equal('');
       expect(switcher.size).to.be.equal('medium');
     });
+
+    it('should be valid', async () => {
+      const switcher = await fixture<DsSwitch>(
+        html`<ds-switch>Label</ds-switch>`
+      );
+      expect(switcher.checkValidity()).to.be.true;
+    });
   });
 
   describe('when disabled', () => {
