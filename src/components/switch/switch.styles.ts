@@ -93,4 +93,10 @@ export default css`
   :host([disabled]) .switch__input {
     cursor: not-allowed;
   }
+
+  /** Required */
+  :host([required]) .switch__label::after {
+    content: var(--ds-input-required-content);
+    margin-inline-start: -10px;
+  }
 `;
