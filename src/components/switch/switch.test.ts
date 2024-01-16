@@ -1,0 +1,28 @@
+import './switch.component.js';
+
+import {fixture, html, expect} from '@open-wc/testing';
+import type DsSwitch from './switch.component';
+
+describe('<ds-switch>', () => {
+  describe('when no parameters are provided', () => {
+    it('should be accessible', async () => {
+      const switcher = await fixture<DsSwitch>(
+        html`<ds-switch>Label</ds-switch>`
+      );
+      await expect(switcher).to.be.accessible();
+    });
+
+    it('should have default values for not provided props', async () => {
+      const switcher = await fixture<DsSwitch>(
+        html`<ds-switch>Label</ds-switch>`
+      );
+
+      expect(switcher.checked).to.be.false;
+      expect(switcher.required).to.be.false;
+      expect(switcher.disabled).to.be.false;
+      expect(switcher.name).to.be.equal('');
+      expect(switcher.value).to.be.equal('');
+      expect(switcher.size).to.be.equal('medium');
+    });
+  });
+});
