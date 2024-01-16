@@ -7,6 +7,8 @@ import {css} from 'lit';
 
 export default css`
   :host {
+    --font-size: var(--ds-input-font-size-medium);
+
     --thumb-size: 20px;
     --thumb-color: var(--ds-color-neutral-0);
 
@@ -18,6 +20,17 @@ export default css`
     display: inline-block;
   }
 
+  /** Sizes */
+  :host([size='small']) {
+    --thumb-size: 15px;
+    --font-size: var(--ds-input-font-size-small);
+  }
+
+  :host([size='large']) {
+    --thumb-size: 25px;
+    --font-size: var(--ds-input-font-size-large);
+  }
+
   .switch {
     gap: 1rem;
     display: flex;
@@ -25,6 +38,7 @@ export default css`
     user-select: none;
     align-items: center;
     justify-content: space-between;
+    font-size: var(--font-size);
   }
 
   .switch__input {

@@ -22,6 +22,9 @@ export default class DsSwitch extends BaseElement {
   switch: HTMLInputElement;
 
   @property()
+  size: Size = 'medium';
+
+  @property()
   name = '';
 
   @property()
@@ -105,3 +108,5 @@ declare global {
     [ELEMENT_NAME]: DsSwitch;
   }
 }
+
+type Size = 'small' | 'medium' | 'large';
