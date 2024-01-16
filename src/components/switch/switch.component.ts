@@ -11,6 +11,7 @@ export default class DsSwitch extends BaseElement {
   static styles = [BaseElement.styles, styles];
 
   private _internals: ElementInternals;
+  private _defaultChecked = false;
 
   constructor() {
     super();
@@ -39,6 +40,7 @@ export default class DsSwitch extends BaseElement {
   required = false;
 
   firstUpdated() {
+    this._defaultChecked = this.checked;
     this._switchStateHandler();
   }
 
@@ -46,6 +48,13 @@ export default class DsSwitch extends BaseElement {
     if (changedProps.get('checked') !== undefined) {
       this._switchStateHandler();
     }
+  }
+
+  formResetCallback() {
+    this.checked = this._defaultChecked;
+    // if we do not reset the switch checked attribute directly
+    // it won't change the position of the thumb!
+    this.switch.checked = this.checked;
   }
 
   render() {
@@ -83,7 +92,7 @@ export default class DsSwitch extends BaseElement {
       if (this.required) {
         this._internals.setValidity(
           {valueMissing: true},
-          'Please, check if you wish to proceed',
+          'Please, turn on the switch if you wish to proceed',
           this.switch
         );
       }
