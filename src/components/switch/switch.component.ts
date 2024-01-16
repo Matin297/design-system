@@ -77,6 +77,10 @@ export default class DsSwitch extends BaseElement {
     this.switch.blur();
   }
 
+  checkValidity() {
+    return this._internals.checkValidity();
+  }
+
   render() {
     return html`
       <label part="base" class="switch" for="switch">
