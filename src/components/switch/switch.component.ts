@@ -67,6 +67,16 @@ export default class DsSwitch extends BaseElement {
     if (message) this._validationMessage = message;
   }
 
+  /** Delegates focus to the underlying switch input element */
+  focus(options?: FocusOptions) {
+    this.switch.focus(options);
+  }
+
+  /** Delegates blur to the underlying switch input element */
+  blur() {
+    this.switch.blur();
+  }
+
   render() {
     return html`
       <label part="base" class="switch" for="switch">
