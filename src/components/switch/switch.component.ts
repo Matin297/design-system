@@ -10,6 +10,8 @@ export default class DsSwitch extends BaseElement {
   static formAssociated = true;
   static styles = [BaseElement.styles, styles];
 
+  private _validationMessage =
+    'Please, turn on the switch if you wish to proceed';
   private _internals: ElementInternals;
   private _defaultChecked = false;
 
@@ -60,6 +62,11 @@ export default class DsSwitch extends BaseElement {
     this.switch.checked = this.checked;
   }
 
+  /** Sets the validation message used when switch is invalid */
+  setCustomValidationMessage(message: string) {
+    if (message) this._validationMessage = message;
+  }
+
   render() {
     return html`
       <label part="base" class="switch" for="switch">
@@ -95,7 +102,7 @@ export default class DsSwitch extends BaseElement {
       if (this.required) {
         this._internals.setValidity(
           {valueMissing: true},
-          'Please, turn on the switch if you wish to proceed',
+          this._validationMessage,
           this.switch
         );
       }
