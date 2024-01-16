@@ -83,4 +83,14 @@ export default css`
   :host([vertical]) .switch__input {
     transform: rotate(90deg);
   }
+
+  /** Disabled */
+  :host([disabled]) .switch {
+    opacity: 0.5;
+  }
+
+  :host([disabled]) .switch,
+  :host([disabled]) .switch__input {
+    cursor: not-allowed;
+  }
 `;

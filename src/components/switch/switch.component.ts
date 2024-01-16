@@ -10,7 +10,13 @@ export default class DsSwitch extends BaseElement {
   static styles = [BaseElement.styles, styles];
 
   @property({type: Boolean, reflect: true})
+  checked = false;
+
+  @property({type: Boolean, reflect: true})
   vertical = false;
+
+  @property({type: Boolean, reflect: true})
+  disabled = false;
 
   render() {
     return html`
@@ -22,6 +28,8 @@ export default class DsSwitch extends BaseElement {
           role="switch"
           type="checkbox"
           class="switch__input"
+          ?checked=${this.checked}
+          ?disabled=${this.disabled}
         />
       </label>
     `;
