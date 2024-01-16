@@ -77,6 +77,11 @@ export default class DsSwitch extends BaseElement {
     this.switch.blur();
   }
 
+  /** Delegates click to the underlying switch input element */
+  click() {
+    this.switch.click();
+  }
+
   checkValidity() {
     return this._internals.checkValidity();
   }
