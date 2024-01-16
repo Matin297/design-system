@@ -25,4 +25,16 @@ describe('<ds-switch>', () => {
       expect(switcher.size).to.be.equal('medium');
     });
   });
+
+  describe('when disabled', () => {
+    it('should disable the underlying input', async () => {
+      const switcher = await fixture<DsSwitch>(
+        html`<ds-switch disabled>Label</ds-switch>`
+      );
+
+      const input =
+        switcher.shadowRoot!.querySelector<HTMLInputElement>('input')!;
+      expect(input.disabled).to.be.true;
+    });
+  });
 });
