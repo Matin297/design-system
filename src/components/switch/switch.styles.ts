@@ -30,6 +30,7 @@ export default css`
   .switch__input {
     --thumb-position: 0%;
 
+    margin: 0;
     border: none;
     display: grid;
     flex-shrink: 0;
@@ -46,13 +47,20 @@ export default css`
     transition: background-color var(--ds-transition-fast) ease;
   }
 
+  /** Checked */
   .switch__input:checked {
     --thumb-position: calc(var(--track-size) - 100%);
     background-color: var(--track-active-color);
   }
 
+  /** Indeterminate */
   .switch__input:indeterminate {
     --thumb-position: calc(var(--track-size) / 2 - 50%);
+  }
+
+  /** Focus */
+  .switch__input:focus-visible {
+    outline-color: var(--ds-color-primary-600);
   }
 
   .switch__input::before {
@@ -65,5 +73,14 @@ export default css`
 
     transform: translateX(var(--thumb-position));
     transition: transform var(--ds-transition-fast) ease;
+  }
+
+  /** Vertical */
+  :host([vertical]) .switch {
+    min-block-size: calc(var(--track-size) + var(--track-padding));
+  }
+
+  :host([vertical]) .switch__input {
+    transform: rotate(90deg);
   }
 `;

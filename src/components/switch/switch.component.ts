@@ -1,5 +1,5 @@
 import {html} from 'lit';
-import {customElement} from 'lit/decorators.js';
+import {customElement, property} from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
 import styles from './switch.styles';
 
@@ -8,6 +8,9 @@ const ELEMENT_NAME = 'ds-switch';
 @customElement(ELEMENT_NAME)
 export default class DsSwitch extends BaseElement {
   static styles = [BaseElement.styles, styles];
+
+  @property({type: Boolean, reflect: true})
+  vertical = false;
 
   render() {
     return html`
