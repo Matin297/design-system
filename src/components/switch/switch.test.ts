@@ -1,6 +1,7 @@
 import './switch.component.js';
 
 import {fixture, html, expect} from '@open-wc/testing';
+import {sendKeys} from '@web/test-runner-commands';
 import type DsSwitch from './switch.component';
 
 describe('<ds-switch>', () => {
@@ -38,6 +39,17 @@ describe('<ds-switch>', () => {
       );
 
       switcher.click();
+      await switcher.updateComplete;
+
+      expect(switcher.checked).to.be.true;
+    });
+
+    it('should be toggled using space bar', async () => {
+      const switcher = await fixture<DsSwitch>(
+        html`<ds-switch>Label</ds-switch>`
+      );
+      switcher.focus();
+      await sendKeys({type: ' '});
       await switcher.updateComplete;
 
       expect(switcher.checked).to.be.true;
