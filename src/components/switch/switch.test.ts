@@ -2,6 +2,7 @@ import './switch.component.js';
 
 import {fixture, html, expect} from '@open-wc/testing';
 import {sendKeys} from '@web/test-runner-commands';
+import sinon from 'sinon';
 import type DsSwitch from './switch.component';
 
 describe('<ds-switch>', () => {
@@ -65,6 +66,34 @@ describe('<ds-switch>', () => {
       const input =
         switcher.shadowRoot!.querySelector<HTMLInputElement>('input')!;
       expect(input.disabled).to.be.true;
+    });
+  });
+
+  describe('when submitting a form', () => {
+    it('should include name and value in the form data', async () => {
+      const form = await fixture<HTMLFormElement>(
+        html`
+          <form>
+            <ds-switch name="a" value="b">Label</ds-switch>
+            <button type="submit">submit</button>
+          </form>
+        `
+      );
+
+      const submitHandler = sinon.spy((e: Event) => e.preventDefault());
+      form.addEventListener('submit', submitHandler);
+
+      const switcher = form.querySelector('ds-switch')!;
+      switcher.click();
+      await switcher.updateComplete;
+
+      form.querySelector('button')!.click();
+
+      expect(submitHandler).to.have.been.calledOnce;
+
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('b');
     });
   });
 });
