@@ -68,6 +68,16 @@ describe('<ds-switch>', () => {
     });
   });
 
+  describe('when required', () => {
+    it('should be invalid when not checked', async () => {
+      const switcher = await fixture<DsSwitch>(
+        html`<ds-switch required>Label</ds-switch>`
+      );
+
+      expect(switcher.checkValidity()).to.be.false;
+    });
+  });
+
   describe('when submitting a form', () => {
     it('should include name and value in the form data', async () => {
       const form = await fixture<HTMLFormElement>(
