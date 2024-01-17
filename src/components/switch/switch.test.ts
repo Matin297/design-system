@@ -23,7 +23,6 @@ describe('<ds-switch>', () => {
       expect(switcher.required).to.be.false;
       expect(switcher.disabled).to.be.false;
       expect(switcher.name).to.be.equal('');
-      expect(switcher.value).to.be.equal('');
       expect(switcher.size).to.be.equal('medium');
     });
 
@@ -94,6 +93,32 @@ describe('<ds-switch>', () => {
       const formData = new FormData(form);
 
       expect(formData.get('a')).to.equal('b');
+    });
+
+    it('should include the name with value "on" if value is not provided', async () => {
+      const form = await fixture<HTMLFormElement>(
+        html`
+          <form>
+            <ds-switch name="a">Label</ds-switch>
+            <button type="submit">submit</button>
+          </form>
+        `
+      );
+
+      const submitHandler = sinon.spy((e: Event) => e.preventDefault());
+      form.addEventListener('submit', submitHandler);
+
+      const switcher = form.querySelector('ds-switch')!;
+      switcher.click();
+      await switcher.updateComplete;
+
+      form.querySelector('button')!.click();
+
+      expect(submitHandler).to.have.been.calledOnce;
+
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('on');
     });
   });
 });
