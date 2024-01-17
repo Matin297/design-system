@@ -30,7 +30,7 @@ export default class DsSwitch extends BaseElement {
   name = '';
 
   @property()
-  value = '';
+  value = 'on';
 
   @property({type: Boolean, reflect: true})
   checked = false;
