@@ -138,5 +138,35 @@ describe('<ds-switch>', () => {
 
       expect(formData.get('a')).to.equal('on');
     });
+
+    it('should include name and value in the form data when placed outside form', async () => {
+      const container = await fixture<HTMLDivElement>(
+        html`
+          <div>
+            <ds-switch form="former" name="a" value="b">Label</ds-switch>
+            <form id="former">
+              <button type="submit">submit</button>
+            </form>
+          </div>
+        `
+      );
+
+      const form = container.querySelector<HTMLFormElement>('form')!;
+
+      const submitHandler = sinon.spy((e: Event) => e.preventDefault());
+      form.addEventListener('submit', submitHandler);
+
+      const switcher = container.querySelector('ds-switch')!;
+      switcher.click();
+      await switcher.updateComplete;
+
+      form.querySelector('button')!.click();
+
+      expect(submitHandler).to.have.been.calledOnce;
+
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('b');
+    });
   });
 });
