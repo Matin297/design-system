@@ -169,4 +169,28 @@ describe('<ds-switch>', () => {
       expect(formData.get('a')).to.equal('b');
     });
   });
+
+  describe('when resetting a form', () => {
+    it('should rollback to the initial check state', async () => {
+      const form = await fixture<HTMLFormElement>(
+        html`
+          <form>
+            <ds-switch name="a" checked>Label</ds-switch>
+            <button type="reset">reset</button>
+          </form>
+        `
+      );
+
+      const switcher = form.querySelector('ds-switch')!;
+      switcher.click();
+      await switcher.updateComplete;
+
+      expect(switcher.checked).to.be.false;
+
+      form.querySelector('button')!.click();
+      await switcher.updateComplete;
+
+      expect(switcher.checked).to.be.true;
+    });
+  });
 });
