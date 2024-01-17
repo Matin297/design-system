@@ -76,6 +76,14 @@ describe('<ds-switch>', () => {
 
       expect(switcher.checkValidity()).to.be.false;
     });
+
+    it('should be valid when checked', async () => {
+      const switcher = await fixture<DsSwitch>(
+        html`<ds-switch required checked>Label</ds-switch>`
+      );
+
+      expect(switcher.checkValidity()).to.be.true;
+    });
   });
 
   describe('when submitting a form', () => {
