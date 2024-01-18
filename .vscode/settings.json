@@ -9,6 +9,8 @@
         "formtarget",
         "labelledby",
         "progressbar",
+        "tablist",
+        "tabpanel",
         "valuenow"
     ]
 }
