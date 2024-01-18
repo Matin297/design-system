@@ -11,42 +11,35 @@
 
     <script
       type="module"
-      src="../dist/components/spinner/spinner.component.js"
+      src="../dist/components/tab-set/tab-list.component.js"
     ></script>
     <script
       type="module"
-      src="../dist/components/avatar/avatar.component.js"
+      src="../dist/components/tab-set/tab-panel.component.js"
+    ></script>
+    <script
+      type="module"
+      src="../dist/components/tab-set/tab.component.js"
     ></script>
 
     <style>
       body {
         font-family: var(--ds-font-sans);
       }
-
-      nav {
-        display: flex;
-        gap: 1rem;
-      }
     </style>
   </head>
   <body>
-    <header>
-      <h1>Components</h1>
-      <nav>
-        <a href="./avatar.html">Avatar</a>
-        <a href="./spinner.html">Spinner</a>
-        <a href="./card.html">Card</a>
-        <a href="./details.html">Details</a>
-        <a href="./button.html">Button</a>
-        <a href="./link.html">Link</a>
-        <a href="./checkbox.html">Checkbox</a>
-        <a href="./split-panel.html">Split Panel</a>
-        <a href="./drawer.html">Drawer</a>
-        <a href="./range.html">Range</a>
-        <a href="./switch.html">Switch</a>
-        <a href="./tab-set.html">Tab Set</a>
-      </nav>
-    </header>
+    <h1>Tab Set</h1>
+
+    <ds-tab-list label="test tab set">
+      <ds-tab slot="tabs" id="tab-1" panel="panel-1" active>Matin 1</ds-tab>
+      <ds-tab-panel id="panel-1" tab="tab-1" active>
+        Matin 1 Content
+      </ds-tab-panel>
+
+      <ds-tab slot="tabs" id="tab-2" panel="panel-2">Matin 2</ds-tab>
+      <ds-tab-panel id="panel-2" tab="tab-2">Matin 2 Content</ds-tab-panel>
+    </ds-tab-list>
 
     <script
       type="module"
