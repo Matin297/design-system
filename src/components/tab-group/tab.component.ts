@@ -1,5 +1,5 @@
 import {html} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import {customElement, property, query} from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
 
 const ELEMENT_NAME = 'ds-tab';
@@ -7,6 +7,9 @@ const ELEMENT_NAME = 'ds-tab';
 @customElement(ELEMENT_NAME)
 export default class DsTab extends BaseElement {
   static styles = [BaseElement.styles];
+
+  @query('button[role=tab]')
+  button: HTMLButtonElement;
 
   @property()
   id: string;
@@ -16,6 +19,11 @@ export default class DsTab extends BaseElement {
 
   @property({reflect: true, type: Boolean})
   active = false;
+
+  /** Delegate focus to the underlying button element */
+  focus(options?: FocusOptions) {
+    this.button.focus(options);
+  }
 
   render() {
     return html`
