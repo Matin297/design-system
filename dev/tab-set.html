@@ -11,15 +11,15 @@
 
     <script
       type="module"
-      src="../dist/components/tab-set/tab-list.component.js"
+      src="../dist/components/tab-group/tab-group.component.js"
     ></script>
     <script
       type="module"
-      src="../dist/components/tab-set/tab-panel.component.js"
+      src="../dist/components/tab-group/tab-panel.component.js"
     ></script>
     <script
       type="module"
-      src="../dist/components/tab-set/tab.component.js"
+      src="../dist/components/tab-group/tab.component.js"
     ></script>
 
     <style>
@@ -31,7 +31,7 @@
   <body>
     <h1>Tab Set</h1>
 
-    <ds-tab-list label="test tab set">
+    <ds-tab-group label="test tab set">
       <ds-tab slot="tabs" id="tab-1" panel="panel-1" active>Matin 1</ds-tab>
       <ds-tab-panel id="panel-1" tab="tab-1" active>
         Matin 1 Content
@@ -39,7 +39,7 @@
 
       <ds-tab slot="tabs" id="tab-2" panel="panel-2">Matin 2</ds-tab>
       <ds-tab-panel id="panel-2" tab="tab-2">Matin 2 Content</ds-tab-panel>
-    </ds-tab-list>
+    </ds-tab-group>
 
     <script
       type="module"
