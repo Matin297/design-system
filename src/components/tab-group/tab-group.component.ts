@@ -7,12 +7,13 @@ import {
 import {BaseElement} from '../../internals/base-element';
 import type DsTab from './tab.component';
 import type DsPanel from './tab-panel.component';
+import styles from './tab-group.styles';
 
 const ELEMENT_NAME = 'ds-tab-group';
 
 @customElement(ELEMENT_NAME)
 export default class DsTabGroup extends BaseElement {
-  static styles = [BaseElement.styles];
+  static styles = [BaseElement.styles, styles];
 
   private _tabFocus = 0;
 
@@ -33,9 +34,11 @@ export default class DsTabGroup extends BaseElement {
 
   render() {
     return html`
-      <div>
+      <div part="base" class="tab-group">
         <div
           role="tablist"
+          part="tablist"
+          class="tab-group__list"
           aria-label=${this.label}
           @keydown=${this._handleKeyDownNavigation}
         >
