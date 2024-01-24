@@ -37,7 +37,7 @@ export default class DsTabGroup extends BaseElement {
         <div
           role="tablist"
           aria-label=${this.label}
-          @keydown=${this._handleKeyDown}
+          @keydown=${this._handleKeyDownNavigation}
         >
           <slot name="tabs"></slot>
         </div>
@@ -47,7 +47,7 @@ export default class DsTabGroup extends BaseElement {
     `;
   }
 
-  private _handleKeyDown(event: KeyboardEvent) {
+  private _handleKeyDownNavigation(event: KeyboardEvent) {
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
       this.tabs[this._tabFocus].active = false;
 
