@@ -1,12 +1,14 @@
 import {html} from 'lit';
 import {customElement, property, query} from 'lit/decorators.js';
+import {classMap} from 'lit/directives/class-map.js';
 import {BaseElement} from '../../internals/base-element';
+import styles from './tab.styles';
 
 const ELEMENT_NAME = 'ds-tab';
 
 @customElement(ELEMENT_NAME)
 export default class DsTab extends BaseElement {
-  static styles = [BaseElement.styles];
+  static styles = [BaseElement.styles, styles];
 
   @query('button[role=tab]')
   button: HTMLButtonElement;
@@ -29,6 +31,11 @@ export default class DsTab extends BaseElement {
     return html`
       <button
         role="tab"
+        part="base"
+        class=${classMap({
+          tab: true,
+          'tab--active': this.active,
+        })}
         id=${this.id}
         aria-controls=${this.panel}
         tabindex=${this.active ? 0 : -1}
