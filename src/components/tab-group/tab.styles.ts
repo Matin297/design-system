@@ -15,8 +15,8 @@ export default css`
     font-size: var(--ds-font-size-small);
     font-weight: var(--ds-font-weight-semibold);
 
+    padding: var(--tab-spacing);
     border-radius: var(--ds-border-radius-medium);
-    padding: var(--ds-spacing-medium) var(--ds-spacing-large);
   }
 
   .tab:enabled:hover,
