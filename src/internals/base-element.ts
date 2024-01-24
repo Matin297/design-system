@@ -56,6 +56,6 @@ type DsEventName = (typeof EVENTS)[keyof typeof EVENTS];
 
 declare global {
   interface GlobalEventHandlersEventMap {
-    [EVENTS.ACTIVATE_TAB]: CustomEvent<string | number>;
+    [EVENTS.ACTIVATE_TAB]: CustomEvent<string>;
   }
 }
