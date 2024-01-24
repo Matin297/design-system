@@ -6,6 +6,7 @@ import {
 } from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
 import type DsTab from './tab.component';
+import type DsPanel from './tab-panel.component';
 
 const ELEMENT_NAME = 'ds-tab-group';
 
@@ -18,8 +19,17 @@ export default class DsTabGroup extends BaseElement {
   @queryAssignedElements({slot: 'tabs'})
   tabs: DsTab[];
 
+  @queryAssignedElements()
+  panels: DsPanel[];
+
   @property()
   label = '';
+
+  firstUpdated() {
+    this.addEventListener('ds-activate-tab', (event) => {
+      this._handleTabActivation(event.detail);
+    });
+  }
 
   render() {
     return html`
@@ -58,6 +68,27 @@ export default class DsTabGroup extends BaseElement {
       this.tabs[this._tabFocus].active = true;
       this.tabs[this._tabFocus].focus();
     }
+  }
+
+  private _handleTabActivation(tabID: string | number) {
+    this.tabs.forEach((tab) => {
+      tab.active = false;
+
+      if (tab.id === tabID) {
+        tab.active = true;
+        this._handlePanelActivation(tab.panel);
+      }
+    });
+  }
+
+  private _handlePanelActivation(panelID: string) {
+    this.panels.forEach((panel) => {
+      panel.active = false;
+
+      if (panel.id === panelID) {
+        panel.active = true;
+      }
+    });
   }
 }
 
