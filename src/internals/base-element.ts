@@ -49,6 +49,13 @@ const EVENTS = {
   SHOW: 'ds-show',
   SHOW_FINISH: 'ds-show-finish',
   INITIAL_FOCUS: 'ds-initial-focus',
+  ACTIVATE_TAB: 'ds-activate-tab',
 } as const;
 
 type DsEventName = (typeof EVENTS)[keyof typeof EVENTS];
+
+declare global {
+  interface GlobalEventHandlersEventMap {
+    [EVENTS.ACTIVATE_TAB]: CustomEvent<string | number>;
+  }
+}
