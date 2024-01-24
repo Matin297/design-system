@@ -1,12 +1,13 @@
 import {html} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
+import styles from './tab-panel.styles';
 
 const ELEMENT_NAME = 'ds-tab-panel';
 
 @customElement(ELEMENT_NAME)
 export default class DsTabPanel extends BaseElement {
-  static styles = [BaseElement.styles];
+  static styles = [BaseElement.styles, styles];
 
   @property()
   id: string;
@@ -20,6 +21,8 @@ export default class DsTabPanel extends BaseElement {
   render() {
     return html`
       <div
+        part="base"
+        class="panel"
         role="tabpanel"
         tabindex="0"
         id=${this.id}
