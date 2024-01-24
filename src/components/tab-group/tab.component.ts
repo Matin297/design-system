@@ -33,10 +33,18 @@ export default class DsTab extends BaseElement {
         aria-controls=${this.panel}
         tabindex=${this.active ? 0 : -1}
         aria-selected=${this.active ? 'true' : 'false'}
+        @click=${this._handleClick}
       >
         <slot></slot>
       </button>
     `;
+  }
+
+  private _handleClick() {
+    // dispatch activation event
+    this.dispatchEvent(
+      this.generateEvent('ds-activate-tab', {detail: this.id})
+    );
   }
 }
 
