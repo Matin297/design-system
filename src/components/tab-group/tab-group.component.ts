@@ -2,6 +2,7 @@ import {html} from 'lit';
 import {
   customElement,
   property,
+  query,
   queryAssignedElements,
 } from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
@@ -23,13 +24,20 @@ export default class DsTabGroup extends BaseElement {
   @queryAssignedElements()
   panels: DsPanel[];
 
+  @query('.tab-group__active-indicator')
+  indicator: HTMLDivElement;
+
   @property()
   label = '';
 
-  firstUpdated() {
+  async firstUpdated() {
     this.addEventListener('ds-activate-tab', (event) => {
-      this._handleTabActivation(event.detail);
+      this._handleTabClick(event.detail);
     });
+
+    await this._waitForTabsToFinishUpdating();
+
+    this._moveIndicator();
   }
 
   render() {
@@ -42,6 +50,10 @@ export default class DsTabGroup extends BaseElement {
           aria-label=${this.label}
           @keydown=${this._handleKeyDownNavigation}
         >
+          <div
+            part="active-indicator"
+            class="tab-group__active-indicator"
+          ></div>
           <slot name="tabs"></slot>
         </div>
 
@@ -73,25 +85,52 @@ export default class DsTabGroup extends BaseElement {
     }
   }
 
-  private _handleTabActivation(tabID: string | number) {
+  private _handleTabClick(tabID: string) {
+    this._handleTabActivation(tabID);
+    this._handlePanelActivation(tabID);
+    this._moveIndicator(tabID);
+  }
+
+  private _handleTabActivation(tabID: string) {
     this.tabs.forEach((tab) => {
       tab.active = false;
 
       if (tab.id === tabID) {
         tab.active = true;
-        this._handlePanelActivation(tab.panel);
       }
     });
   }
 
-  private _handlePanelActivation(panelID: string) {
+  private _handlePanelActivation(tabID: string) {
     this.panels.forEach((panel) => {
       panel.active = false;
 
-      if (panel.id === panelID) {
+      if (panel.tab === tabID) {
         panel.active = true;
       }
     });
+  }
+
+  private _calcIndicatorOffset(offsetTabs: DsTab[]) {
+    return offsetTabs.reduce((acc, tab) => acc + tab.offsetWidth, 0);
+  }
+
+  private _moveIndicator(tabID?: string) {
+    const activeTabIndex = this.tabs.findIndex(
+      (tab) => tab.id === tabID || tab.active
+    );
+    const activeTab = this.tabs[activeTabIndex];
+
+    const offsetTabs = this.tabs.slice(0, activeTabIndex);
+    const offset = this._calcIndicatorOffset(offsetTabs);
+
+    this.indicator.style.width = `${activeTab.offsetWidth}px`;
+    this.indicator.style.translate = `${offset}px`;
+  }
+
+  private async _waitForTabsToFinishUpdating() {
+    await customElements.whenDefined('ds-tab');
+    await Promise.all(this.tabs.map((tab) => tab.updateComplete));
   }
 }
 
