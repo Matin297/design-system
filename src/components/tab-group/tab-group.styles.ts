@@ -12,19 +12,47 @@ export default css`
     display: block;
   }
 
+  .tab-group {
+    display: flex;
+  }
+
   .tab-group__list {
     position: relative;
-    border-bottom: var(--track-size) solid var(--track-color);
   }
 
   .tab-group__active-indicator {
     position: absolute;
     inset-inline-start: 0;
-    inset-block-start: 100%;
     height: var(--track-size);
     background-color: var(--active-color);
 
     transition: translate var(--ds-transition-fast) ease,
       width var(--ds-transition-fast) ease;
+  }
+
+  /** Start */
+  .tab-group--start {
+    flex-direction: column;
+  }
+
+  .tab-group--start .tab-group__list {
+    border-bottom: var(--track-size) solid var(--track-color);
+  }
+
+  .tab-group--start .tab-group__active-indicator {
+    inset-block-start: 100%;
+  }
+
+  /** End */
+  .tab-group--end {
+    flex-direction: column-reverse;
+  }
+
+  .tab-group--end .tab-group__list {
+    border-top: var(--track-size) solid var(--track-color);
+  }
+
+  .tab-group--end .tab-group__active-indicator {
+    inset-block-end: 100%;
   }
 `;
