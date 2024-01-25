@@ -5,6 +5,7 @@ import {
   query,
   queryAssignedElements,
 } from 'lit/decorators.js';
+import {classMap} from 'lit/directives/class-map.js';
 import {BaseElement} from '../../internals/base-element';
 import type DsTab from './tab.component';
 import type DsPanel from './tab-panel.component';
@@ -30,6 +31,10 @@ export default class DsTabGroup extends BaseElement {
   @property()
   label = '';
 
+  /** Defined the placement of the tabs relative to the track/indicator */
+  @property()
+  placement: Placement = 'start';
+
   async firstUpdated() {
     this.addEventListener('ds-activate-tab', (event) => {
       this._handleTabClick(event.detail);
@@ -42,7 +47,14 @@ export default class DsTabGroup extends BaseElement {
 
   render() {
     return html`
-      <div part="base" class="tab-group">
+      <div
+        part="base"
+        class=${classMap({
+          'tab-group': true,
+          'tab-group--start': this.placement === 'start',
+          'tab-group--end': this.placement === 'end',
+        })}
+      >
         <div
           role="tablist"
           part="tablist"
@@ -139,3 +151,5 @@ declare global {
     [ELEMENT_NAME]: DsTabGroup;
   }
 }
+
+type Placement = 'start' | 'end';
