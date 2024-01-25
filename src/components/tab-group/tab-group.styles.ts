@@ -16,4 +16,15 @@ export default css`
     position: relative;
     border-bottom: var(--track-size) solid var(--track-color);
   }
+
+  .tab-group__active-indicator {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: 100%;
+    height: var(--track-size);
+    background-color: var(--active-color);
+
+    transition: translate var(--ds-transition-fast) ease,
+      width var(--ds-transition-fast) ease;
+  }
 `;
