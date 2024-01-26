@@ -17,7 +17,7 @@ const ELEMENT_NAME = 'ds-tab-group';
 export default class DsTabGroup extends BaseElement {
   static styles = [BaseElement.styles, styles];
 
-  private _tabFocus = 0;
+  private _tabFocusIndex = 0;
 
   @queryAssignedElements({slot: 'tabs'})
   tabs: DsTab[];
@@ -46,6 +46,7 @@ export default class DsTabGroup extends BaseElement {
 
     await this._waitForTabsToFinishUpdating();
 
+    this._updateTabFocusIndex();
     this._moveIndicator();
   }
 
@@ -82,6 +83,10 @@ export default class DsTabGroup extends BaseElement {
     `;
   }
 
+  private get _enabledTabs() {
+    return this.tabs.filter((tab) => !tab.disabled);
+  }
+
   private _handleKeyDownNavigation(event: KeyboardEvent) {
     if (
       event.key === 'ArrowUp' ||
@@ -89,45 +94,46 @@ export default class DsTabGroup extends BaseElement {
       event.key === 'ArrowLeft' ||
       event.key === 'ArrowRight'
     ) {
-      this.tabs[this._tabFocus].active = false;
+      this._enabledTabs[this._tabFocusIndex].active = false;
 
       if (
         (event.key === 'ArrowRight' && this.direction === 'inline') ||
         (event.key === 'ArrowDown' && this.direction === 'block')
       ) {
-        this._tabFocus++;
+        this._tabFocusIndex++;
 
-        if (this._tabFocus >= this.tabs.length) {
-          this._tabFocus = 0;
+        if (this._tabFocusIndex >= this._enabledTabs.length) {
+          this._tabFocusIndex = 0;
         }
       } else if (
         (event.key === 'ArrowLeft' && this.direction === 'inline') ||
         (event.key === 'ArrowUp' && this.direction === 'block')
       ) {
-        this._tabFocus--;
+        this._tabFocusIndex--;
 
-        if (this._tabFocus < 0) {
-          this._tabFocus = this.tabs.length - 1;
+        if (this._tabFocusIndex < 0) {
+          this._tabFocusIndex = this._enabledTabs.length - 1;
         }
       }
 
-      this.tabs[this._tabFocus].active = true;
-      this.tabs[this._tabFocus].focus();
+      this._enabledTabs[this._tabFocusIndex].active = true;
+      this._enabledTabs[this._tabFocusIndex].focus();
     }
   }
 
   private _handleTabClick(tabID: string) {
     this._handleTabActivation(tabID);
     this._handlePanelActivation(tabID);
-    this._moveIndicator(tabID);
+    this._moveIndicator();
   }
 
   private _handleTabActivation(tabID: string) {
-    this.tabs.forEach((tab) => {
+    this._enabledTabs.forEach((tab) => {
       tab.active = false;
 
       if (tab.id === tabID) {
         tab.active = true;
+        this._updateTabFocusIndex(tabID);
       }
     });
   }
@@ -142,7 +148,16 @@ export default class DsTabGroup extends BaseElement {
     });
   }
 
-  private _calcIndicatorOffset(offsetTabs: DsTab[]) {
+  private _updateTabFocusIndex(tabID?: string) {
+    this._tabFocusIndex = this._enabledTabs.findIndex(
+      (tab) => tab.id === tabID || tab.active
+    );
+  }
+
+  private _calcIndicatorOffset(activeTab: DsTab) {
+    const activeTabIndex = this.tabs.findIndex((tab) => tab === activeTab);
+    const offsetTabs = this.tabs.slice(0, activeTabIndex);
+
     return offsetTabs.reduce((acc, tab) => {
       if (this.direction === 'inline') {
         return acc + tab.offsetWidth;
@@ -151,16 +166,9 @@ export default class DsTabGroup extends BaseElement {
     }, 0);
   }
 
-  private _moveIndicator(tabID?: string) {
-    const activeTabIndex = this.tabs.findIndex(
-      (tab) => tab.id === tabID || tab.active
-    );
-    this._tabFocus = activeTabIndex;
-
-    const activeTab = this.tabs[activeTabIndex];
-
-    const offsetTabs = this.tabs.slice(0, activeTabIndex);
-    const offset = this._calcIndicatorOffset(offsetTabs);
+  private _moveIndicator() {
+    const activeTab = this._enabledTabs[this._tabFocusIndex];
+    const offset = this._calcIndicatorOffset(activeTab);
 
     if (this.direction === 'inline') {
       this.indicator.style.translate = `${offset}px 0`;
