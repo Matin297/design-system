@@ -8,6 +8,7 @@ export default css`
   .tab {
     border: none;
     cursor: pointer;
+    white-space: nowrap;
     background-color: transparent;
 
     font-family: var(--ds-font-sans);
