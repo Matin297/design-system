@@ -33,7 +33,7 @@ export default class DsTabGroup extends BaseElement {
 
   /** Whether the tabs should stack vertically or horizontally */
   @property({reflect: true})
-  direction: Direction = 'block';
+  direction: Direction = 'inline';
 
   /** Defined the placement of the tabs relative to the track/indicator */
   @property({reflect: true})
