@@ -31,9 +31,9 @@ export default class DsTabGroup extends BaseElement {
   @property()
   label = '';
 
-  /** Whether the tabs should stack vertically or horizontally */
+  /** Whether the tabs and panels should align vertically or horizontally */
   @property({reflect: true})
-  direction: Direction = 'inline';
+  direction: Direction = 'block';
 
   /** Defined the placement of the tabs relative to the track/indicator */
   @property({reflect: true})
@@ -97,8 +97,8 @@ export default class DsTabGroup extends BaseElement {
       this._enabledTabs[this._tabFocusIndex].active = false;
 
       if (
-        (event.key === 'ArrowRight' && this.direction === 'inline') ||
-        (event.key === 'ArrowDown' && this.direction === 'block')
+        (event.key === 'ArrowRight' && this.direction === 'block') ||
+        (event.key === 'ArrowDown' && this.direction === 'inline')
       ) {
         this._tabFocusIndex++;
 
@@ -106,8 +106,8 @@ export default class DsTabGroup extends BaseElement {
           this._tabFocusIndex = 0;
         }
       } else if (
-        (event.key === 'ArrowLeft' && this.direction === 'inline') ||
-        (event.key === 'ArrowUp' && this.direction === 'block')
+        (event.key === 'ArrowLeft' && this.direction === 'block') ||
+        (event.key === 'ArrowUp' && this.direction === 'inline')
       ) {
         this._tabFocusIndex--;
 
@@ -159,7 +159,7 @@ export default class DsTabGroup extends BaseElement {
     const offsetTabs = this.tabs.slice(0, activeTabIndex);
 
     return offsetTabs.reduce((acc, tab) => {
-      if (this.direction === 'inline') {
+      if (this.direction === 'block') {
         return acc + tab.offsetWidth;
       }
       return acc + tab.offsetHeight;
@@ -170,7 +170,7 @@ export default class DsTabGroup extends BaseElement {
     const activeTab = this._enabledTabs[this._tabFocusIndex];
     const offset = this._calcIndicatorOffset(activeTab);
 
-    if (this.direction === 'inline') {
+    if (this.direction === 'block') {
       this.indicator.style.translate = `${offset}px 0`;
       this.indicator.style.width = `${activeTab.offsetWidth}px`;
     } else {
