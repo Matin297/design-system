@@ -37,7 +37,7 @@
 
     <br />
 
-    <h2>Tabs on Top</h2>
+    <h2>Inline Start Tabs</h2>
     <ds-tab-group label="test tab set">
       <ds-tab slot="tabs" id="tab-1" panel="panel-1">Matin 1</ds-tab>
       <ds-tab-panel id="panel-1" tab="tab-1">
@@ -86,7 +86,7 @@
 
     <br />
 
-    <h2>Tabs on Bottom</h2>
+    <h2>Inline End Tabs</h2>
     <ds-tab-group label="test tab set" placement="end">
       <ds-tab slot="tabs" id="tab-1" panel="panel-1">Matin 1</ds-tab>
       <ds-tab-panel id="panel-1" tab="tab-1">
@@ -132,6 +132,104 @@
         </p>
       </ds-tab-panel>
     </ds-tab-group>
+
+    <h2>Block Start Tabs</h2>
+    <ds-tab-group label="test tab set" direction="block">
+      <ds-tab slot="tabs" id="tab-1" panel="panel-1">Matin 1</ds-tab>
+      <ds-tab-panel id="panel-1" tab="tab-1">
+        <h3>Content 1</h3>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Reprehenderit labore ratione nulla possimus reiciendis, non at beatae
+          repellendus illo blanditiis fugiat mollitia iste, eos natus error!
+          Debitis itaque laboriosam nulla.
+        </p>
+      </ds-tab-panel>
+
+      <ds-tab slot="tabs" id="tab-2" panel="panel-2" active>Matin 2</ds-tab>
+      <ds-tab-panel id="panel-2" tab="tab-2" active>
+        <h3>Content 2</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil
+          praesentium eaque adipisci consequatur similique quod quisquam vero
+          pariatur fugiat non nesciunt quam, dolore odio quibusdam architecto
+          dolores nisi quos dignissimos.
+        </p>
+      </ds-tab-panel>
+
+      <ds-tab slot="tabs" id="tab-3" panel="panel-3">Matin 3</ds-tab>
+      <ds-tab-panel id="panel-3" tab="tab-3">
+        <h3>Content 3</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sunt
+          architecto porro, reprehenderit fugit vero repudiandae ex. Repellendus
+          vero molestiae, corrupti vel soluta quasi repellat eum, est, tempore
+          nemo tenetur?
+        </p>
+      </ds-tab-panel>
+
+      <ds-tab slot="tabs" id="tab-4" panel="panel-4">Matin 4</ds-tab>
+      <ds-tab-panel id="panel-4" tab="tab-4">
+        <h3>Content 4</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero nemo
+          tempora quam quidem reprehenderit saepe consequatur! Labore amet
+          tempora error obcaecati earum animi ipsam, velit totam non iusto et
+          unde.
+        </p>
+      </ds-tab-panel>
+    </ds-tab-group>
+
+    <br />
+
+    <h2>Block End Tabs</h2>
+    <ds-tab-group label="test tab set" direction="block" placement="end">
+      <ds-tab slot="tabs" id="tab-1" panel="panel-1">Matin 1</ds-tab>
+      <ds-tab-panel id="panel-1" tab="tab-1">
+        <h3>Content 1</h3>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Reprehenderit labore ratione nulla possimus reiciendis, non at beatae
+          repellendus illo blanditiis fugiat mollitia iste, eos natus error!
+          Debitis itaque laboriosam nulla.
+        </p>
+      </ds-tab-panel>
+
+      <ds-tab slot="tabs" id="tab-2" panel="panel-2" active>Matin 2</ds-tab>
+      <ds-tab-panel id="panel-2" tab="tab-2" active>
+        <h3>Content 2</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil
+          praesentium eaque adipisci consequatur similique quod quisquam vero
+          pariatur fugiat non nesciunt quam, dolore odio quibusdam architecto
+          dolores nisi quos dignissimos.
+        </p>
+      </ds-tab-panel>
+
+      <ds-tab slot="tabs" id="tab-3" panel="panel-3">Matin 3</ds-tab>
+      <ds-tab-panel id="panel-3" tab="tab-3">
+        <h3>Content 3</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sunt
+          architecto porro, reprehenderit fugit vero repudiandae ex. Repellendus
+          vero molestiae, corrupti vel soluta quasi repellat eum, est, tempore
+          nemo tenetur?
+        </p>
+      </ds-tab-panel>
+
+      <ds-tab slot="tabs" id="tab-4" panel="panel-4">Matin 4</ds-tab>
+      <ds-tab-panel id="panel-4" tab="tab-4">
+        <h3>Content 4</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero nemo
+          tempora quam quidem reprehenderit saepe consequatur! Labore amet
+          tempora error obcaecati earum animi ipsam, velit totam non iusto et
+          unde.
+        </p>
+      </ds-tab-panel>
+    </ds-tab-group>
+
+    <br />
 
     <script
       type="module"
