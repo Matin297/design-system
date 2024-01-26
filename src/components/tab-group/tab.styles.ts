@@ -20,6 +20,11 @@ export default css`
     border-radius: var(--ds-border-radius-medium);
   }
 
+  .tab:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   .tab:enabled:hover,
   .tab--active:enabled {
     color: var(--active-color);

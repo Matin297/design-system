@@ -22,6 +22,9 @@ export default class DsTab extends BaseElement {
   @property({reflect: true, type: Boolean})
   active = false;
 
+  @property({type: Boolean, reflect: true})
+  disabled = false;
+
   /** Delegate focus to the underlying button element */
   focus(options?: FocusOptions) {
     this.button.focus(options);
@@ -38,6 +41,7 @@ export default class DsTab extends BaseElement {
         })}
         id=${this.id}
         aria-controls=${this.panel}
+        ?disabled=${this.disabled}
         tabindex=${this.active ? 0 : -1}
         aria-selected=${this.active ? 'true' : 'false'}
         @click=${this._handleClick}
