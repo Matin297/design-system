@@ -31,8 +31,12 @@ export default class DsTabGroup extends BaseElement {
   @property()
   label = '';
 
+  /** Whether the tabs should stack vertically or horizontally */
+  @property({reflect: true})
+  direction: Direction = 'block';
+
   /** Defined the placement of the tabs relative to the track/indicator */
-  @property()
+  @property({reflect: true})
   placement: Placement = 'start';
 
   async firstUpdated() {
@@ -51,14 +55,16 @@ export default class DsTabGroup extends BaseElement {
         part="base"
         class=${classMap({
           'tab-group': true,
+          'tab-group--inline': this.direction === 'inline',
+          'tab-group--block': this.direction === 'block',
           'tab-group--start': this.placement === 'start',
           'tab-group--end': this.placement === 'end',
         })}
       >
         <div
           role="tablist"
-          part="tablist"
-          class="tab-group__list"
+          part="tab-list"
+          class="tab-group__tab-list"
           aria-label=${this.label}
           @keydown=${this._handleKeyDownNavigation}
         >
@@ -69,22 +75,35 @@ export default class DsTabGroup extends BaseElement {
           <slot name="tabs"></slot>
         </div>
 
-        <slot></slot>
+        <div part="panel-list" class="tab-group__panel-list">
+          <slot></slot>
+        </div>
       </div>
     `;
   }
 
   private _handleKeyDownNavigation(event: KeyboardEvent) {
-    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+    if (
+      event.key === 'ArrowUp' ||
+      event.key === 'ArrowDown' ||
+      event.key === 'ArrowLeft' ||
+      event.key === 'ArrowRight'
+    ) {
       this.tabs[this._tabFocus].active = false;
 
-      if (event.key === 'ArrowRight') {
+      if (
+        (event.key === 'ArrowRight' && this.direction === 'inline') ||
+        (event.key === 'ArrowDown' && this.direction === 'block')
+      ) {
         this._tabFocus++;
 
         if (this._tabFocus >= this.tabs.length) {
           this._tabFocus = 0;
         }
-      } else if (event.key === 'ArrowLeft') {
+      } else if (
+        (event.key === 'ArrowLeft' && this.direction === 'inline') ||
+        (event.key === 'ArrowUp' && this.direction === 'block')
+      ) {
         this._tabFocus--;
 
         if (this._tabFocus < 0) {
@@ -124,7 +143,12 @@ export default class DsTabGroup extends BaseElement {
   }
 
   private _calcIndicatorOffset(offsetTabs: DsTab[]) {
-    return offsetTabs.reduce((acc, tab) => acc + tab.offsetWidth, 0);
+    return offsetTabs.reduce((acc, tab) => {
+      if (this.direction === 'inline') {
+        return acc + tab.offsetWidth;
+      }
+      return acc + tab.offsetHeight;
+    }, 0);
   }
 
   private _moveIndicator(tabID?: string) {
@@ -136,8 +160,13 @@ export default class DsTabGroup extends BaseElement {
     const offsetTabs = this.tabs.slice(0, activeTabIndex);
     const offset = this._calcIndicatorOffset(offsetTabs);
 
-    this.indicator.style.width = `${activeTab.offsetWidth}px`;
-    this.indicator.style.translate = `${offset}px`;
+    if (this.direction === 'inline') {
+      this.indicator.style.translate = `${offset}px 0`;
+      this.indicator.style.width = `${activeTab.offsetWidth}px`;
+    } else {
+      this.indicator.style.translate = `0 ${offset}px`;
+      this.indicator.style.height = `${activeTab.offsetHeight}px`;
+    }
   }
 
   private async _waitForTabsToFinishUpdating() {
@@ -152,4 +181,5 @@ declare global {
   }
 }
 
+type Direction = 'inline' | 'block';
 type Placement = 'start' | 'end';
