@@ -155,6 +155,8 @@ export default class DsTabGroup extends BaseElement {
     const activeTabIndex = this.tabs.findIndex(
       (tab) => tab.id === tabID || tab.active
     );
+    this._tabFocus = activeTabIndex;
+
     const activeTab = this.tabs[activeTabIndex];
 
     const offsetTabs = this.tabs.slice(0, activeTabIndex);
