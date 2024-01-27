@@ -1,4 +1,4 @@
-import {html} from 'lit';
+import {html, PropertyValues} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
 import styles from './tab-panel.styles';
@@ -18,17 +18,19 @@ export default class DsTabPanel extends BaseElement {
   @property({reflect: true, type: Boolean})
   active = false;
 
+  firstUpdated() {
+    this.setAttribute('role', 'tabpanel');
+  }
+
+  willUpdate(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('tab')) {
+      this.setAttribute('aria-labelledby', this.tab);
+    }
+  }
+
   render() {
     return html`
-      <div
-        part="base"
-        class="panel"
-        role="tabpanel"
-        tabindex="0"
-        id=${this.id}
-        ?hidden=${!this.active}
-        aria-labelledby=${this.tab}
-      >
+      <div part="base" class="panel" tabindex="0" ?hidden=${!this.active}>
         <slot></slot>
       </div>
     `;
