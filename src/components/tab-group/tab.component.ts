@@ -10,8 +10,8 @@ const ELEMENT_NAME = 'ds-tab';
 export default class DsTab extends BaseElement {
   static styles = [BaseElement.styles, styles];
 
-  @query('button')
-  button: HTMLButtonElement;
+  @query('div')
+  tab: HTMLDivElement;
 
   @property()
   id: string;
@@ -41,31 +41,42 @@ export default class DsTab extends BaseElement {
 
   /** Delegate focus to the underlying button element */
   focus(options?: FocusOptions) {
-    this.button.focus(options);
+    this.tab.focus(options);
   }
 
   render() {
     return html`
-      <button
+      <div
         part="base"
         class=${classMap({
           tab: true,
           'tab--active': this.active,
+          'tab--disabled': this.disabled,
         })}
-        ?disabled=${this.disabled}
         tabindex=${this.active ? 0 : -1}
         @click=${this._handleClick}
+        @keydown=${this._handleKeyDown}
       >
         <slot></slot>
-      </button>
+      </div>
     `;
   }
 
-  private _handleClick() {
+  private _requestTabActivation() {
     // dispatch activation event
     this.dispatchEvent(
       this.generateEvent('ds-activate-tab', {detail: this.id})
     );
+  }
+
+  private _handleClick() {
+    this._requestTabActivation();
+  }
+
+  private _handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this._requestTabActivation();
+    }
   }
 }
 
