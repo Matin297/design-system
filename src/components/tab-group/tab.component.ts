@@ -1,4 +1,4 @@
-import {html} from 'lit';
+import {html, PropertyValues} from 'lit';
 import {customElement, property, query} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 import {BaseElement} from '../../internals/base-element';
@@ -10,7 +10,7 @@ const ELEMENT_NAME = 'ds-tab';
 export default class DsTab extends BaseElement {
   static styles = [BaseElement.styles, styles];
 
-  @query('button[role=tab]')
+  @query('button')
   button: HTMLButtonElement;
 
   @property()
@@ -25,6 +25,20 @@ export default class DsTab extends BaseElement {
   @property({type: Boolean, reflect: true})
   disabled = false;
 
+  firstUpdated() {
+    this.setAttribute('role', 'tab');
+  }
+
+  willUpdate(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('panel')) {
+      this.setAttribute('aria-controls', this.panel);
+    }
+
+    if (changedProperties.has('active')) {
+      this.setAttribute('aria-selected', `${this.active}`);
+    }
+  }
+
   /** Delegate focus to the underlying button element */
   focus(options?: FocusOptions) {
     this.button.focus(options);
@@ -33,17 +47,13 @@ export default class DsTab extends BaseElement {
   render() {
     return html`
       <button
-        role="tab"
         part="base"
         class=${classMap({
           tab: true,
           'tab--active': this.active,
         })}
-        id=${this.id}
-        aria-controls=${this.panel}
         ?disabled=${this.disabled}
         tabindex=${this.active ? 0 : -1}
-        aria-selected=${this.active ? 'true' : 'false'}
         @click=${this._handleClick}
       >
         <slot></slot>
