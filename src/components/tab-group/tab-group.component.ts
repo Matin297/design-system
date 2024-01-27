@@ -39,15 +39,14 @@ export default class DsTabGroup extends BaseElement {
   @property({reflect: true})
   placement: Placement = 'start';
 
-  async firstUpdated() {
+  firstUpdated() {
     this.addEventListener('ds-activate-tab', (event) => {
-      this._handleTabClick(event.detail);
+      this._handleTabActivation(event.detail);
     });
 
-    await this._waitForTabsToFinishUpdating();
-
-    this._updateTabFocusIndex();
-    this._moveIndicator();
+    this._waitForTabsToFinishUpdating().then(() => {
+      this._handleTabActivation();
+    });
   }
 
   render() {
@@ -121,37 +120,44 @@ export default class DsTabGroup extends BaseElement {
     }
   }
 
-  private _handleTabClick(tabID: string) {
-    this._handleTabActivation(tabID);
-    this._handlePanelActivation(tabID);
-    this._moveIndicator();
+  private _handleTabActivation(tabID?: string) {
+    this._activateTab(tabID);
+    this._activatePanel();
+    this._moveActiveTabIndicator();
   }
 
-  private _handleTabActivation(tabID: string) {
-    this._enabledTabs.forEach((tab) => {
-      tab.active = false;
+  private _activateTab(tabID?: string) {
+    if (!tabID) {
+      let activeTabIndex = this._enabledTabs.findIndex((tab) => tab.active);
 
-      if (tab.id === tabID) {
-        tab.active = true;
-        this._updateTabFocusIndex(tabID);
+      if (activeTabIndex < 0) {
+        activeTabIndex = 0;
+        this._enabledTabs[activeTabIndex].active = true;
       }
-    });
+
+      this._tabFocusIndex = activeTabIndex;
+    } else {
+      this._enabledTabs.forEach((tab, index) => {
+        tab.active = false;
+
+        if (tab.id === tabID) {
+          tab.active = true;
+          this._tabFocusIndex = index;
+        }
+      });
+    }
   }
 
-  private _handlePanelActivation(tabID: string) {
+  private _activatePanel() {
+    const activeTab = this._enabledTabs[this._tabFocusIndex];
+
     this.panels.forEach((panel) => {
       panel.active = false;
 
-      if (panel.tab === tabID) {
+      if (panel.tab === activeTab.id) {
         panel.active = true;
       }
     });
-  }
-
-  private _updateTabFocusIndex(tabID?: string) {
-    this._tabFocusIndex = this._enabledTabs.findIndex(
-      (tab) => tab.id === tabID || tab.active
-    );
   }
 
   private _calcIndicatorOffset(activeTab: DsTab) {
@@ -166,7 +172,7 @@ export default class DsTabGroup extends BaseElement {
     }, 0);
   }
 
-  private _moveIndicator() {
+  private _moveActiveTabIndicator() {
     const activeTab = this._enabledTabs[this._tabFocusIndex];
     const offset = this._calcIndicatorOffset(activeTab);
 
