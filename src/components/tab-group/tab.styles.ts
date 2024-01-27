@@ -20,17 +20,17 @@ export default css`
     border-radius: var(--ds-border-radius-medium);
   }
 
-  .tab:disabled {
+  .tab--disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  .tab:enabled:hover,
-  .tab--active:enabled {
+  .tab:not(.tab--disabled):hover,
+  .tab--active:not(.tab--disabled) {
     color: var(--active-color);
   }
 
-  .tab:enabled:focus-visible {
+  .tab:not(.tab--disabled):focus-visible {
     outline: var(--ds-focus-ring);
     outline-offset: calc(
       -1 * var(--ds-focus-ring-width) - var(--ds-focus-ring-offset)
