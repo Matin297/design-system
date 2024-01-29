@@ -39,9 +39,14 @@ export default class DsTab extends BaseElement {
     }
   }
 
-  /** Delegate focus to the underlying button element */
+  /** Delegate focus to the underlying element */
   focus(options?: FocusOptions) {
     this.tab.focus(options);
+  }
+
+  /** Delegate click to the underlying element */
+  click() {
+    this.tab.click();
   }
 
   render() {
