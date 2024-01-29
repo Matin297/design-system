@@ -68,6 +68,8 @@ export default class DsTab extends BaseElement {
   }
 
   private _requestTabActivation() {
+    if (this.disabled) return;
+
     // dispatch activation event
     this.dispatchEvent(
       this.generateEvent('ds-activate-tab', {detail: this.id})
