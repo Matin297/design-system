@@ -1,11 +1,14 @@
 import {html} from 'lit';
 import {customElement, query} from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
+import styles from './dialog.styles';
 
 const ELEMENT_NAME = 'ds-dialog';
 
 @customElement(ELEMENT_NAME)
 export default class DsDialog extends BaseElement {
+  static styles = [BaseElement.styles, styles];
+
   @query('dialog')
   dialog: HTMLDialogElement;
 
