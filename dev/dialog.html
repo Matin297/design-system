@@ -33,8 +33,8 @@
   <body>
     <h1>Dialog</h1>
 
-    <ds-button onclick="dialog.show()">Open Dialog</ds-button>
-    <ds-dialog id="dialog">
+    <ds-button onclick="dialog1.show()">Open Dialog</ds-button>
+    <ds-dialog id="dialog1">
       <h4 slot="header">Header</h4>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam aliquid
@@ -42,7 +42,24 @@
         inventore doloremque aut sequi. Commodi eveniet cum inventore a
         asperiores!
       </p>
-      <ds-button slot="footer" onclick="dialog.close()">Close Dialog</ds-button>
+      <ds-button slot="footer" onclick="dialog1.close()"
+        >Close Dialog</ds-button
+      >
+    </ds-dialog>
+
+    <ds-button onclick="dialog2.show()">Open Dialog</ds-button>
+    <ds-dialog id="dialog2">
+      <h4 slot="header">Header</h4>
+      <input placeholder="focus me" autofocus />
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam aliquid
+        doloremque aperiam cum nesciunt! Eos unde odio alias optio! Architecto
+        inventore doloremque aut sequi. Commodi eveniet cum inventore a
+        asperiores!
+      </p>
+      <ds-button slot="footer" onclick="dialog2.close()"
+        >Close Dialog</ds-button
+      >
     </ds-dialog>
 
     <script
