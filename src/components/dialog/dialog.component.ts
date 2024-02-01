@@ -3,6 +3,10 @@ import {customElement, query} from 'lit/decorators.js';
 import {BaseElement} from '../../internals/base-element';
 import {waitForAnimationsToFinish} from '../../internals/animation';
 import {lockBodyScroll, unlockBodyScroll} from '../../internals/scroll';
+import {
+  findAutoFocusElement,
+  queryFocusableElements,
+} from '../../internals/tabbable';
 import styles from './dialog.styles';
 
 const ELEMENT_NAME = 'ds-dialog';
@@ -57,10 +61,28 @@ export default class DsDialog extends BaseElement {
 
       if (target.open) {
         lockBodyScroll(this);
+        await waitForAnimationsToFinish(target);
+        this._moveFocus();
       } else {
         await waitForAnimationsToFinish(target);
         unlockBodyScroll(this);
       }
+    }
+  }
+
+  private async _moveFocus() {
+    const focusableElements = queryFocusableElements(this);
+    const autofocusElement = findAutoFocusElement(focusableElements);
+
+    // selected element which is either an element with autofocus attribute
+    // or the first focusable element found.
+    const elementToFocus = autofocusElement ?? focusableElements[0];
+
+    // perform the focus and dispatch an event to indicate
+    // the shift of focus to the selected element
+    if (elementToFocus && typeof elementToFocus.focus === 'function') {
+      elementToFocus.focus();
+      this.dispatchEvent(this.generateEvent('ds-initial-focus'));
     }
   }
 }
