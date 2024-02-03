@@ -40,18 +40,26 @@ export default class DsDialog extends BaseElement {
   }
 
   render() {
+    const header = this.hasSlottedElement('header')
+      ? html`<header part="header" class="dialog__header">
+          <slot name="header"></slot>
+        </header>`
+      : '';
+
+    const footer = this.hasSlottedElement('footer')
+      ? html`<footer part="footer" class="dialog__footer">
+          <slot name="footer"></slot>
+        </footer>`
+      : '';
+
     return html`
       <dialog part="base" class="dialog">
         <section class="dialog__panel">
-          <header part="header" class="dialog__header">
-            <slot name="header"></slot>
-          </header>
+          ${header}
           <main part="main" class="dialog__main">
             <slot></slot>
           </main>
-          <footer part="footer" class="dialog__footer">
-            <slot name="footer"></slot>
-          </footer>
+          ${footer}
         </section>
       </dialog>
     `;
