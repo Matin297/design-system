@@ -9,6 +9,12 @@ export default css`
     --footer-spacing: var(--ds-spacing-large);
   }
 
+  .dialog,
+  .dialog__panel {
+    max-width: calc(100vw - var(--ds-spacing-2x-large));
+    max-height: calc(100vh - var(--ds-spacing-2x-large));
+  }
+
   .dialog {
     padding: 0;
     border: none;
@@ -29,11 +35,18 @@ export default css`
     background-color: hsl(240 3.8% 46.1% / 33%);
   }
 
+  .dialog__panel {
+    display: flex;
+    flex-direction: column;
+  }
+
   .dialog__header {
     padding: var(--header-spacing);
   }
 
   .dialog__main {
+    flex: 1 1 auto;
+    overflow: auto;
     padding: var(--main-spacing);
   }
 
