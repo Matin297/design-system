@@ -66,6 +66,31 @@
       </ds-button>
     </ds-dialog>
 
+    <h2>Content Scroll</h2>
+    <ds-button variant="outline" onclick="dialog3.show()">
+      Open Dialog
+    </ds-button>
+    <ds-dialog id="dialog3">
+      <h4 slot="header">Header</h4>
+      <div
+        style="
+          height: 150vh;
+          border: dashed 2px var(--ds-color-neutral-200);
+          padding: 1rem;
+        "
+      >
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam aliquid
+          doloremque aperiam cum nesciunt! Eos unde odio alias optio! Architecto
+          inventore doloremque aut sequi. Commodi eveniet cum inventore a
+          asperiores!
+        </p>
+      </div>
+      <ds-button variant="outline" slot="footer" onclick="dialog3.close()">
+        Close Dialog
+      </ds-button>
+    </ds-dialog>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
