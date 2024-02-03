@@ -1,0 +1,20 @@
+import './dialog.component.js';
+
+import {fixture, html, expect} from '@open-wc/testing';
+import type DsDialog from './dialog.component';
+
+describe('<ds-dialog>', () => {
+  describe('when no parameters are provided', () => {
+    it('should not be visible by default', async () => {
+      const dialog = await fixture<DsDialog>(html`<ds-dialog>test</ds-dialog>`);
+
+      await dialog.updateComplete;
+
+      const dialogElement =
+        dialog.shadowRoot!.querySelector<HTMLDialogElement>('dialog')!;
+      const {display} = getComputedStyle(dialogElement);
+
+      expect(display).to.equal('none');
+    });
+  });
+});
