@@ -1,6 +1,7 @@
 import './dialog.component.js';
 
 import {fixture, html, expect, oneEvent} from '@open-wc/testing';
+import {sendKeys} from '@web/test-runner-commands';
 import type DsDialog from './dialog.component';
 
 describe('<ds-dialog>', () => {
@@ -79,6 +80,21 @@ describe('<ds-dialog>', () => {
       await oneEvent(dialog, 'ds-initial-focus');
 
       expect(document.activeElement).to.be.equal(dialog.querySelector('input'));
+    });
+
+    it('should be closed whe Esc key is pressed', async () => {
+      const dialog = await fixture<DsDialog>(html`<ds-dialog>Test</ds-dialog>`);
+
+      const dialogElement =
+        dialog.shadowRoot!.querySelector<HTMLDialogElement>('dialog')!;
+      const {display} = getComputedStyle(dialogElement);
+
+      dialog.show();
+      await dialog.updateComplete;
+
+      await sendKeys({press: 'Escape'});
+
+      expect(display).to.be.equal('none');
     });
   });
 });
