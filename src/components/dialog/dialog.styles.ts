@@ -2,7 +2,7 @@ import {css} from 'lit';
 
 export default css`
   :host {
-    --width: 31rem;
+    --size: 31rem;
 
     --header-spacing: var(--ds-spacing-large);
     --main-spacing: var(--ds-spacing-large);
@@ -13,7 +13,7 @@ export default css`
     padding: 0;
     border: none;
 
-    width: var(--width);
+    width: var(--size);
     border-radius: var(--ds-border-radius-medium);
     box-shadow: var(--ds-shadow-x-large);
 
