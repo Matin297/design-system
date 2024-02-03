@@ -16,5 +16,19 @@ describe('<ds-dialog>', () => {
 
       expect(display).to.equal('none');
     });
+
+    it('should display dialog after calling show method', async () => {
+      const dialog = await fixture<DsDialog>(html`<ds-dialog>test</ds-dialog>`);
+
+      dialog.show();
+
+      await dialog.updateComplete;
+
+      const dialogElement =
+        dialog.shadowRoot!.querySelector<HTMLDialogElement>('dialog')!;
+      const {display} = getComputedStyle(dialogElement);
+
+      expect(display).to.equal('block');
+    });
   });
 });
