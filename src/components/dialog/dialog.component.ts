@@ -42,15 +42,17 @@ export default class DsDialog extends BaseElement {
   render() {
     return html`
       <dialog part="base" class="dialog">
-        <header part="header" class="dialog__header">
-          <slot name="header"></slot>
-        </header>
-        <main part="main" class="dialog__main">
-          <slot></slot>
-        </main>
-        <footer part="footer" class="dialog__footer">
-          <slot name="footer"></slot>
-        </footer>
+        <section class="dialog__panel">
+          <header part="header" class="dialog__header">
+            <slot name="header"></slot>
+          </header>
+          <main part="main" class="dialog__main">
+            <slot></slot>
+          </main>
+          <footer part="footer" class="dialog__footer">
+            <slot name="footer"></slot>
+          </footer>
+        </section>
       </dialog>
     `;
   }
