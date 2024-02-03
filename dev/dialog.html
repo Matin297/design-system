@@ -91,6 +91,24 @@
       </ds-button>
     </ds-dialog>
 
+    <h2>Custom Initial Focus</h2>
+    <ds-button variant="outline" onclick="dialog4.show()">
+      Open Dialog
+    </ds-button>
+    <ds-dialog id="dialog4">
+      <h4 slot="header">Header</h4>
+      <input placeholder="autofocus" autofocus />
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam aliquid
+        doloremque aperiam cum nesciunt! Eos unde odio alias optio! Architecto
+        inventore doloremque aut sequi. Commodi eveniet cum inventore a
+        asperiores!
+      </p>
+      <ds-button variant="outline" slot="footer" onclick="dialog4.close()">
+        Close Dialog
+      </ds-button>
+    </ds-dialog>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
