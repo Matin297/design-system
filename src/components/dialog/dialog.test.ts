@@ -1,6 +1,6 @@
 import './dialog.component.js';
 
-import {fixture, html, expect} from '@open-wc/testing';
+import {fixture, html, expect, oneEvent} from '@open-wc/testing';
 import type DsDialog from './dialog.component';
 
 describe('<ds-dialog>', () => {
@@ -45,6 +45,22 @@ describe('<ds-dialog>', () => {
       await dialog.updateComplete;
 
       expect(display).to.equal('none');
+    });
+
+    it('should focus on an autofocus element if any is provided', async () => {
+      const dialog = await fixture<DsDialog>(
+        html`<ds-dialog>
+          <p>Test</p>
+          <input autofocus />
+        </ds-dialog>`
+      );
+
+      dialog.show();
+      await dialog.updateComplete;
+
+      await oneEvent(dialog, 'ds-initial-focus');
+
+      expect(document.activeElement).to.be.equal(dialog.querySelector('input'));
     });
   });
 });
