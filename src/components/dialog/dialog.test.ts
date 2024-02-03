@@ -47,6 +47,24 @@ describe('<ds-dialog>', () => {
       expect(display).to.equal('none');
     });
 
+    it('should focus on a focusable element if any is provided', async () => {
+      const dialog = await fixture<DsDialog>(
+        html`<ds-dialog>
+          <p>Test</p>
+          <button slot="footer">Here</button>
+        </ds-dialog>`
+      );
+
+      dialog.show();
+      await dialog.updateComplete;
+
+      await oneEvent(dialog, 'ds-initial-focus');
+
+      expect(document.activeElement).to.be.equal(
+        dialog.querySelector('button')
+      );
+    });
+
     it('should focus on an autofocus element if any is provided', async () => {
       const dialog = await fixture<DsDialog>(
         html`<ds-dialog>
