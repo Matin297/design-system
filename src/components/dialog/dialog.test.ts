@@ -30,5 +30,21 @@ describe('<ds-dialog>', () => {
 
       expect(display).to.equal('block');
     });
+
+    it('should hide dialog after calling close method', async () => {
+      const dialog = await fixture<DsDialog>(html`<ds-dialog>test</ds-dialog>`);
+
+      const dialogElement =
+        dialog.shadowRoot!.querySelector<HTMLDialogElement>('dialog')!;
+      const {display} = getComputedStyle(dialogElement);
+
+      dialog.show();
+      await dialog.updateComplete;
+
+      dialog.close();
+      await dialog.updateComplete;
+
+      expect(display).to.equal('none');
+    });
   });
 });
